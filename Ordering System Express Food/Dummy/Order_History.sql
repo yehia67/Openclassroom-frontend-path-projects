@@ -1,0 +1,10 @@
+insert into Order_History (feedback, order_id, client_id, employee_id, menu_date) values ('Lorem ipsum dolor', 1, 1, 1, '2018-03-12');
+insert into Order_History (feedback, order_id, client_id, employee_id, menu_date) values ('quae voluptate rem natus eius quos veniam ad', 2, 2, 2, '2021-01-23');
+insert into Order_History (feedback, order_id, client_id, employee_id, menu_date) values ('Lorem ipsum dolor', 3, 3, 3, '2020-02-21');
+insert into Order_History (feedback, order_id, client_id, employee_id, menu_date) values ('sit amet consectetur adipisicing elit. Nisi magnam provident', 4, 4, 4, '2018-08-20');
+insert into Order_History (feedback, order_id, client_id, employee_id, menu_date) values ('quae voluptate rem natus eius quos veniam ad', 5, 5, 5, '2022-12-31');
+insert into Order_History (feedback, order_id, client_id, employee_id, menu_date) values ('sit amet consectetur adipisicing elit. Nisi magnam provident', 6, 6, 6, '2022-08-15');
+insert into Order_History (feedback, order_id, client_id, employee_id, menu_date) values ('distinctio', 7, 7, 7, '2018-06-27');
+insert into Order_History (feedback, order_id, client_id, employee_id, menu_date) values ('sit amet consectetur adipisicing elit. Nisi magnam provident', 8, 8, 8, '2022-01-01');
+insert into Order_History (feedback, order_id, client_id, employee_id, menu_date) values ('sit amet consectetur adipisicing elit. Nisi magnam provident', 9, 9, 9, '2018-06-06');
+insert into Order_History (feedback, order_id, client_id, employee_id, menu_date) values ('iste nihil nobis amet reprehenderit enim blanditiis corrupti unde! Praesentium.', 10, 10, 10, '2019-07-07');

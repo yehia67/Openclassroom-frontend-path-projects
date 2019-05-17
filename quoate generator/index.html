@@ -1,0 +1,76 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="mobile interpter">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>quotes Generator</title>
+    <link rel="stylesheet" type="text/css" href="assests/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assests/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <body>
+        <!--APP-->
+        <div class="app">
+            <!--FORM-->
+            <form id="myform">
+                <fieldset>
+                    <div id="intro">
+                        <h3>--Quotes generator--</h3>
+                        <p>Welcome to our quote generator.If you don't know how to use it please press the following short <a href="#" onclick="helpBtn();return false;">tutorial</a>
+
+                        </p>
+                    </div>
+                    <div id="quoteType">
+                        <h3>--Quote Type--</h3>
+                        <label for="radio">Choose Quote Type</label>
+                        <input type="radio" name="quote" id="family" checked> Family Quote
+                        <input type="radio" name="quote" id="days"> Days Quote <br/>
+                    </div>
+                    <div id="options">
+                        <h3>--Quote Number--</h3>
+                        <label for="number">Number of generated quotes (max 5.)</label>
+                        <input type="number" id="no" max="5" min="1" value="1"><br/>
+                    </div>
+                    <div id="submit">
+                        <h3>--Quote Number--</h3>
+                        <p>Now Press Generator quote to get your result</p>
+                        <input type="button" id="result" value="generate quotes" onclick="run()">
+                    </div>
+                    <div id="result-section">
+                        <h3>--Your quotes--</h3>
+                        <div id="result-quotes"></div>
+                        <a href="#" class="return" id="return" onclick="returnBtn();return false;">Return &raquo;</a>
+                    </div>
+                    <div id="help-section">
+                        <h3>--Tuorial--</h3>
+                        <p>In this web app you could get randome generated quotes. <b>How it work?</b> : <br /> -Choose between 2 types of quote generators Family Quotes or Daily Quotes <br /> -Select the number of quotes generated (between 1 and 5) <br
+                            />Once the quotes are generated, have the program generate new quotes or quit the program. </p>
+
+                        <a href="#" class="return" id="return" onclick="returnBtn();return false;">Return &raquo;</a>
+                    </div>
+                    <div class="navigation">
+                        <a href="#" class="previous" id="previous" onclick="previousBtn();return false;">&laquo; Previous</a>
+                        <a href="#" class="next" id="next" onclick="nextBtn();return false;">Next &raquo;</a>
+                    </div>
+                </fieldset>
+            </form>
+            <!--/FORM-->
+        </div>
+        <!--/APP-->
+
+
+    </body>
+
+
+
+    <!--Scripts-->
+    <script src="./assests/js/bootstrap.min.js"></script>
+    <script src="./assests/js/main.js"></script>
+    <script src="assests/js/control.js"></script>
+</body>
+
+</html>

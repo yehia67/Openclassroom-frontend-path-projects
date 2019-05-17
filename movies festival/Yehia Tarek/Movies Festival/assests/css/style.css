@@ -1,0 +1,113 @@
+/*Start Global Rules*/
+
+* {
+    -moz-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px
+}
+
+a {
+    text-decoration: none;
+    display: inline-block
+}
+
+a:hover {
+    text-decoration: none;
+    -o-transition: 0.5ms all;
+    -moz-transition: 0.5ms all;
+    -webkit-transition: 0.5ms all;
+    transition: 0.5ms all
+}
+
+button:hover {
+    background-color: #fff000 !important;
+    cursor: pointer
+}
+
+.btn {
+    color: black;
+    background-color: #FACD21
+}
+
+
+/*End Global Rules*/
+
+
+/*Navbar*/
+
+.nav {
+    background-color: #FACD21
+}
+
+
+/*Home*/
+
+#home {
+    background-size: cover;
+    height: -webkit-fill-available;
+    background-image: url('https://s3-eu-west-1.amazonaws.com/sdz-upload/prod/upload/film_festival_parc_shutterstock_220181725.jpg');
+    background-position: center;
+    background-repeat: no-repeat
+}
+
+#home .btn {
+    width: fit-content;
+    background-color: #FACD21;
+    color: black
+}
+
+
+/*About me*/
+
+#aboutme .details {}
+
+#aboutme .details h1 {
+    color: gray
+}
+
+#aboutme .picture {}
+
+#aboutme .picture img {
+    width: -webkit-fill-available
+}
+
+
+/*Movies*/
+
+#movies .movies-list .movie-box .figure .figure-caption {}
+
+#movies .movies-list .btn {}
+
+
+/*Footer*/
+
+.page-footer {
+    width: 100%;
+    background-color: #263238
+}
+
+.page-footer .footer-title {
+    color: #FACD21
+}
+
+.page-footer .list-inline-item a i {
+    color: #FACD21
+}
+
+.page-footer .footer-copyright {
+    background-color: rgba(0, 0, 0, .2);
+    color: rgba(255, 255, 255, .6);
+}
+
+
+/*Start My Own Framework*/
+
+.clearfix {
+    clear: both
+}
+
+
+/*End My Own Framework*/

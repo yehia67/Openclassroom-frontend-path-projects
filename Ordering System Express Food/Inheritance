@@ -1,0 +1,24 @@
+CREATE TABLE policies (
+   policy_id          int,
+   date_issued        datetime,
+
+  PRIMARY KEY (policy_id)
+);
+
+CREATE TABLE policy_motor (
+    policy_id         int,
+    vehicle_reg_no    varchar(20),
+
+   -- // other attributes specific to motor insurance ...
+
+   FOREIGN KEY (policy_id) REFERENCES policies (policy_id)
+);
+
+CREATE TABLE policy_property (
+    policy_id         int,
+    property_address  varchar(20),
+
+   -- // other attributes specific to property insurance ...
+
+   FOREIGN KEY (policy_id) REFERENCES policies (policy_id)
+);

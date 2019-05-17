@@ -1,0 +1,10 @@
+insert into Restaurent (name, address, employee_id, menu_date, order_id) values ('MAC', '3 Superior Court', 1, '2022-08-15', 1);
+insert into Restaurent (name, address, employee_id, menu_date, order_id) values ('Cinabonn', '0954 Burning Wood Avenue', 2, '2018-08-20', 2);
+insert into Restaurent (name, address, employee_id, menu_date, order_id) values ('MAC', '624 Manitowish Alley', 3, '2022-08-15', 3);
+insert into Restaurent (name, address, employee_id, menu_date, order_id) values ('Buafflo Burger', '6346 Loftsgordon Drive', 4, '2018-08-20', 4);
+insert into Restaurent (name, address, employee_id, menu_date, order_id) values ('KFC', '743 Forest Dale Center', 5, '2020-02-21', 5);
+insert into Restaurent (name, address, employee_id, menu_date, order_id) values ('Spectra', '5884 Farmco Point', 6, '2022-08-15', 6);
+insert into Restaurent (name, address, employee_id, menu_date, order_id) values ('Spectra', '3360 International Junction', 7, '2020-02-21', 7);
+insert into Restaurent (name, address, employee_id, menu_date, order_id) values ('Cinabonn', '56 Utah Park', 8, '2022-08-15', 8);
+insert into Restaurent (name, address, employee_id, menu_date, order_id) values ('Spectra', '1605 Thackeray Parkway', 9, '2019-07-07', 9);
+insert into Restaurent (name, address, employee_id, menu_date, order_id) values ('Buafflo Burger', '2 Buhler Drive', 10, '2018-08-20', 10);
