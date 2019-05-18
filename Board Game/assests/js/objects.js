@@ -42,12 +42,18 @@ function worrior(name, id, img, position) {
         console.log("new Row value " + that.row);
         console.log("new Col value " + that.col);
     };
+    this.showhint = function() {
+        for (let index = 0; index < that.avMoves.length; index++) {
+            $("#" + that.avMoves[index]).addClass("hint");
+        }
+    };
     this.removeHints = function() {
         for (let index = 0; index < that.avMoves.length; index++) {
 
             $('#' + String(that.avMoves[index])).removeClass('hint');
+            that.avMoves[index] = "";
         }
-        that.avMoves = [];
+        that.avMoves.pop();
     };
     this.getPosition = function() { return this.position };
     this.changePosition = function(pos) {

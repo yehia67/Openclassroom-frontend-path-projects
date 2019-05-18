@@ -39,6 +39,7 @@ function block(row, col, empty) {
 var blocks = [];
 
 function avRowCol(row, col, avMoves) {
+    avMoves.length = 0;
     var hold, back = -1;
     var rowforward = true,
         rowbackward = true,
