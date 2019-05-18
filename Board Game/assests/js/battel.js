@@ -38,10 +38,14 @@ function move(worrior) {
         $('#' + "worrior-" + worrior.id).css("background-image", "url(./assests/res/img/" + worrior.img + ")");
         $(".hint").removeClass("hint");
         worrior.avMoves = [];
-        worrior.changePosition(newPlace);
-        console.log("the new place is  " + newPlace);
-        console.log("the new place is current  " + worrior.getPosition());
+        var rowAndcol = newPlace.split('-');
+        worrior.row = parseInt(rowAndcol[1]);
+        worrior.col = parseInt(rowAndcol[2]);
         checkHints(worrior);
+        /*  worrior.changePosition(newPlace);
+         console.log("the new place is  " + newPlace);
+         console.log("the new place is current  " + worrior.getPosition());
+         checkHints(worrior); */
         //}
     });
 
