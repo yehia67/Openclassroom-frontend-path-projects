@@ -1,8 +1,10 @@
 function Battel() {
-
-    var worriorOne = new worrior("Player 1", 0, "worriorOne.jpg", randomPlace(blocks));
-    var worriorTwo = new worrior("Player 2", 1, "worriorTwo.jpg", randomPlace(blocks));
-
+    var x = randomPlace(blocks);
+    var y = randomPlace(blocks);
+    var worriorOne = new worrior("Player 1", 0, "worriorOne.jpg", x);
+    var worriorTwo = new worrior("Player 2", 1, "worriorTwo.jpg", y);
+    console.log("worrior One Place " + x);
+    console.log("worrior Two Place " + y);
     worriorInit(worriorOne);
     worriorInit(worriorTwo);
     // Make Labels
@@ -16,16 +18,32 @@ function worriorInit(worrior) {
 
 function checkHints(worrior) {
     $("#" + worrior.getWorriorId()).clickToggle(function(ev) {
-        worrior.availableMoves();
-
-    }, function(ev) {
-        worrior.removeHints();
-    });
+            console.log("clickedd---------------------------------------")
+            worrior.availableMoves();
+            move(worrior);
+        },
+        function(ev) {
+            worrior.removeHints();
+        });
 
 };
 
-function Move() {
-    $('.hint').on('click', function() {
-        console.log("hintclicked");
+function move(worrior) {
+
+    $(".hint").click(function(event) {
+        var newPlace = $(this).closest('div').attr('id');
+        // if (newPlace !== "worrior-" + worrior.id) {
+        $('#' + "worrior-" + worrior.id).remove();
+        $("#" + newPlace).append("<div id='" + "worrior-" + worrior.id + "' " + " class='worrior'></div>");
+        $('#' + "worrior-" + worrior.id).css("background-image", "url(./assests/res/img/" + worrior.img + ")");
+        $(".hint").removeClass("hint");
+        worrior.avMoves = [];
+        worrior.changePosition(newPlace);
+        console.log("the new place is  " + newPlace);
+        console.log("the new place is current  " + worrior.getPosition());
+        checkHints(worrior);
+        //}
     });
+
+
 }

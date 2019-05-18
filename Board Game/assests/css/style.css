@@ -37,6 +37,7 @@
 }
 
 .hint {
+    cursor: pointer;
     background-color: #00F !important
 }
 
