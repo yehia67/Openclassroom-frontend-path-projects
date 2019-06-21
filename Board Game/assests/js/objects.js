@@ -34,57 +34,31 @@ function worrior(name, id, img, position) {
     this.img = img;
     img = this.img;
     that = this;
-    this.avMoves = [];
-    this.setrowAndCol = function() {
-        that.rowAndcol = that.position.split('-');
-        that.row = parseInt(that.rowAndcol[1]);
-        that.col = parseInt(that.rowAndcol[2]);
-        console.log("new Row value " + that.row);
-        console.log("new Col value " + that.col);
-    };
-    this.showhint = function() {
-        for (let index = 0; index < that.avMoves.length; index++) {
-            $("#" + that.avMoves[index]).addClass("hint");
-        }
-    };
-    this.removeHints = function() {
-        for (let index = 0; index < that.avMoves.length; index++) {
 
-            $('#' + String(that.avMoves[index])).removeClass('hint');
-            that.avMoves[index] = "";
-        }
-        that.avMoves.pop();
-    };
+
     this.getPosition = function() { return this.position };
-    this.changePosition = function(pos) {
-        console.log("change position param " + pos);
-        console.log("change position old value " + this.position);
-        this.position = pos;
-        console.log("change position new value " + this.position);
-        that.setrowAndCol();
-    }
 
     this.availableMoves = function() {
         console.log("available row " + this.row);
         console.log("available col " + this.col);
-        console.log("availablle old av Moves" + that.avMoves);
-        avRowCol(this.row, this.col, that.avMoves);
-        console.log("availablle new av Moves" + that.avMoves);
+        $('#' + "block-" + parseInt(parseInt(this.row) + parseInt(-3)) + "-" + this.col).addClass('hint');
+        $('#' + "block-" + parseInt(parseInt(this.row) + parseInt(-2)) + "-" + this.col).addClass('hint');
+        $('#' + "block-" + parseInt(parseInt(this.row) + parseInt(-1)) + "-" + this.col).addClass('hint');
+        $('#' + "block-" + parseInt(parseInt(this.row) + parseInt(3)) + "-" + this.col).addClass('hint');
+        $('#' + "block-" + parseInt(parseInt(this.row) + parseInt(2)) + "-" + this.col).addClass('hint');
+        $('#' + "block-" + parseInt(parseInt(this.row) + parseInt(1)) + "-" + this.col).addClass('hint');
+
+        $('#' + "block-" + this.row + "-" + parseInt(parseInt(this.col) + parseInt(-3))).addClass('hint');
+        $('#' + "block-" + this.row + "-" + parseInt(parseInt(this.col) + parseInt(-2))).addClass('hint');
+        $('#' + "block-" + this.row + "-" + parseInt(parseInt(this.col) + parseInt(-1))).addClass('hint');
+        $('#' + "block-" + this.row + "-" + parseInt(parseInt(this.col) + parseInt(3))).addClass('hint');
+        $('#' + "block-" + this.row + "-" + parseInt(parseInt(this.col) + parseInt(2))).addClass('hint');
+        $('#' + "block-" + this.row + "-" + parseInt(parseInt(this.col) + parseInt(1))).addClass('hint');
+
+
     };
     this.nextMove = function() {
-        var moves = that.avMoves;
-        for (const index in moves) {
-            $("#" + String(moves[index])).click(function() {
-                $('#' + "worrior-" + id).remove();
-                console.log("ID ----------------------- " + this.id);
-                that.removeHints();
-                $('#' + String(moves[index])).append("<div id='" + "worrior-" + id + "' " + " class='worrior'></div>");
-                $('#' + "worrior-" + id).addClass('worrior');
-                $('#' + "worrior-" + id).css("background-image", "url(./assests/res/img/" + img + ")");
-                that.changePosition(moves[index]);
-                //   that.availableMoves();
-            });
-        }
+
     };
     this.redraw = function() {
         $('#' + "worrior-" + this.id).remove();

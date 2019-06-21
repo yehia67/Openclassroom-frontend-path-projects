@@ -20,38 +20,17 @@ function worriorInit(worrior) {
 
 function checkHints(worrior) {
     $("#" + worrior.getWorriorId()).clickToggle(function(ev) {
-            console.log("clickedd---------------------------------------")
 
             worrior.availableMoves();
-            move(worrior);
-
-
         },
-        function(ev) {
-            worrior.removeHints();
-        });
+        function(ev) {});
 
 };
 
 function move(worrior) {
 
     $(".hint").click(function(event) {
-        var newPlace = $(this).closest('div').attr('id');
-        $('#' + "worrior-" + worrior.id).remove();
-        $("#" + newPlace).append("<div id='" + "worrior-" + worrior.id + "' " + " class='worrior'></div>");
-        $('#' + "worrior-" + worrior.id).css("background-image", "url(./assests/res/img/" + worrior.img + ")");
-        $(".hint").removeClass("hint");
-        worrior.avMoves = [];
-        var rowAndcol = newPlace.split('-');
-        worrior.row = parseInt(rowAndcol[1]);
-        worrior.col = parseInt(rowAndcol[2]);
-        console.log("------turn--------- " + turn);
-        if (turn === 0) {
-            turn = 1;
-        } else {
-            turn = 0;
-        }
-        checkHints(worrior, turn);
+
     });
 
 
