@@ -84,9 +84,10 @@ function worrior(name, id, img, position) {
     this.nextMove = function() {
 
     };
-    this.redraw = function() {
-        $('#' + "worrior-" + this.id).remove();
-        that.draw();
+    this.redraw = function(place) {
+        $("#" + place).append("<div id='" + "worrior-" + this.id + "' " + " class='worrior'></div>");
+        $('#' + "worrior-" + this.id).addClass('worrior');
+        $('#' + "worrior-" + this.id).css("background-image", "url(./assests/res/img/" + this.img + ")");
     };
     this.draw = function() {
         $("#" + this.position).append("<div id='" + "worrior-" + this.id + "' " + " class='worrior'></div>");

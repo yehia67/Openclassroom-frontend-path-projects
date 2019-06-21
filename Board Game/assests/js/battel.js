@@ -22,6 +22,7 @@ function checkHints(worrior) {
     $("#" + worrior.getWorriorId()).clickToggle(function(ev) {
 
             worrior.availableMoves();
+            move(worrior);
         },
         function(ev) {
             $("div").removeClass('hint');
@@ -32,6 +33,11 @@ function checkHints(worrior) {
 function move(worrior) {
 
     $(".hint").click(function(event) {
+        var blockId = event.target.id
+        console.log(event.target.id);
+        $("div").removeClass('hint');
+        $("#" + worrior.getWorriorId()).remove();
+        worrior.redraw(blockId);
 
     });
 
