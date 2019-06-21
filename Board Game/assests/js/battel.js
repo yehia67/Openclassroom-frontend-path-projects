@@ -23,7 +23,9 @@ function checkHints(worrior) {
 
             worrior.availableMoves();
         },
-        function(ev) {});
+        function(ev) {
+            $("div").removeClass('hint');
+        });
 
 };
 

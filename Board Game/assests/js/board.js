@@ -22,7 +22,7 @@ function block(row, col, empty) {
     };
 
     this.beBusy = function() {
-
+        busy = false;
     };
     this.free = function() {
         busy = false;
@@ -38,72 +38,7 @@ function block(row, col, empty) {
 
 var blocks = [];
 
-function avRowCol(row, col, avMoves) {
-    avMoves.length = 0;
-    var hold, back = -1;
-    var rowforward = true,
-        rowbackward = true,
-        colforward = true,
-        colbackward = true;
-    //rows
-    for (let i = 1; i < 7; i++) {
-        if (i < 4 && rowforward) {
-            hold = row + i;
-            if ($('#' + "block-" + hold + "-" + col).length) {
-                if ($('#' + "block-" + hold + "-" + col).children("div").attr("class") == "unempty") {
-                    rowforward = false;
-                    continue;
-                } else {
-                    $('#' + "block-" + hold + "-" + col).addClass('hint');
-                    avMoves.push("block-" + hold + "-" + col);
-                }
-            }
-        } else if (rowbackward && back > -4) {
-            hold = row + back;
-            if ($('#' + "block-" + hold + "-" + col).length) {
-                if ($('#' + "block-" + hold + "-" + col).children("div").attr("class") == "unempty") {
-                    rowbackward = false;
-                    continue;
-                } else {
-                    $('#' + "block-" + hold + "-" + col).addClass('hint');
-                    avMoves.push("block-" + hold + "-" + col);
-                }
-            }
-            back--;
-        }
-    }
 
-    //colums
-    back = -1;
-    for (let i = 1; i < 7; i++) {
-        if (i < 4 && colforward) {
-            hold = col + i;
-            if ($('#' + "block-" + row + "-" + hold).length) {
-                if ($('#' + "block-" + row + "-" + hold).children("div").attr("class") == "unempty") {
-                    colforward = false;
-                    continue;
-                } else {
-                    $('#' + "block-" + row + "-" + hold).addClass('hint');
-                    avMoves.push("block-" + row + "-" + hold);
-
-                }
-            }
-        } else if (colbackward && back > -4) {
-            hold = col + back;
-            if ($('#' + "block-" + row + "-" + hold).length) {
-                if ($('#' + "block-" + row + "-" + hold).children("div").attr("class") == "unempty") {
-                    colbackward = false;
-                    continue;
-                } else {
-                    $('#' + "block-" + row + "-" + hold).addClass('hint');
-                    avMoves.push("block-" + row + "-" + hold);
-                }
-            }
-            back--;
-        }
-    }
-    console.log(avMoves);
-};
 
 
 function board() {

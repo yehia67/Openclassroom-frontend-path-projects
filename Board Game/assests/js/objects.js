@@ -41,19 +41,43 @@ function worrior(name, id, img, position) {
     this.availableMoves = function() {
         console.log("available row " + this.row);
         console.log("available col " + this.col);
-        $('#' + "block-" + parseInt(parseInt(this.row) + parseInt(-3)) + "-" + this.col).addClass('hint');
-        $('#' + "block-" + parseInt(parseInt(this.row) + parseInt(-2)) + "-" + this.col).addClass('hint');
-        $('#' + "block-" + parseInt(parseInt(this.row) + parseInt(-1)) + "-" + this.col).addClass('hint');
-        $('#' + "block-" + parseInt(parseInt(this.row) + parseInt(3)) + "-" + this.col).addClass('hint');
-        $('#' + "block-" + parseInt(parseInt(this.row) + parseInt(2)) + "-" + this.col).addClass('hint');
-        $('#' + "block-" + parseInt(parseInt(this.row) + parseInt(1)) + "-" + this.col).addClass('hint');
+        //negative row
+        for (let index = -1; index > -4; index--) {
+            if (!($('#' + "block-" + parseInt(parseInt(this.row) + parseInt(index)) + "-" + this.col + " div").hasClass("unempty"))) {
+                $('#' + "block-" + parseInt(parseInt(this.row) + parseInt(index)) + "-" + this.col).addClass('hint');
+            } else {
+                break;
+            }
 
-        $('#' + "block-" + this.row + "-" + parseInt(parseInt(this.col) + parseInt(-3))).addClass('hint');
-        $('#' + "block-" + this.row + "-" + parseInt(parseInt(this.col) + parseInt(-2))).addClass('hint');
-        $('#' + "block-" + this.row + "-" + parseInt(parseInt(this.col) + parseInt(-1))).addClass('hint');
-        $('#' + "block-" + this.row + "-" + parseInt(parseInt(this.col) + parseInt(3))).addClass('hint');
-        $('#' + "block-" + this.row + "-" + parseInt(parseInt(this.col) + parseInt(2))).addClass('hint');
-        $('#' + "block-" + this.row + "-" + parseInt(parseInt(this.col) + parseInt(1))).addClass('hint');
+        }
+        //positive row
+        for (let index = 1; index < 4; index++) {
+            if (!($('#' + "block-" + parseInt(parseInt(this.row) + parseInt(index)) + "-" + this.col + " div").hasClass("unempty"))) {
+                $('#' + "block-" + parseInt(parseInt(this.row) + parseInt(index)) + "-" + this.col).addClass('hint');
+            } else {
+                break;
+            }
+
+        }
+
+        //negative col
+        for (let index = -1; index > -4; index--) {
+            if (!($('#' + "block-" + this.row + "-" + parseInt(parseInt(this.col) + parseInt(index)) + " div").hasClass("unempty"))) {
+                $('#' + "block-" + this.row + "-" + parseInt(parseInt(this.col) + parseInt(index))).addClass('hint');
+            } else {
+                break;
+            }
+
+        }
+        //positive col
+        for (let index = 1; index < 4; index++) {
+            if (!($('#' + "block-" + this.row + "-" + parseInt(parseInt(this.col) + parseInt(index)) + " div").hasClass("unempty"))) {
+                $('#' + "block-" + this.row + "-" + parseInt(parseInt(this.col) + parseInt(index))).addClass('hint');
+            } else {
+                break;
+            }
+
+        }
 
 
     };
