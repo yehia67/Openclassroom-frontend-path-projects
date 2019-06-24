@@ -22,7 +22,7 @@ function block(row, col, empty) {
     };
 
     this.beBusy = function() {
-        busy = false;
+        busy = true;
     };
     this.free = function() {
         busy = false;
@@ -96,6 +96,7 @@ function randomPlace(blocks) {
     for (var i in blocks) {
         if (blocks[rand].empty && (blocks[rand].busy === false)) {
             blocks[rand].beBusy();
+            blocks[rand].empty = false;
             return blocks[rand].getBlock();
         }
         rand = Math.floor(Math.random() * 255);
