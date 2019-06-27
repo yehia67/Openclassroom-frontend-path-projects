@@ -45,7 +45,7 @@ function worriorTurn(worrior, blockId) {
 
 function move(worrior) {
 
-    $("div").on('click', '.hint', function(event) {
+    $(".hint").on('click', function(event) {
         if (turn && worrior.id == 1 && event.target.id != "worrior-1") {
             var blockId = event.target.id;
             console.log(event.target.id);
