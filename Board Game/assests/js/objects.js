@@ -28,14 +28,13 @@ function worrior(name, id, img, position) {
     this.lifePoints = 100;
     this.defaultCastle = 10;
     this.position = position;
-    /*  this.rowAndcol = position.split('-');
-      this.row = parseInt(this.rowAndcol[1]);
-      this.col = parseInt(this.rowAndcol[2]); */
     this.img = img;
     img = this.img;
     that = this;
 
-
+    this.getPositionParam = function() {
+        return position;
+    }
 
     this.setposition = function(place) {
         var position = place;
@@ -46,6 +45,11 @@ function worrior(name, id, img, position) {
         return [row, col];
     }
     this.availableMoves = function(place) {
+        console.log("-------------------------------------------------------------");
+        console.log("The Place is " + place);
+        console.log("-------------------------------------------------------------");
+
+        $("div").removeClass('hint');
         var rowCol = that.setposition(place);
         var row = rowCol[0];
         var col = rowCol[1];
@@ -55,6 +59,7 @@ function worrior(name, id, img, position) {
         for (let index = -1; index > -4; index--) {
             if (!($('#' + "block-" + parseInt(parseInt(row) + parseInt(index)) + "-" + col + " div").hasClass("unempty"))) {
                 $('#' + "block-" + parseInt(parseInt(row) + parseInt(index)) + "-" + col).addClass('hint');
+                // console.log('#' + "block-" + parseInt(parseInt(row) + parseInt(index)) + "-" + col);
             } else {
                 break;
             }
@@ -64,6 +69,7 @@ function worrior(name, id, img, position) {
         for (let index = 1; index < 4; index++) {
             if (!($('#' + "block-" + parseInt(parseInt(row) + parseInt(index)) + "-" + col + " div").hasClass("unempty"))) {
                 $('#' + "block-" + parseInt(parseInt(row) + parseInt(index)) + "-" + col).addClass('hint');
+                //console.log('#' + "block-" + parseInt(parseInt(row) + parseInt(index)) + "-" + col);
             } else {
                 break;
             }
@@ -74,6 +80,7 @@ function worrior(name, id, img, position) {
         for (let index = -1; index > -4; index--) {
             if (!($('#' + "block-" + row + "-" + parseInt(parseInt(col) + parseInt(index)) + " div").hasClass("unempty"))) {
                 $('#' + "block-" + row + "-" + parseInt(parseInt(col) + parseInt(index))).addClass('hint');
+                //console.log('#' + "block-" + row + "-" + parseInt(parseInt(col) + parseInt(index)));
             } else {
                 break;
             }
@@ -83,6 +90,7 @@ function worrior(name, id, img, position) {
         for (let index = 1; index < 4; index++) {
             if (!($('#' + "block-" + row + "-" + parseInt(parseInt(col) + parseInt(index)) + " div").hasClass("unempty"))) {
                 $('#' + "block-" + row + "-" + parseInt(parseInt(col) + parseInt(index))).addClass('hint');
+                //console.log('#' + "block-" + row + "-" + parseInt(parseInt(col) + parseInt(index)));
             } else {
                 break;
             }
