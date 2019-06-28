@@ -17,11 +17,21 @@ function Battel() {
     console.log("hnaaaaaaaaaaaaaaaa el fightttt " + worriorOneFight);
     holdOne = x;
     holdeTow = y;
-    $("#game").append(" <div class='labels'> <div class='label player-one'><div class='label-name '>" + "Player One" + "</div><div class='label-score'>Score: " + worriorOne.lifePoints + "</div> </div><div class='label player-two'> <div class='label-name'>" + "Player Two" + "</div>  <div class='label-score'>Score:" + worriorTwo.lifePoints + "</div></div></div>");
+
+    makeAction();
     console.log("one")
     worriorTurn(worriorOne, x);
 
     // Make Labels
+}
+
+function makeAction() {
+    $('.labels').remove();
+    $("#game").append(" <div class='labels'> <div class='label player-one'><div class='label-name '>" + "Player One" + "</div><div class='label-score'>Score: " +
+        worriorOneFight.lifePoints + "<br/>  " + "<div>" + "ATK: " + worriorOneFight.attack + " " + "<br>" + "DEF: " + worriorOneFight.defense + "</div>" +
+        "</div> </div><div class='label player-two'> <div class='label-name'>" + "Player Two" + "</div>  <div class='label-score'>Score: " + worriorTwoFight.lifePoints + "<br/>  " +
+        "<div>" + "ATK: " + worriorTwoFight.attack + " " + "<br>" + "DEF: " + worriorTwoFight.defense + "</div>" +
+        "</div></div></div>");
 }
 
 function createWorrior(id, img, place) {
@@ -53,7 +63,7 @@ function move(worrior) {
             var blockId = event.target.id;
 
             //check for collision
-            worriorOneFight.checkFight(worriorOneFight, worriorTwoFight, blockId, holdeTow);
+            worriorOneFight.checkFight(worriorOneFight, worriorTwoFight, event.target.parentElement.id, holdeTow);
             worriorOneFight.checkCastle(blockId)
 
 
