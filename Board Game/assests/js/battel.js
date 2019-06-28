@@ -1,6 +1,6 @@
 var turn = 1;
-var worriorOne;
-var worriorTwo;
+var worriorOne, worriorOneFight;
+var worriorTwo, worriorTwoFight;
 var holdOne,
     holdeTow;
 
@@ -12,9 +12,12 @@ function Battel() {
     console.log("worrior Two Place " + y);
     worriorOne = createWorrior(1, "One", x);
     worriorTwo = createWorrior(2, "Two", y);
+    worriorOneFight = new WorriorsFight(worriorOne, 20, 20);
+    worriorTwoFight = new WorriorsFight(worriorTwo, 20, 20);
+    console.log("hnaaaaaaaaaaaaaaaa el fightttt " + worriorOneFight);
     holdOne = x;
     holdeTow = y;
-    $("#game").append(" <div class='labels'> <div class='label player-one'><div class='label-name '>" + worriorOne.name + "</div><div class='label-score'>Score: " + worriorOne.lifePoints + "</div> </div><div class='label player-two'> <div class='label-name'>" + worriorTwo.name + "</div>  <div class='label-score'>Score:" + worriorTwo.lifePoints + "</div></div></div>");
+    $("#game").append(" <div class='labels'> <div class='label player-one'><div class='label-name '>" + "Player One" + "</div><div class='label-score'>Score: " + worriorOne.lifePoints + "</div> </div><div class='label player-two'> <div class='label-name'>" + "Player Two" + "</div>  <div class='label-score'>Score:" + worriorTwo.lifePoints + "</div></div></div>");
     console.log("one")
     worriorTurn(worriorOne, x);
 
@@ -48,6 +51,12 @@ function move(worrior) {
     $(".hint").on('click', function(event) {
         if (turn && worrior.id == 1 && event.target.id != "worrior-1") {
             var blockId = event.target.id;
+
+            //check for collision
+            worriorOneFight.checkFight(worriorOneFight, worriorTwoFight, blockId, holdeTow);
+            worriorOneFight.checkCastle(blockId)
+
+
             console.log(event.target.id);
             $("div").removeClass('hint');
             $("#" + worrior.getWorriorId()).remove();
@@ -59,6 +68,10 @@ function move(worrior) {
 
         } else if (!turn && worrior.id == 2 && event.target.id != "worrior-2") {
             var blockId = event.target.id
+
+            //check for collision
+            worriorTwoFight.checkFight(worriorTwoFight, worriorOneFight, blockId, holdOne)
+            worriorTwoFight.checkCastle(blockId)
             console.log(event.target.id);
             $("div").removeClass('hint');
             $("#" + worrior.getWorriorId()).remove();

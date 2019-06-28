@@ -3,6 +3,9 @@ function castle(attack, defense, img, position) {
     this.defense = defense;
     this.img = img;
     this.owner = null;
+    this.getId = function() {
+        return "castle-" + attack + "-" + defense;
+    };
     $("#" + position).append("<div id='" + "castle-" + attack + "-" + defense + "' " + " class='castle'></div>");
     $('#' + "castle-" + attack + "-" + defense).css("width", "50px");
     $('#' + "castle-" + attack + "-" + defense).css("height", "50px");
@@ -21,6 +24,69 @@ function castle(attack, defense, img, position) {
     };
 
 };
+
+function WorriorsFight(worrior, attack, deffense) {
+    this.lifePoints = 100;
+    this.attack = attack;
+    this.defense = deffense;
+    this.defensePosition = false;
+    var that = this;
+    //conditions
+    this.checkCastle = function(worriorPlace) {
+        console.log(castles);
+        for (let i = 0; i < castles.length; i++) {
+            if (castles[i].getId() === worriorPlace) {
+                addCastle();
+                break;
+            }
+
+        }
+    }
+
+    this.checkFight = function(attackWorrior, attackedWorrior, worriorTurnPosition, worriorHoldPosition) {
+        if (worriorTurnPosition === worriorHoldPosition) {
+            startfight(attackWorrior, attackedWorrior);
+        }
+    }
+
+    //actions
+
+    //collect castle
+    function addCastle() {
+        that.attack += 20;
+        that.defense += 20;
+        console.log("ATTACK!!! " + that.attack);
+        console.log("DEFENSE!!! " + that.defense);
+
+    }
+
+    function startfight(attackWorrior, attackedWorrior) {
+        if (confirm("Do you want to peek a fight?")) {
+            let attacker = attackWorrior.attack;
+            let defenser;
+            let defense;
+            if (confirm("do you need a counter attack")) {
+                defenser = attackedWorrior.attack;
+                defense = false;
+            } else {
+                defenser = attackedWorrior.deffense;
+                defense = true;
+            }
+
+            if (attacker > defenser && defense) {
+                attackedWorrior.lifePoints -= (attacker * 0.5);
+            } else if (attacker > defenser && !defense) {
+                attackedWorrior.lifePoints -= attacker;
+            } else {
+                attackWorrior.lifePoints -= defense;
+            }
+
+
+        } else {
+
+        }
+    }
+}
 
 function worrior(name, id, img, position) {
     this.name = name;

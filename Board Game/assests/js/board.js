@@ -69,7 +69,7 @@ function board() {
 
 };
 var turn = 0;
-
+var castles = [];
 
 function drawCastle(blocks) {
     var castlesName = ['stark.jpg', 'targedyan.jpg', 'lanyster.jpg', 'barathone.jpg'];
@@ -82,7 +82,7 @@ function drawCastle(blocks) {
     var laynsterCastel = new castle(75, 90, castlesName[2], randomPlace(blocks));
 
     var barathonCastel = new castle(110, 95, castlesName[3], randomPlace(blocks));
-
+    castles = [starkCastle, targedyanCastel, laynsterCastel, barathonCastel];
 
     starkCastle.draw();
     targedyanCastel.draw();
