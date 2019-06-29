@@ -47,8 +47,8 @@ function board() {
     $("#game").css("width", "960px");
     $("#game").css("height", "960px");
     var unempty = [];
-    //initialize unempty blocks
-    for (let index = 0; index < 64; index++) {
+    //initialize unempty blocks (difficulty level)
+    for (let index = 0; index < 45; index++) {
         unempty.push(Math.floor(Math.random() * 255));
 
     }

@@ -17,11 +17,26 @@ function Battel() {
     console.log("hnaaaaaaaaaaaaaaaa el fightttt " + worriorOneFight);
     holdOne = x;
     holdeTow = y;
-    $("#game").append(" <div class='labels'> <div class='label player-one'><div class='label-name '>" + "Player One" + "</div><div class='label-score'>Score: " + worriorOne.lifePoints + "</div> </div><div class='label player-two'> <div class='label-name'>" + "Player Two" + "</div>  <div class='label-score'>Score:" + worriorTwo.lifePoints + "</div></div></div>");
+
+    makeAction();
     console.log("one")
     worriorTurn(worriorOne, x);
 
     // Make Labels
+}
+
+function makeAction() {
+    $('.labels').remove();
+    $("#game").append(" <div class='labels'> <div class='label player-one'><div class='label-name '>" + "Player One" + "</div><div class='label-score'>Score: " +
+        worriorOneFight.lifePoints + "<br/>  " + "<div>" + "ATK: " + worriorOneFight.attack + " " + "<br>" + "DEF: " + worriorOneFight.defense + "</div>" +
+        "</div> </div><div class='label player-two'> <div class='label-name'>" + "Player Two" + "</div>  <div class='label-score'>Score: " + worriorTwoFight.lifePoints + "<br/>  " +
+        "<div>" + "ATK: " + worriorTwoFight.attack + " " + "<br>" + "DEF: " + worriorTwoFight.defense + "</div>" +
+        "</div></div></div>");
+    if (worriorOneFight.lifePoints <= 0) {
+        alert("Game is Done Congratulation Player One");
+    } else if (worriorTwoFight.lifePoints <= 0) {
+        alert("Game is Done Congratulation Player Two");
+    }
 }
 
 function createWorrior(id, img, place) {
@@ -34,49 +49,69 @@ function createWorrior(id, img, place) {
 
 function worriorTurn(worrior, blockId) {
     $("#" + worrior.getWorriorId()).clickToggle(function(ev) {
-            console.log("hnaaaaa" + blockId);
-            worrior.availableMoves(blockId);
+
+            worrior.availableMoves(getBlockPlace(blockId));
+
+
             move(worrior);
 
         },
         function(ev) {
+            $(".hint").off('click');
             $("div").removeClass('hint');
         });
 
 };
 
+function getBlockPlace(blockId) {
+    console.log("YARBA YARAB  " + blockId.search("wo"));
+    if (blockId.search("ca") == -1 && blockId.search("wo") == -1) {
+
+        return blockId;
+
+    } else {
+        console.log($(blockId).parent().attr('id'));
+        return $('#' + blockId).parent().attr('id');
+
+    }
+
+}
 
 function move(worrior) {
 
     $(".hint").on('click', function(event) {
         if (turn && worrior.id == 1 && event.target.id != "worrior-1") {
             var blockId = event.target.id;
-
+            var blockplace = getBlockPlace(blockId);
             //check for collision
-            worriorOneFight.checkFight(worriorOneFight, worriorTwoFight, blockId, holdeTow);
-            worriorOneFight.checkCastle(blockId)
+            worriorOneFight.checkFight(worriorOneFight, worriorTwoFight, event.target.parentElement.id, holdeTow);
+            worriorOneFight.checkCastle(blockplace)
 
 
             console.log(event.target.id);
+            $(".hint").off('click');
             $("div").removeClass('hint');
-            $("#" + worrior.getWorriorId()).remove();
-            worrior = createWorrior(1, "One", blockId); //worrior One
+            $("#worrior-1").remove();
+            worrior = createWorrior(1, "One", blockplace); //worrior One
             turn = !turn;
-            holdOne = blockId;
+            holdOne = blockplace;
             //console.log("worrior One turn");
             worriorTurn(worriorTwo, '#' + holdeTow);
 
         } else if (!turn && worrior.id == 2 && event.target.id != "worrior-2") {
             var blockId = event.target.id
+            var blockplace = getBlockPlace(blockId);
 
             //check for collision
-            worriorTwoFight.checkFight(worriorTwoFight, worriorOneFight, blockId, holdOne)
-            worriorTwoFight.checkCastle(blockId)
+            worriorTwoFight.checkFight(worriorTwoFight, worriorOneFight, blockplace, holdOne)
+            worriorTwoFight.checkCastle(blockplace)
             console.log(event.target.id);
+            $(".hint").off('click');
             $("div").removeClass('hint');
-            $("#" + worrior.getWorriorId()).remove();
-            worrior = createWorrior(2, "Two", blockId); //worrior Two
-            holdeTow = blockId;
+
+            $("#worrior-2").remove();
+            worrior = createWorrior(2, "Two", blockplace); //worrior Two
+            holdeTow = blockplace;
             turn = !turn;
             //console.log("worrior Two turn");
             worriorTurn(worriorOne, '#' + holdOne);

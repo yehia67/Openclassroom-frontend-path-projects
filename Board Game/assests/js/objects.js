@@ -46,6 +46,7 @@ function WorriorsFight(worrior, attack, deffense) {
     this.checkFight = function(attackWorrior, attackedWorrior, worriorTurnPosition, worriorHoldPosition) {
         if (worriorTurnPosition === worriorHoldPosition) {
             startfight(attackWorrior, attackedWorrior);
+
         }
     }
 
@@ -55,36 +56,49 @@ function WorriorsFight(worrior, attack, deffense) {
     function addCastle() {
         that.attack += 20;
         that.defense += 20;
+        makeAction();
+
         console.log("ATTACK!!! " + that.attack);
         console.log("DEFENSE!!! " + that.defense);
 
     }
 
     function startfight(attackWorrior, attackedWorrior) {
-        if (confirm("Do you want to peek a fight?")) {
-            let attacker = attackWorrior.attack;
-            let defenser;
-            let defense;
-            if (confirm("do you need a counter attack")) {
-                defenser = attackedWorrior.attack;
-                defense = false;
-            } else {
-                defenser = attackedWorrior.deffense;
-                defense = true;
-            }
 
-            if (attacker > defenser && defense) {
-                attackedWorrior.lifePoints -= (attacker * 0.5);
-            } else if (attacker > defenser && !defense) {
-                attackedWorrior.lifePoints -= attacker;
-            } else {
-                attackWorrior.lifePoints -= defense;
-            }
-
+        let attacker = attackWorrior.attack;
+        let defenser;
+        let defense;
+        if (confirm("do you want to take defense position")) {
+            defenser = attackedWorrior.attack;
+            defense = false;
+            makeAction();
 
         } else {
+            defenser = attackedWorrior.deffense;
+            defense = true;
+            makeAction();
 
         }
+
+        if ((attacker > defenser) && defense) {
+            attackedWorrior.lifePoints -= (attacker * 0.5);
+            makeAction();
+
+        } else if (attacker > defenser && !defense) {
+            attackedWorrior.lifePoints -= attacker;
+            makeAction();
+
+        } else if (attacker === defenser) {
+            attackedWorrior.lifePoints -= attacker;
+            attackWorrior.lifePoints -= defenser;
+        } else {
+            attackWorrior.lifePoints -= defenser;
+            makeAction();
+
+        }
+
+
+
     }
 }
 
