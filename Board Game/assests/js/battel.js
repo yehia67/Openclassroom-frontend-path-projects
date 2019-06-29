@@ -33,9 +33,9 @@ function makeAction() {
         "<div>" + "ATK: " + worriorTwoFight.attack + " " + "<br>" + "DEF: " + worriorTwoFight.defense + "</div>" +
         "</div></div></div>");
     if (worriorOneFight.lifePoints <= 0) {
-        alert("Game is Done Congratulation Player One");
+        alert("Game is Done Congratulation Player TWo");
     } else if (worriorTwoFight.lifePoints <= 0) {
-        alert("Game is Done Congratulation Player Two");
+        alert("Game is Done Congratulation Player One");
     }
 }
 
@@ -50,7 +50,7 @@ function createWorrior(id, img, place) {
 function worriorTurn(worrior, blockId) {
     $("#" + worrior.getWorriorId()).clickToggle(function(ev) {
 
-            worrior.availableMoves(getBlockPlace(blockId));
+            worrior.availableMoves(blockId);
 
 
             move(worrior);

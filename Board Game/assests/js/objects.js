@@ -35,7 +35,7 @@ function WorriorsFight(worrior, attack, deffense) {
     this.checkCastle = function(worriorPlace) {
         console.log(castles);
         for (let i = 0; i < castles.length; i++) {
-            if (castles[i].getId() === worriorPlace) {
+            if ($("#" + castles[i].getId()).parent().attr('id') === worriorPlace) {
                 addCastle();
                 break;
             }
