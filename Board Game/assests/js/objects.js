@@ -32,15 +32,17 @@ function WorriorsFight(worrior, attack, deffense) {
     this.defensePosition = false;
     var that = this;
     //conditions
-    this.checkCastle = function(worriorPlace) {
+    this.checkCastle = function(worriorPlace, changePlace) {
         console.log(castles);
         for (let i = 0; i < castles.length; i++) {
             if ($("#" + castles[i].getId()).parent().attr('id') === worriorPlace) {
                 addCastle();
-                break;
-            }
+                worriorPlace = castles[i].getId();
+                return true;
 
+            }
         }
+        return false;
     }
 
     this.checkFight = function(attackWorrior, attackedWorrior, worriorTurnPosition, worriorHoldPosition) {

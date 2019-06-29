@@ -70,7 +70,6 @@ function getBlockPlace(blockId) {
         return blockId;
 
     } else {
-        console.log($(blockId).parent().attr('id'));
         return $('#' + blockId).parent().attr('id');
 
     }
@@ -83,12 +82,15 @@ function move(worrior) {
         if (turn && worrior.id == 1 && event.target.id != "worrior-1") {
             var blockId = event.target.id;
             var blockplace = getBlockPlace(blockId);
+            var getCastleParent;
             //check for collision
             worriorOneFight.checkFight(worriorOneFight, worriorTwoFight, event.target.parentElement.id, holdeTow);
-            worriorOneFight.checkCastle(blockplace)
+            getCastleParent = worriorOneFight.checkCastle(blockplace)
+            if (getCastleParent) {
+                blockplace = blockId;
+                console.log("trueee" + blockplace);
+            }
 
-
-            console.log(event.target.id);
             $(".hint").off('click');
             $("div").removeClass('hint');
             $("#worrior-1").remove();
