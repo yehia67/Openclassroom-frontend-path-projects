@@ -88,7 +88,7 @@ function move(worrior) {
             getCastleParent = worriorOneFight.checkCastle(blockplace)
             if (getCastleParent) {
                 blockplace = blockId;
-                console.log("trueee" + blockplace);
+                console.log("***************************************************************trueee" + blockplace);
             }
 
             $(".hint").off('click');
@@ -96,7 +96,7 @@ function move(worrior) {
             $("#worrior-1").remove();
             worrior = createWorrior(1, "One", blockplace); //worrior One
             turn = !turn;
-            holdOne = blockplace;
+            holdOne = getBlockPlace(blockId);
             //console.log("worrior One turn");
             worriorTurn(worriorTwo, '#' + holdeTow);
 
