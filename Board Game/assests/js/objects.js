@@ -76,7 +76,7 @@ function WorriorsFight(worrior, attack, deffense) {
             makeAction();
 
         } else {
-            defenser = attackedWorrior.deffense;
+            defenser = attackedWorrior.defense;
             defense = true;
             makeAction();
 
@@ -86,7 +86,7 @@ function WorriorsFight(worrior, attack, deffense) {
             attackedWorrior.lifePoints -= (attacker * 0.5);
 
         } else {
-            defenser = attackedWorrior.deffense;
+            defenser = attackedWorrior.defense;
             defense = true;
             makeAction();
 
