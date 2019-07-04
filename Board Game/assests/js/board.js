@@ -4,6 +4,7 @@ jQuery.fn.clickToggle = function(a, b) {
     })
 }
 
+
 function block(row, col, empty) {
     this.side = 30;
     this.row = row;

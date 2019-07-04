@@ -1,14 +1,22 @@
 .game-menu {
-    background-image: url(../res/img/download.jpeg);
-    height: 1000px;
+    background-image: url(../res/img/wallpaper1.jpg);
+}
+
+#playersName,
+.game-menu {
+    ,
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
     background-repeat: no-repeat;
     background-size: cover
 }
 
 .game-menu .menu {
-    position: relative;
-    left: 860px;
-    top: 123px
+    position: absolute;
+    bottom: 5%;
+    top: auto;
+    left: 50%
 }
 
 .game-menu .menu .menu-btn {
@@ -17,6 +25,22 @@
 
 #game {
     margin: auto
+}
+
+#game .action-label {}
+
+#game .lable-one-place {
+    left: 12%
+}
+
+#game .lable-one-place,
+#game .lable-two-place {
+    position: absolute;
+    top: 45%
+}
+
+#game .lable-two-place {
+    right: 12%
 }
 
 .block {

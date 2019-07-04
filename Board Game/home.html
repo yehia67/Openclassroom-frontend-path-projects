@@ -5,8 +5,9 @@
     <meta name="description" content="mobile interpter">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="assests/css/style.css">
-    <link rel="stylesheet" type="text/css" href="assests/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.1/css/bootstrap-slider.min.css">
     <title>Game Of Thrones</title>
 </head>
 
@@ -14,15 +15,44 @@
     <!--APP-->
     <div class="game-menu">
         <div class="menu">
-            <button type="button" href="index.html" class="btn btn-primary btn-lg menu-btn">Start Game</button> <br>
-            <button type="button" class="btn btn-primary btn-lg menu-btn">DashBoard</button>
+            <button type="button" class="btn btn-primary btn-lg menu-btn" data-toggle="modal" data-target="#playersName">Start Game</button> <br>
         </div>
     </div>
     <!--/APP-->
+    <div class="modal fade" id="playersName" tabindex="-1" role="dialog" style="background-image: url(assests/res/img/download.jpeg)" aria-labelledby="makeFeedbackCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Entere Players Names </div>
+                <div class="modal-body">
+
+                    <!--Start Form-->
+                    <form class="text-capitalize p-2">
+                        <div class="form-group">
+                            <input type="text" required class="form-control mb-3" id="playerOne" placeholder="Player One Name">
+                            <input type="text" required class="form-control" id="playerTwo" placeholder="Player Two Name">
+
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" onclick="play();" class="btn btn-primary">Start Playing</button>
+                        </div>
+                    </form>
+                    <!--End Form-->
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
 
     <!--Scripts-->
-    <script src="./assests/js/jquery-3.3.1.min.js"></script>
-    <script src="./assests/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="./assests/js/play.js"></script>
+
+
 </body>
 
 </html>

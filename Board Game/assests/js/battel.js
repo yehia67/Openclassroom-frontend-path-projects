@@ -1,3 +1,9 @@
+var qs = window.location.href.split('=')
+console.log(qs)
+var playerOneName = qs[1].split('&')
+playerOneName = playerOneName[0]
+console.log("PLAYYYYYYYYYYYYYER ONEE  " + playerOneName)
+var playerTwoName = qs[2]
 var turn = 1;
 var worriorOne, worriorOneFight;
 var worriorTwo, worriorTwoFight;
@@ -27,16 +33,20 @@ function Battel() {
 
 function makeAction() {
     $('.labels').remove();
-    $("#game").append(" <div class='labels'> <div class='label player-one'><div class='label-name '>" + "Player One" + "</div><div class='label-score'>Score: " +
+    $("#game").append(" <div class='labels'> <div class='label player-one'><div class='label-name '>" + playerOneName + "</div><div class='label-score'>Score: " +
         worriorOneFight.lifePoints + "<br/>  " + "<div>" + "ATK: " + worriorOneFight.attack + " " + "<br>" + "DEF: " + worriorOneFight.defense + "</div>" +
-        "</div> </div><div class='label player-two'> <div class='label-name'>" + "Player Two" + "</div>  <div class='label-score'>Score: " + worriorTwoFight.lifePoints + "<br/>  " +
+        "</div> </div><div class='label player-two'> <div class='label-name'>" + playerTwoName + "</div>  <div class='label-score'>Score: " + worriorTwoFight.lifePoints + "<br/>  " +
         "<div>" + "ATK: " + worriorTwoFight.attack + " " + "<br>" + "DEF: " + worriorTwoFight.defense + "</div>" +
         "</div></div></div>");
     if (worriorOneFight.lifePoints <= 0) {
-        alert("Game is Done Congratulation Player TWo");
+        alert("Game is Done Congratulation  " + playerTwoName);
+        location.href = 'home.html'
     } else if (worriorTwoFight.lifePoints <= 0) {
-        alert("Game is Done Congratulation Player One");
+        alert("Game is Done Congratulation " + playerOneName);
+        location.href = 'home.html'
     }
+    $("#game").append("<div class='action-label lable-one-place'></div><div class='action-label lable-two-place'></div>")
+    $('.action-label').html(playerOneName + " Turn");
 }
 
 function createWorrior(id, img, place) {
@@ -96,8 +106,11 @@ function move(worrior) {
             $("#worrior-1").remove();
             worrior = createWorrior(1, "One", blockplace); //worrior One
             turn = !turn;
+
             holdOne = getBlockPlace(blockId);
             //console.log("worrior One turn");
+            $('.action-label').html(playerTwoName + " Turn");
+
             worriorTurn(worriorTwo, '#' + holdeTow);
 
         } else if (!turn && worrior.id == 2 && event.target.id != "worrior-2") {
@@ -118,7 +131,10 @@ function move(worrior) {
             worrior = createWorrior(2, "Two", blockplace); //worrior Two
             holdeTow = getBlockPlace(blockId);
             turn = !turn;
+
+
             //console.log("worrior Two turn");
+            $('.action-label').html(playerOneName + " Turn");
             worriorTurn(worriorOne, '#' + holdOne);
 
         }
