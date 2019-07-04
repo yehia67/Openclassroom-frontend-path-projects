@@ -32,14 +32,11 @@ function makeAction() {
         "</div> </div><div class='label player-two'> <div class='label-name'>" + "Player Two" + "</div>  <div class='label-score'>Score: " + worriorTwoFight.lifePoints + "<br/>  " +
         "<div>" + "ATK: " + worriorTwoFight.attack + " " + "<br>" + "DEF: " + worriorTwoFight.defense + "</div>" +
         "</div></div></div>");
-<<<<<<< HEAD
     if (worriorOneFight.lifePoints <= 0) {
         alert("Game is Done Congratulation Player TWo");
     } else if (worriorTwoFight.lifePoints <= 0) {
         alert("Game is Done Congratulation Player One");
     }
-=======
->>>>>>> 14449cf0bfcb748f764ca700eafa5956b328ea37
 }
 
 function createWorrior(id, img, place) {
@@ -88,42 +85,38 @@ function move(worrior) {
             var getCastleParent;
             //check for collision
             worriorOneFight.checkFight(worriorOneFight, worriorTwoFight, event.target.parentElement.id, holdeTow);
-<<<<<<< HEAD
             getCastleParent = worriorOneFight.checkCastle(blockplace)
             if (getCastleParent) {
                 blockplace = blockId;
-                console.log("trueee" + blockplace);
+                console.log("***************************************************************trueee" + blockplace);
             }
 
             $(".hint").off('click');
-=======
-            worriorOneFight.checkCastle(blockId)
-
-
-            console.log(event.target.id);
->>>>>>> 14449cf0bfcb748f764ca700eafa5956b328ea37
             $("div").removeClass('hint');
             $("#worrior-1").remove();
             worrior = createWorrior(1, "One", blockplace); //worrior One
             turn = !turn;
-            holdOne = blockplace;
+            holdOne = getBlockPlace(blockId);
             //console.log("worrior One turn");
             worriorTurn(worriorTwo, '#' + holdeTow);
 
         } else if (!turn && worrior.id == 2 && event.target.id != "worrior-2") {
             var blockId = event.target.id
             var blockplace = getBlockPlace(blockId);
-
+            var getCastleParent;
             //check for collision
             worriorTwoFight.checkFight(worriorTwoFight, worriorOneFight, blockplace, holdOne)
-            worriorTwoFight.checkCastle(blockplace)
-            console.log(event.target.id);
+            getCastleParent = worriorTwoFight.checkCastle(blockplace)
+            if (getCastleParent) {
+                blockplace = blockId;
+                console.log("***************************************************************trueee" + blockplace);
+            }
             $(".hint").off('click');
             $("div").removeClass('hint');
 
             $("#worrior-2").remove();
             worrior = createWorrior(2, "Two", blockplace); //worrior Two
-            holdeTow = blockplace;
+            holdeTow = getBlockPlace(blockId);
             turn = !turn;
             //console.log("worrior Two turn");
             worriorTurn(worriorOne, '#' + holdOne);
