@@ -1,9 +1,9 @@
 var qs = window.location.href.split('=')
 console.log(qs)
 var playerOneName = qs[1].split('&')
-playerOneName = playerOneName[0]
+playerOneName = playerOneName[0].replace('%20', '');
 console.log("PLAYYYYYYYYYYYYYER ONEE  " + playerOneName)
-var playerTwoName = qs[2]
+var playerTwoName = qs[2].replace('%20', '');
 var turn = 1;
 var worriorOne, worriorOneFight;
 var worriorTwo, worriorTwoFight;
@@ -40,12 +40,9 @@ function makeAction() {
         "<div>" + "ATK: " + worriorTwoFight.attack + " " + "<br>" + "DEF: " + worriorTwoFight.defense + "</div>" +
         "</div></div></div>");
     if (worriorOneFight.lifePoints <= 0) {
-        alert("Game is Done Congratulation  " + playerTwoName);
-        location.href = 'home.html'
-
+        openGameOver()
     } else if (worriorTwoFight.lifePoints <= 0) {
-        alert("Game is Done Congratulation " + playerOneName);
-        location.href = 'home.html'
+        openGameOver()
     }
     $("#game").append("<div class='action-label lable-one-place'> <p class='events-label>event</p></div> ")
     $("#game").append("<div class='action-label lable-two-place'> <p class='events-label>event</p><</div>")

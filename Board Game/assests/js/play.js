@@ -2,10 +2,10 @@ function play() {
     var playerOneName = $('#playerOne').val();
     var PlayerTwoName = $('#playerTwo').val();
     if (playerOneName === "") {
-        playerOneName = "Player One";
+        playerOneName = "PlayerOne";
     }
     if (PlayerTwoName === "") {
-        PlayerTwoName = "Player Two";
+        PlayerTwoName = "PlayerTwo";
     }
     location.href = 'index.html?playerOne=' + playerOneName + '&' + 'playerTwo=' + PlayerTwoName;
 }

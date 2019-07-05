@@ -20,9 +20,65 @@
 
     <!--/APP-->
 
+    <!--MODALS-->
+    <div class="modal fade" id="castleModal" tabindex="-1" role="dialog" style="" aria-labelledby="makeFeedbackCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Earn Castles Points </div>
+                <div class="modal-body">
+                    <h1>You Earned 20 pointes for attack and defense</h1>
+                    <div class="form-group">
+                        <button type="button" onclick="closCastle();" class="btn btn-primary float-right">Got it!</button>
+                    </div>
+                    </form>
+                    <!--End Form-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="gameOver" tabindex="-1" role="dialog" style="" aria-labelledby="makeFeedbackCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="text-centre  modal-header">
+                    <h1>Game Over</h1>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <button type="button" onclick="goToHomePage();" class="btn btn-primary float-right">Return To Home Page</button>
+                    </div>
+                    </form>
+                    <!--End Form-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="pickFight" tabindex="-1" role="dialog" style="" aria-labelledby="makeFeedbackCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Choose Your Position</div>
+                <div class="modal-body">
+
+                    <div class="form-group positionHandler">
+                        <button type="button" onclick="defnsePosition();" class="btn btn-primary">Defnse Position</button>
+                        <button type="button" onclick="attackPosition();" class="btn btn-primary float-right">Attack Position</button>
+                    </div>
+                    </form>
+                    <!--End Form-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--/MODALS-->
+
     <!--Scripts-->
     <script src="./assests/js/jquery-3.3.1.min.js"></script>
     <script src="./assests/js/bootstrap.min.js"></script>
+    <script src="./assests/js/modalHandler.js"></script>
     <script src="./assests/js/play.js"></script>
     <script src="./assests/js/board.js"></script>
     <script src="./assests/js/objects.js"></script>

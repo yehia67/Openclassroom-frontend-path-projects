@@ -45,7 +45,11 @@ function WorriorsFight(worrior, attack, deffense) {
 
     this.checkFight = function(attackWorrior, attackedWorrior, worriorTurnPosition, worriorHoldPosition) {
         if (worriorTurnPosition === worriorHoldPosition) {
-            startfight(attackWorrior, attackedWorrior);
+            pickAFight();
+            $('.positionHandler').on('click', function() {
+                startfight(attackWorrior, attackedWorrior);
+
+            })
 
         }
     }
@@ -56,7 +60,7 @@ function WorriorsFight(worrior, attack, deffense) {
     function addCastle() {
         that.attack += 20;
         that.defense += 20;
-        $('.action-label').html("You Earn 20 points for attack and defense");
+        openCastle();
         makeAction();
 
         console.log("ATTACK!!! " + that.attack);
@@ -69,7 +73,7 @@ function WorriorsFight(worrior, attack, deffense) {
         let attacker = attackWorrior.attack;
         let defenser;
         let defense;
-        if (confirm("do you want to take defense position")) {
+        if (checkposition) {
             defenser = attackedWorrior.attack;
             defense = false;
             makeAction();
