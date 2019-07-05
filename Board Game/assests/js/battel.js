@@ -31,6 +31,7 @@ function Battel() {
     // Make Labels
 }
 
+
 function makeAction() {
     $('.labels').remove();
     $("#game").append(" <div class='labels'> <div class='label player-one'><div class='label-name '>" + playerOneName + "</div><div class='label-score'>Score: " +
@@ -41,11 +42,13 @@ function makeAction() {
     if (worriorOneFight.lifePoints <= 0) {
         alert("Game is Done Congratulation  " + playerTwoName);
         location.href = 'home.html'
+
     } else if (worriorTwoFight.lifePoints <= 0) {
         alert("Game is Done Congratulation " + playerOneName);
         location.href = 'home.html'
     }
-    $("#game").append("<div class='action-label lable-one-place'></div><div class='action-label lable-two-place'></div>")
+    $("#game").append("<div class='action-label lable-one-place'> <p class='events-label>event</p></div> ")
+    $("#game").append("<div class='action-label lable-two-place'> <p class='events-label>event</p><</div>")
     $('.action-label').html(playerOneName + " Turn");
 }
 

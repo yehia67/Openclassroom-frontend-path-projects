@@ -6,17 +6,15 @@ function castle(attack, defense, img, position) {
     this.getId = function() {
         return "castle-" + attack + "-" + defense;
     };
-    $("#" + position).append("<div id='" + "castle-" + attack + "-" + defense + "' " + " class='castle'></div>");
-    $('#' + "castle-" + attack + "-" + defense).css("width", "50px");
-    $('#' + "castle-" + attack + "-" + defense).css("height", "50px");
-    $('#' + "castle-" + attack + "-" + defense).css("margin", "4px auto");
-    $('#' + "castle-" + attack + "-" + defense).css("background-image", "url(./assests/res/img/" + img + ")");
+
     this.draw = function() {
         $("#" + position).append("<div id='" + "castle-" + attack + "-" + defense + "' " + " class='castle'></div>");
-        $('#' + "castle-" + attack + "-" + defense).css("width", "50px");
-        $('#' + "castle-" + attack + "-" + defense).css("height", "50px"); + "' "
+        $('#' + "castle-" + attack + "-" + defense).css("width", "60px");
+        $('#' + "castle-" + attack + "-" + defense).css("height", "60px"); + "' "
         $('#' + "castle-" + attack + "-" + defense).css("margin", "4px auto"); + "' "
         $('#' + "castle-" + attack + "-" + defense).css("background-image", "url(./assests/res/img/" + img + ")");
+        $('#' + "castle-" + attack + "-" + defense).css("background-repeat", "no-repeat");
+
     };
 
     this.setOwner = function(owner) {
@@ -58,6 +56,7 @@ function WorriorsFight(worrior, attack, deffense) {
     function addCastle() {
         that.attack += 20;
         that.defense += 20;
+        $('.action-label').html("You Earn 20 points for attack and defense");
         makeAction();
 
         console.log("ATTACK!!! " + that.attack);
@@ -105,8 +104,7 @@ function WorriorsFight(worrior, attack, deffense) {
             makeAction();
 
         } else if (attacker === defenser) {
-            attackedWorrior.lifePoints -= attacker;
-            attackWorrior.lifePoints -= defenser;
+
         } else {
             attackWorrior.lifePoints -= defenser;
             makeAction();

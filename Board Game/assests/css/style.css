@@ -4,7 +4,6 @@
 
 #playersName,
 .game-menu {
-    ,
     height: 100%;
     width: 100%;
     overflow: hidden;
@@ -27,7 +26,12 @@
     margin: auto
 }
 
-#game .action-label {}
+#game .action-label {
+    font-size: 23px;
+    font-style: italic;
+    font-weight: bold;
+    color: #00F
+}
 
 #game .lable-one-place {
     left: 12%
