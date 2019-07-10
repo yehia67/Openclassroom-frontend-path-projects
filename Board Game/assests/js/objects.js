@@ -69,31 +69,19 @@ function WorriorsFight(worrior, attack, deffense) {
     }
 
     function startfight(attackWorrior, attackedWorrior) {
-
-        let attacker = attackWorrior.attack;
-        let defenser;
-        let defense;
-        if (checkposition) {
-            defenser = attackedWorrior.defense
-            defense = true
+        if (defenseposition) {
+            if (attackWorrior.attack > attackedWorrior.defense) {
+                attackedWorrior.lifePoints -= attackWorrior.attack * 0.5;
+                $(".positionHandler").off('click');
+                makeAction();
+            }
         } else {
-            defenser = attackedWorrior.attack
-            defense = false
+            if (attackWorrior.attack > attackedWorrior.defense) {
+                attackedWorrior.lifePoints -= attackWorrior.attack;
+                $(".positionHandler").off('click');
+                makeAction();
+            }
         }
-        if ((attacker > defenser) && defense) {
-            attackedWorrior.lifePoints -= (0.5 * attacker)
-            makeAction()
-        } else if ((attacker > defenser) && !defense) {
-            attackedWorrior.lifePoints -= attacker
-            makeAction()
-
-        } else if (attcker < defenser) {
-            attackWorrior.lifePoints -= defenser
-            makeAction()
-
-        }
-
-
 
     }
 }

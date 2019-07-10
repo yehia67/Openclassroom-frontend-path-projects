@@ -23,7 +23,7 @@ function goToHomePage() {
 function openGameOver() {
     open('gameOver');
 }
-var checkposition;
+var defenseposition;
 
 function pickAFight() {
     open('pickFight');
@@ -31,10 +31,10 @@ function pickAFight() {
 
 function attackPosition() {
     close('pickFight');
-    checkposition = false;
+    defenseposition = false;
 }
 
 function defnsePosition() {
     close('pickFight');
-    checkposition = true;
+    defenseposition = true;
 }
