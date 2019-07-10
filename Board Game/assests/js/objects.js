@@ -74,44 +74,22 @@ function WorriorsFight(worrior, attack, deffense) {
         let defenser;
         let defense;
         if (checkposition) {
-            defenser = attackedWorrior.attack;
-            defense = false;
-            makeAction();
-
+            defenser = attackedWorrior.defense
+            defense = true
         } else {
-            defenser = attackedWorrior.defense;
-            defense = true;
-            makeAction();
-
+            defenser = attackedWorrior.attack
+            defense = false
         }
-
         if ((attacker > defenser) && defense) {
-            attackedWorrior.lifePoints -= (attacker * 0.5);
+            attackedWorrior.lifePoints -= (0.5 * attacker)
+            makeAction()
+        } else if ((attacker > defenser) && !defense) {
+            attackedWorrior.lifePoints -= attacker
+            makeAction()
 
-        } else {
-            defenser = attackedWorrior.defense;
-            defense = true;
-            makeAction();
-
-        }
-
-        if ((attacker > defenser) && defense) {
-            attackedWorrior.lifePoints -= (attacker * 0.5);
-            makeAction();
-
-        } else if (attacker > defenser && !defense) {
-            attackedWorrior.lifePoints -= attacker;
-            makeAction();
-
-        } else if (attacker > defenser && !defense) {
-            attackedWorrior.lifePoints -= attacker;
-            makeAction();
-
-        } else if (attacker === defenser) {
-
-        } else {
-            attackWorrior.lifePoints -= defenser;
-            makeAction();
+        } else if (attcker < defenser) {
+            attackWorrior.lifePoints -= defenser
+            makeAction()
 
         }
 

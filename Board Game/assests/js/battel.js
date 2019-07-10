@@ -59,9 +59,10 @@ function createWorrior(id, img, place) {
 
 function worriorTurn(worrior, blockId) {
     $("#" + worrior.getWorriorId()).clickToggle(function(ev) {
-
-            worrior.availableMoves(blockId);
-
+            if (blockId.search("ca") == -1)
+                worrior.availableMoves(blockId);
+            else
+                worrior.availableMoves($(blockId).parent().attr('id'));
 
             move(worrior);
 
