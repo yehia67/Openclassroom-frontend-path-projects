@@ -1,5 +1,5 @@
 import React from 'react';
-import Map from './Map.js';
+import MapDiv from './MapDiv.js';
 import '../App.css';
 import RestaurantList from './RestaurantList.js';
 class RestaurantBox extends React.Component {
@@ -60,7 +60,9 @@ class RestaurantBox extends React.Component {
 
       <div className="map-box row align-items-center" >
 
-      <Map  />
+
+        {this.state.restaurants !== []?   <MapDiv restaurants={this.state.restaurants} restaurantsNames={this.state.restaurantsNames} Latitude={this.state.Latitude} Longitude={this.state.Longitude} />: null}
+
 
         {this.state.Latitude !== 1?   <RestaurantList  restaurantsNames={this.state.restaurantsNames} Latitude={this.state.Latitude} Longitude={this.state.Longitude} />: null}
 
