@@ -16,8 +16,8 @@ class MapDiv extends React.Component {
     displayMarkers = () => {
    return this.props.restaurants.map((store, index) => {
      return <Marker key={index} id={index} position={{
-      lat: this.props.restaurants[index].location.lat,
-      lng: this.props.restaurants[index].location.lng
+      lat: this.props.restaurants[index].geometry.location.lat,
+      lng: this.props.restaurants[index].geometry.location.lng
     }}
     onClick={() => console.log("You clicked me!")} />
    })

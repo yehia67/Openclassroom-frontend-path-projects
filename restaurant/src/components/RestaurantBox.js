@@ -19,24 +19,24 @@ class RestaurantBox extends React.Component {
         Latitude: crd.latitude,
         Longitude: crd.longitude
       },()=> {
-        console.log("Latiufr "+this.props.Latitude)
-        console.log("Longitude "+this.props.Longitude);
-        fetch('https://api.foursquare.com/v2/venues/explore?client_id=530ZOMCUSPZECUFMZ5FGX1PIR3FTUPO5GQYYHYSRLDTQGH2Z&client_secret=4ZMYGVO4FDDRWEZFQH1JBOWQB42IOYAHZZFTBWPWLTH51SCA&v=20180323&limit=10&ll='+this.state.Latitude+','+this.state.Longitude+'&query=restaurant')
+        fetch('https://cors-anywhere.herokuapp.com/'+'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location='+this.state.Latitude +','+ this.state.Longitude + '&radius=15000&type=restaurant&keyword=cruise&key=AIzaSyAR14v1v6okXPc5QrZwvsmMbaHktnQ0M5I')
        .then(response=>response.json()).then(data =>{
 
+           console.log(data)
+           console.log(this.state.Latitude)
+           console.log(this.state.Longitude)
          let arrName = [];
          let arr = [];
-         console.log(data.response.groups[0])
-         console.log(data.response.groups[0].items[0].venue.name)
+         console.log(data.results)
+         console.log(data.results[0].name)
 
-         for(let i = 0; i < data.response.groups[0].items.length;i++){
-          arrName[i] = data.response.groups[0].items[i].venue.name;
-          arr[i] = data.response.groups[0].items[i].venue;
+         for(let i = 0; i < data.results.length;i++){
+          arrName[i] = data.results[i].name;
          }
 
          this.setState({
            restaurantsNames: arrName,
-           restaurants: arr
+           restaurants: data.results
          });
 
        })
@@ -61,10 +61,10 @@ class RestaurantBox extends React.Component {
       <div className="map-box row align-items-center" >
 
 
-        {this.state.restaurants !== []?   <MapDiv restaurants={this.state.restaurants} restaurantsNames={this.state.restaurantsNames} Latitude={this.state.Latitude} Longitude={this.state.Longitude} />: null}
+      {this.state.restaurants !== []?   <MapDiv restaurants={this.state.restaurants} restaurantsNames={this.state.restaurantsNames} Latitude={this.state.Latitude} Longitude={this.state.Longitude} />: null}
 
 
-        {this.state.Latitude !== 1?   <RestaurantList  restaurantsNames={this.state.restaurantsNames} Latitude={this.state.Latitude} Longitude={this.state.Longitude} />: null}
+       {this.state.Latitude !== 1?   <RestaurantList  restaurantsNames={this.state.restaurantsNames} Latitude={this.state.Latitude} Longitude={this.state.Longitude} />: null}
 
 
 
