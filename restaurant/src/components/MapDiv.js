@@ -1,6 +1,10 @@
 import React from 'react';
-import { Map, TileLayer, Marker, Popup } from './leaflet'
+import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 const google = window.google;
+const mapStyles = {
+  width: '500px',
+  height: '500px',
+};
 class MapDiv extends React.Component {
   constructor() {
       super()
@@ -9,23 +13,33 @@ class MapDiv extends React.Component {
       }
     }
 
-   render() {
-     const position = [this.props.Latitude, this.props.Longitude];
-     return (
-       <div className="map" id="map">
-         <Map center={position} zoom={this.state.zoom}>
-                <TileLayer
-                  attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                  url='https://{s}.tile.osm.org/{z}/{x}/{y}.png'
-                />
-                <Marker position={position}>
-                  <Popup>
-                    A pretty CSS3 popup. <br/> Easily customizable.
-                  </Popup>
-                </Marker>
-      </Map>
-     </div>
-     );
-   }
+    displayMarkers = () => {
+   return this.props.restaurants.map((store, index) => {
+     return <Marker key={index} id={index} position={{
+      lat: this.props.restaurants[index].location.lat,
+      lng: this.props.restaurants[index].location.lng
+    }}
+    onClick={() => console.log("You clicked me!")} />
+   })
  }
-export default MapDiv;
+
+    render() {
+      return (
+      <div className="map-div" id="map-div">
+        <Map
+                google={this.props.google}
+                zoom={13}
+                style={mapStyles}
+                initialCenter={{ lat: this.props.Latitude, lng: this.props.Longitude}}
+              >
+              {this.displayMarkers()}
+            </Map>
+
+      </div>
+      );
+    }
+
+}
+export default GoogleApiWrapper({
+  apiKey: 'AIzaSyAR14v1v6okXPc5QrZwvsmMbaHktnQ0M5I'
+})(MapDiv);
