@@ -24,7 +24,7 @@ class commit:
           self.Changes.removeFiles.append(removeLines)
       def addAddLines(self,addLines):
           self.Changes.removeFiles.append(addLines)         
-      
+# c3e9bc2672301d709109f536aa5a6038eff1e2db    7acd6ec2a8abbde0a950de2520b12318483fd7f5      
 #Use gitPython module
 repo = Repo('/home/yehia/Documents/openclassroom projects')
 assert not repo.bare
@@ -65,8 +65,29 @@ for i in range(1,len(splitAllCommits)):
      
 #for i in range(0,len(Commits)-1):
 
-gitDiffCommand = os.popen('git diff '+ Commits[2].hash+" "+Commits[2+1].hash).read()
-print(gitDiffCommand)
+getModifiedFiles = os.popen('git diff --name-only  c3e9bc2672301d709109f536aa5a6038eff1e2db    7acd6ec2a8abbde0a950de2520b12318483fd7f5').read()
+modifiedFiles = getModifiedFiles.split("\n")
+addFiles = []
+removeFiles = []
+addLines = []
+removeLines = []
+
+
+for i in range(0,len(modifiedFiles)-1):
+    getFileStatues = os.popen('git diff  c3e9bc2672301d709109f536aa5a6038eff1e2db    7acd6ec2a8abbde0a950de2520b12318483fd7f5 '+ modifiedFiles[i]).read()
+    
+    print(getFileStatues)
+    if "new file mode " in getFileStatues :
+       addFiles.append(modifiedFiles[i])    
+    elif "deleted file mode" in getFileStatues:
+       removeFiles.append(modifiedFiles[i])    
+    else:
+        addLines.append(modifiedFiles[i])    
+
+    
+print(addFiles)
+print(removeFiles)
+print(addLines)
  
 
  
