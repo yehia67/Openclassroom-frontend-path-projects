@@ -64,44 +64,44 @@ for i in range(1,len(splitAllCommits)):
      
 getModifiedFiles = os.popen("git diff    --diff-filter=M   c3e9bc2672301d709109f536aa5a6038eff1e2db 7acd6ec2a8abbde0a950de2520b12318483fd7f5").read()
 getModifiedFilesNames = getModifiedFiles.split("diff --git a")
-changes = getModifiedFilesNames[1]
-spaceIndeces = changes.find(" ")
-filename = changes[0:spaceIndeces]
-addedLines = "File location " + filename + " new Lines At :"
-removedLines = "File location " + filename + " removed Lines At :"
-lineChanges = changes.split("\n")
-for i in range(0,len(lineChanges)):
-    print(lineChanges[i])
-    print("---------------------------------------------------------------------------------------------------------------------------------")  
-for i in range(0,len(lineChanges)):
-    line =  lineChanges[i]
-    counter = ""
-    if line[0:4] == "@@ -": 
-       counter = get_str_between(lineChanges[i],"@@ -",",") 
-       print(counter)  
-       i = i + 1
-       while i < len(lineChanges):
-            line = lineChanges[i]
-            if line[0:4] == "@@ -":
-                i = i - 1
-                break
-            if line[0:2] == "+ ":
-                addedLines += "\n" + "Line " + str(counter) + " with content " + line[2:len(line)]
-                counter = int(counter) + 1
-            elif line[0:2] == "- ":
-                removedLines += "\n" + "Line " + str(counter) + " with content " + line[2:len(line)]
-                counter = int(counter) + 1
-            else:
-                counter = int(counter) + 1
-            i = i +1
+for i in range(1,len(getModifiedFilesNames)): 
+    changes = getModifiedFilesNames[i]
+    
+    #get file name & location
+    spaceIndeces = changes.find(" ")
+    filename = changes[0:spaceIndeces]
+    addedLines = "File location " + filename + " new Lines At :"
+    removedLines = "File location " + filename + " removed Lines At :"
+    
+    lineChanges = changes.split("\n")
+    for j in range(0,len(lineChanges)):
+        line =  lineChanges[j]
+        counter = ""
+        if line[0:4] == "@@ -": 
+            counter = get_str_between(lineChanges[j],"@@ -",",") 
+            print(counter)  
+            j = j + 1
+            while j < len(lineChanges):
+                line = lineChanges[j]
+                if line[0:4] == "@@ -":
+                    j = j - 1
+                    break
+                if line[0:2] == "+ ":
+                    addedLines += "\n" + "Line " + str(counter) + " with content " + line[2:len(line)]
+                    counter = int(counter) + 1
+                elif line[0:2] == "- ":
+                    removedLines += "\n" + "Line " + str(counter) + " with content " + line[2:len(line)]
+                    counter = int(counter) + 1
+                else:
+                    counter = int(counter) + 1
+                j = j +1
 
-print(addedLines)                      
-print(removedLines)                      
+    print(addedLines)                      
+    print(removedLines)                      
             
             
        
    
-#for i in range(1,len(getModifiedFilesNames)): 
 
 
 for i in range(0,len(Commits)-1):
