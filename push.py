@@ -19,11 +19,11 @@ class commit:
       def addRemovedFiles(self,removeDirectory):
           self.Changes.removeFiles.append(removeDirectory)
       def addAddFiles(self,addDirectory):
-          self.Changes.removeFiles.append(addDirectory) 
+          self.Changes.addFiles.append(addDirectory) 
       def addRemovedLines(self,removeLines):
-          self.Changes.removeFiles.append(removeLines)
+          self.Changes.removLines.append(removeLines)
       def addAddLines(self,addLines):
-          self.Changes.removeFiles.append(addLines)         
+          self.Changes.addLines.append(addLines)         
 # c3e9bc2672301d709109f536aa5a6038eff1e2db    7acd6ec2a8abbde0a950de2520b12318483fd7f5      
 #Use gitPython module
 repo = Repo('/home/yehia/Documents/openclassroom projects')
@@ -63,31 +63,31 @@ for i in range(1,len(splitAllCommits)):
     commitMsg =commitMsg[4:]
     Commits.append(commit(commitHash,commitAuthor,commitDate,commitMsg))
      
-#for i in range(0,len(Commits)-1):
+getModifiedFiles = os.popen("git diff    --diff-filter=M   c3e9bc2672301d709109f536aa5a6038eff1e2db 7acd6ec2a8abbde0a950de2520b12318483fd7f5").read()
+getModifiedFilesNames = getModifiedFiles.split("diff --git a")
+changes = getModifiedFilesNames[1]
+spaceIndeces = changes.find(" ")
+print(spaceIndeces)
+filename = changes[0:spaceIndeces]
+print(filename)
+#for i in range(1,len(getModifiedFilesNames)): 
 
-getModifiedFiles = os.popen('git diff --name-only  c3e9bc2672301d709109f536aa5a6038eff1e2db    7acd6ec2a8abbde0a950de2520b12318483fd7f5').read()
-modifiedFiles = getModifiedFiles.split("\n")
-addFiles = []
-removeFiles = []
-addLines = []
-removeLines = []
+
+for i in range(0,len(Commits)-1):
+    getDeletedFiles = os.popen('git diff --name-only   --diff-filter=D  '+ Commits[i].hash +' ' + Commits[i+1].hash).read()
+    if getDeletedFiles != '':
+        Commits[i+1].addRemovedFiles(getDeletedFiles)
+    getCreatedFiles = os.popen('git diff --name-only   --diff-filter=D  '+ Commits[i].hash +' ' + Commits[i+1].hash).read()
+    if  getCreatedFiles != '':
+        Commits[i+1].addAddFiles(getCreatedFiles) 
+   
+   
+       
 
 
-for i in range(0,len(modifiedFiles)-1):
-    getFileStatues = os.popen('git diff  c3e9bc2672301d709109f536aa5a6038eff1e2db    7acd6ec2a8abbde0a950de2520b12318483fd7f5 '+ modifiedFiles[i]).read()
-    
-    print(getFileStatues)
-    if "new file mode " in getFileStatues :
-       addFiles.append(modifiedFiles[i])    
-    elif "deleted file mode" in getFileStatues:
-       removeFiles.append(modifiedFiles[i])    
-    else:
-        addLines.append(modifiedFiles[i])    
 
-    
-print(addFiles)
-print(removeFiles)
-print(addLines)
+
+
  
 
  
