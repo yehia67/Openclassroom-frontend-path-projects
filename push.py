@@ -61,56 +61,61 @@ for i in range(1,len(splitAllCommits)):
     commitMsg = splitCommit[4]
     commitMsg =commitMsg[4:]
     Commits.append(commit(commitHash,commitAuthor,commitDate,commitMsg))
-     
-getModifiedFiles = os.popen("git diff    --diff-filter=M   c3e9bc2672301d709109f536aa5a6038eff1e2db 7acd6ec2a8abbde0a950de2520b12318483fd7f5").read()
-getModifiedFilesNames = getModifiedFiles.split("diff --git a")
-for i in range(1,len(getModifiedFilesNames)): 
-    changes = getModifiedFilesNames[i]
-    
-    #get file name & location
-    spaceIndeces = changes.find(" ")
-    filename = changes[0:spaceIndeces]
-    addedLines = "File location " + filename + " new Lines At :"
-    removedLines = "File location " + filename + " removed Lines At :"
-    
-    lineChanges = changes.split("\n")
-    for j in range(0,len(lineChanges)):
-        line =  lineChanges[j]
-        counter = ""
-        if line[0:4] == "@@ -": 
-            counter = get_str_between(lineChanges[j],"@@ -",",") 
-            print(counter)  
-            j = j + 1
-            while j < len(lineChanges):
-                line = lineChanges[j]
-                if line[0:4] == "@@ -":
-                    j = j - 1
-                    break
-                if line[0:2] == "+ ":
-                    addedLines += "\n" + "Line " + str(counter) + " with content " + line[2:len(line)]
-                    counter = int(counter) + 1
-                elif line[0:2] == "- ":
-                    removedLines += "\n" + "Line " + str(counter) + " with content " + line[2:len(line)]
-                    counter = int(counter) + 1
-                else:
-                    counter = int(counter) + 1
-                j = j +1
-
-    print(addedLines)                      
-    print(removedLines)                      
-            
-            
-       
-   
-
-
+  
+  
 for i in range(0,len(Commits)-1):
     getDeletedFiles = os.popen('git diff --name-only   --diff-filter=D  '+ Commits[i].hash +' ' + Commits[i+1].hash).read()
     if getDeletedFiles != '':
         Commits[i+1].addRemovedFiles(getDeletedFiles)
     getCreatedFiles = os.popen('git diff --name-only   --diff-filter=D  '+ Commits[i].hash +' ' + Commits[i+1].hash).read()
     if  getCreatedFiles != '':
-        Commits[i+1].addAddFiles(getCreatedFiles) 
+        Commits[i+1].addAddFiles(getCreatedFiles)   
+  
+  
+  
+for z in range(0,len(Commits)-1):     
+    getModifiedFiles = os.popen('git diff    --diff-filter=M  '+  Commits[z].hash +' ' + Commits[z+1].hash).read()
+    getModifiedFilesNames = getModifiedFiles.split("diff --git a")
+    for i in range(1,len(getModifiedFilesNames)): 
+        
+        changes = getModifiedFilesNames[i]
+        
+        #get file name & location
+        spaceIndeces = changes.find(" ")
+        filename = changes[0:spaceIndeces]
+        addedLines = "File location " + filename + " new Lines At :"
+        removedLines = "File location " + filename + " removed Lines At :"
+        
+        lineChanges = changes.split("\n")
+        for j in range(0,len(lineChanges)):
+            line =  lineChanges[j]
+            counter = ""
+            if line[0:4] == "@@ -": 
+                counter = get_str_between(lineChanges[j],"@@ -",",") 
+                j = j + 1
+                while j < len(lineChanges):
+                    line = lineChanges[j]
+                    if line[0:4] == "@@ -":
+                        j = j - 1
+                        break
+                    if line[0:2] == "+ ":
+                        addedLines += "\n" + "Line " + str(counter) + " with content " + line[2:len(line)]
+                        counter = int(counter) + 1
+                    elif line[0:2] == "- ":
+                        removedLines += "\n" + "Line " + str(counter) + " with content " + line[2:len(line)]
+                        counter = int(counter) + 1
+                    else:
+                        counter = int(counter) + 1
+                    j = j +1
+        Commits[z+1].addAddLines(addedLines)
+        Commits[z+1].addRemovedLines(removedLines)                 
+            
+            
+       
+   
+
+
+
    
    
        
