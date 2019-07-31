@@ -67,7 +67,7 @@ for i in range(0,len(Commits)-1):
     getDeletedFiles = os.popen('git diff --name-only   --diff-filter=D  '+ Commits[i].hash +' ' + Commits[i+1].hash).read()
     if getDeletedFiles != '':
         Commits[i+1].addRemovedFiles(getDeletedFiles)
-    getCreatedFiles = os.popen('git diff --name-only   --diff-filter=D  '+ Commits[i].hash +' ' + Commits[i+1].hash).read()
+    getCreatedFiles = os.popen('git diff --name-only   --diff-filter=A  '+ Commits[i].hash +' ' + Commits[i+1].hash).read()
     if  getCreatedFiles != '':
         Commits[i+1].addAddFiles(getCreatedFiles)   
   
@@ -99,10 +99,10 @@ for z in range(0,len(Commits)-1):
                         j = j - 1
                         break
                     if line[0:2] == "+ ":
-                        addedLines += "\n" + "Line " + str(counter) + " with content " + line[2:len(line)]
+                        addedLines += "\n\n" + "Line " + str(counter) + " with content: " +"\n\n"+ line[2:len(line)]+ "\n\n"
                         counter = int(counter) + 1
                     elif line[0:2] == "- ":
-                        removedLines += "\n" + "Line " + str(counter) + " with content " + line[2:len(line)]
+                        removedLines += "\n\n" + "Line " + str(counter) + " with content " + "\n\n"+line[2:len(line)]+"\n\n"
                         counter = int(counter) + 1
                     else:
                         counter = int(counter) + 1
@@ -110,6 +110,30 @@ for z in range(0,len(Commits)-1):
         Commits[z+1].addAddLines(addedLines)
         Commits[z+1].addRemovedLines(removedLines)                 
             
+for i in range(0,len(Commits)):
+    
+    print("____________________________________________________________________")
+    print(Commits[i].hash)
+    print("____________________________________________________________________")
+    print(Commits[i].author)
+    print("____________________________________________________________________")
+    print(Commits[i].date)
+    print("____________________________________________________________________")
+    print(Commits[i].message)
+    print("____________________________________________________________________") 
+    print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+    print("new files :")
+    print(Commits[i].Changes.addFiles)
+    print("____________________________________________________________________")
+    print("-----------------------------------------------------------")
+    print("remove files :")
+    print(Commits[i].Changes.removeFiles)    
+    print("____________________________________________________________________")
+    print(Commits[i].Changes.addLines)
+    print("____________________________________________________________________")
+    print(Commits[i].Changes.removLines) 
+    print("____________________________________________________________________")
+    print("*******************************************************************************************************************************************")
             
        
    

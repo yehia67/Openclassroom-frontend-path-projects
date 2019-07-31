@@ -49,18 +49,18 @@ class MapDiv extends React.Component {
         lng: 0
       };
     }
-    addMarker = (c,location, map) => {
+    addMarker = (location, map) => {
       console.log("clicl");
-      console.log(c[0]);
       console.log(location);
-    //  console.log(location.lng[0].b);
-      this.setState(prev => ({
-        fields: {
-          ...prev.fields,
-          location
-        }
-      }));
-      map.panTo(location);
+      console.log(location.lat());
+      console.log(location.lng());
+      return <Marker  position={{
+       lat: location.lat(),
+       lng: location.lng()
+     }}
+     onClick={() =>
+     alert("doneeeeeeeeeeeeeee " )
+     } />
     };
 
     displayMarkers = () => {
@@ -86,7 +86,7 @@ class MapDiv extends React.Component {
                 zoom={13}
                 style={mapStyles}
                 initialCenter={{ lat: this.props.Latitude, lng: this.props.Longitude}}
-                onClick={(t, map, c) => this.addMarker(c,c.latLng, map)}
+                onClick={(t, map, c) => this.addMarker(c.latLng, map)}
               >
               <Marker
                 icon= {iconBase}
