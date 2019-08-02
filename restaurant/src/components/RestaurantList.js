@@ -22,10 +22,12 @@ class RestaurantList extends React.Component {
        });
    }
 
-
+   addReview = ()=>{
+     alert("work");
+   };
   render() {
 
-      const items =  this.props.restaurants.map((obj,index) => <li id={obj.id} key={index}><a href="#">{obj.name +" "+ "(rate = " + obj.rating+", no. of raters = " +obj.user_ratings_total +")"}</a></li>);
+      const items =  this.props.restaurants.map((obj,index) => <li id={obj.id} key={index} onClick={this.addreview}><a>{obj.name +" "+ "(rate = " + obj.rating+", no. of raters = " +obj.user_ratings_total +")"}</a></li>,this);
 
 
       return (

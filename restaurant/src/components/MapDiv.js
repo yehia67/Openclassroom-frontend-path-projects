@@ -1,66 +1,67 @@
 import React from 'react';
 import { Map, GoogleApiWrapper, Marker,InfoWindow } from 'google-maps-react';
+import Modal from 'react-awesome-modal';
+
 const google = window.google;
 const mapStyles = {
   width: '500px',
   height: '500px',
 };
 var iconBase = 'http://maps.google.com/mapfiles/marker_green.png';
+const MarkersList = props => {
+  const { locations, ...markerProps } = props;
+  return (
+    <span>
+      {locations.map((location, i) => {
+        return (
+          <Marker
+            key={i}
+            {...markerProps}
+            position={{ lat: location.lat(), lng: location.lng() }}
+          />
+        );
+      })}
+    </span>
+  );
+};
 class MapDiv extends React.Component {
   constructor() {
       super()
       this.state = {
         zoom: 13,
-        fields:{}
+        newRestaurantName:"",
+        locations: []
       }
+      this.handleMapClick = this.handleMapClick.bind(this);
     }
 
     async componentDidMount() {
-      const { lat, lng } = await this.getcurrentLocation();
-      this.setState(prev => ({
-        fields: {
-          ...prev.fields,
-          location: {
-            lat,
-            lng
-          }
-        },
-        currentLocation: {
-          lat,
-          lng
-        }
-      }));
-    }
 
-     getcurrentLocation() {
-      if (navigator && navigator.geolocation) {
-        return new Promise((resolve, reject) => {
-          navigator.geolocation.getCurrentPosition(pos => {
-            const coords = pos.coords;
-            resolve({
-              lat: coords.latitude,
-              lng: coords.longitude
-            });
-          });
-        });
-      }
-      return {
-        lat: 0,
-        lng: 0
-      };
     }
-    addMarker = (location, map) => {
-      console.log("clicl");
-      console.log(location);
+   addRestaurant = () =>{
+    const  restaurantName = prompt("Enter restaurant name: ");
+    this.setState(prevState => ({
+      newRestaurantName: restaurantName
+    }));
+   };
+    addMarker = (location, map,t) => {
       console.log(location.lat());
       console.log(location.lng());
       return <Marker  position={{
-       lat: location.lat(),
-       lng: location.lng()
+       lat: location.lat()+ 10,
+       lng: location.lng()-10
      }}
      onClick={() =>
      alert("doneeeeeeeeeeeeeee " )
      } />
+    };
+    handleMapClick = (ref, map, ev) => {
+      this.addRestaurant()
+      const location = ev.latLng;
+      this.setState(prevState => ({
+        locations: [...prevState.locations, location]
+      }));
+      map.panTo(location);
     };
 
     displayMarkers = () => {
@@ -86,8 +87,9 @@ class MapDiv extends React.Component {
                 zoom={13}
                 style={mapStyles}
                 initialCenter={{ lat: this.props.Latitude, lng: this.props.Longitude}}
-                onClick={(t, map, c) => this.addMarker(c.latLng, map)}
+                 onClick={this.handleMapClick}
               >
+               <MarkersList locations={this.state.locations} icon="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png" />
               <Marker
                 icon= {iconBase}
                  position={{ lat: this.props.Latitude, lng: this.props.Longitude}} />
