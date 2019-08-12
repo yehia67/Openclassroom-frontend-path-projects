@@ -22,12 +22,17 @@ class RestaurantList extends React.Component {
        });
    }
 
-   addReview = ()=>{
-     alert("work");
+   addReview = (review,NoOfreviewer)=>{
+     NoOfreviewer++;
+     console.log(NoOfreviewer)
+     this.returnNoOfRateres(NoOfreviewer)
    };
+   returnNoOfRateres = (no) =>{
+     return no;
+   }
   render() {
 
-      const items =  this.props.restaurants.map((obj,index) => <li id={obj.id} key={index} onClick={this.addreview}><a>{obj.name +" "+ "(rate = " + obj.rating+", no. of raters = " +obj.user_ratings_total +")"}</a></li>,this);
+      const items =  this.props.restaurants.map((obj,index) => <li id={obj.id} key={index} ><a href="javascript:void(0);" onClick={() => this.addReview(obj.rating,obj.user_ratings_total) } >{obj.name +" "+ "(rate = " + obj.rating+", no. of raters = " +this.returnNoOfRateres(obj.user_ratings_total) +")"}</a></li>,this);
 
 
       return (

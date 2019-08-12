@@ -18,6 +18,9 @@ const MarkersList = props => {
             key={i}
             {...markerProps}
             position={{ lat: location.lat(), lng: location.lng() }}
+            onClick={() =>
+            alert("hehehehehehehe")
+          }
           />
         );
       })}
@@ -30,11 +33,25 @@ class MapDiv extends React.Component {
       this.state = {
         zoom: 13,
         newRestaurantName:"",
+        visible : false,
         locations: []
       }
       this.handleMapClick = this.handleMapClick.bind(this);
     }
 
+
+
+       openModal() {
+           this.setState({
+               visible : true
+           });
+       }
+
+       closeModal() {
+           this.setState({
+               visible : false
+           });
+       }
     async componentDidMount() {
 
     }
@@ -44,17 +61,7 @@ class MapDiv extends React.Component {
       newRestaurantName: restaurantName
     }));
    };
-    addMarker = (location, map,t) => {
-      console.log(location.lat());
-      console.log(location.lng());
-      return <Marker  position={{
-       lat: location.lat()+ 10,
-       lng: location.lng()-10
-     }}
-     onClick={() =>
-     alert("doneeeeeeeeeeeeeee " )
-     } />
-    };
+
     handleMapClick = (ref, map, ev) => {
       this.addRestaurant()
       const location = ev.latLng;
