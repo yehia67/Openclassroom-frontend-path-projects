@@ -26,11 +26,10 @@ const MarkersList = props => {
             onClick={() =>
               {
                 document.getElementById("restaurant_Name").innerHTML =  newRestaurants[i].name;
-                document.getElementById("restaurant_Rate").innerHTML = newRestaurants[i].rating;
-                document.getElementById("restaurant_No_Rater").innerHTML = newRestaurants[i].user_ratings_total;
-                let modal =  document.getElementById("details_modal").children;
-                let modalElement = modal[0].children;
-                console.log(modalElement[0]);
+                document.getElementById("restaurant_Rate").innerHTML = "Rate "+ newRestaurants[i].rating;
+                document.getElementById("restaurant_No_Rater").innerHTML = "No of raters " +newRestaurants[i].user_ratings_total;
+                document.getElementById("details_modal").style.display = "block";
+
 
               }
             }
@@ -47,7 +46,7 @@ class MapDiv extends React.Component {
         zoom: 13,
         newRestaurantName:"",
         visible : false,
-        restaurantDetailsVisible:false,
+        restaurantDetailsVisible:true,
         locations: []
       }
       this.handleMapClick = this.handleMapClick.bind(this);
@@ -169,9 +168,9 @@ class MapDiv extends React.Component {
                   </Modal>
           </section>
           //marker modal
-          <section id="details_modal" >
+          <section id="details_modal" style={{display: "none"}} >
                 <Modal visible={this.state.restaurantDetailsVisible} width="400" height="150" effect="fadeInUp" onClickAway={() => this.closeModal(0)}>
-                  <a href="javascript:void(0);" className="float-left" onClick={() => this.closeModal(0)}>Close</a>
+                  <a href="javascript:void(0);" className="float-left" onClick={() => {document.getElementById("details_modal").style.display = "none"}}>Close</a>
                       <div className="p-5">
                         <h5 id="restaurant_Name" ></h5>
                         <h5 id="restaurant_Rate" ></h5>
