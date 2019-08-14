@@ -2,12 +2,17 @@ import React from 'react';
 import { Map, GoogleApiWrapper, Marker,InfoWindow } from 'google-maps-react';
 import Modal from 'react-awesome-modal';
 
+const newRestaurants = []
+
 const google = window.google;
+
 const mapStyles = {
   width: '500px',
   height: '500px',
 };
+
 var iconBase = 'http://maps.google.com/mapfiles/marker_green.png';
+
 const MarkersList = props => {
   const { locations, ...markerProps } = props;
   return (
@@ -19,8 +24,16 @@ const MarkersList = props => {
             {...markerProps}
             position={{ lat: location.lat(), lng: location.lng() }}
             onClick={() =>
-            alert("hehehehehehehe")
-          }
+              {
+                document.getElementById("restaurant_Name").innerHTML =  newRestaurants[i].name;
+                document.getElementById("restaurant_Rate").innerHTML = newRestaurants[i].rating;
+                document.getElementById("restaurant_No_Rater").innerHTML = newRestaurants[i].user_ratings_total;
+                let modal =  document.getElementById("details_modal").children;
+                let modalElement = modal[0].children;
+                console.log(modalElement[0]);
+
+              }
+            }
           />
         );
       })}
@@ -40,58 +53,63 @@ class MapDiv extends React.Component {
       this.handleMapClick = this.handleMapClick.bind(this);
     }
 
-
-
        openModal(flag) {
-          if(flag === 1)
-          {
-           this.setState({
-               visible : true
-           });
-         }
-         else{
-           this.setState({
-               restaurantDetailsVisible : true
-           });
-         }
+            if(flag === 1)
+            {
+             this.setState({
+                 visible : true
+             });
+           }
+           else{
+             this.setState({
+                 restaurantDetailsVisible : true
+             });
+           }
        }
 
        closeModal(flag) {
-         if(flag === 1){
-           this.setState({
-               visible : false
-           });
-         }
-         else{
-           this.setState({
-               restaurantDetailsVisible : false
-           });
-         }
+           if(flag === 1){
+             this.setState({
+                 visible : false
+             });
+           }
+           else{
+             this.setState({
+                 restaurantDetailsVisible : false
+             });
+           }
 
        }
     async componentDidMount() {
 
-    }
+     }
    showRestaurantDetails = (index) =>{
-    const retsuarantName =  this.props.restaurants[index].name;
-    const rate = this.props.restaurants[index].rating;
-    const noOfRaters = this.props.restaurants[index].user_ratings_total;
-    document.getElementById("restaurant_Name").innerHTML =  retsuarantName;
-    document.getElementById("restaurant_Rate").innerHTML = "Rate " +rate;
-    document.getElementById("restaurant_No_Rater").innerHTML = "No of raters " + noOfRaters;
-    this.openModal(0);
+      let retsuarantName;
+      let rate;
+      let noOfRaters;
+      retsuarantName =  this.props.restaurants[index].name;
+      rate = this.props.restaurants[index].rating;
+      noOfRaters = this.props.restaurants[index].user_ratings_total;
+      document.getElementById("restaurant_Name").innerHTML =  retsuarantName;
+      document.getElementById("restaurant_Rate").innerHTML = "Rate " +rate;
+      document.getElementById("restaurant_No_Rater").innerHTML = "No of raters " + noOfRaters;
+      this.openModal(0);
   };
    addRestaurant = () =>{
-    const restaurantName = document.getElementById("restaurantName").value;
-    const reviews = document.getElementById("rate").value;
-     console.log(restaurantName)
-     console.log(reviews)
-    var ul = document.getElementById("restaurantsList");
-    var li = document.createElement("li");
-    const newRestaurant = restaurantName +" "+"("+"rate = "+ reviews+", no. of raters = 1 )";
-    li.appendChild(document.createTextNode(newRestaurant));
-    ul.appendChild(li);
-    this.closeModal(1);
+      const restaurantName = document.getElementById("restaurantName").value;
+      const reviews = document.getElementById("rate").value;
+      var ul = document.getElementById("restaurantsList");
+      var li = document.createElement("li");
+      const newRestaurant ={
+        name:restaurantName,
+        rating:reviews,
+        user_ratings_total: 1
+      };
+      const newRestaurantListElement = restaurantName +" "+ "(rate = " + reviews+", no. of raters = 1 )";
+      newRestaurants.push(newRestaurant);
+      li.appendChild(document.createTextNode(newRestaurantListElement));
+      ul.appendChild(li);
+      this.closeModal(1);
    };
 
     handleMapClick = (ref, map, ev) => {
@@ -104,15 +122,15 @@ class MapDiv extends React.Component {
     };
 
     displayMarkers = () => {
-   return this.props.restaurants.map((store, index) => {
-     return <Marker key={index} id={index} position={{
-      lat: this.props.restaurants[index].geometry.location.lat,
-      lng: this.props.restaurants[index].geometry.location.lng
+      return this.props.restaurants.map((store, index) => {
+       return <Marker key={index} id={index} position={{
+          lat: this.props.restaurants[index].geometry.location.lat,
+          lng: this.props.restaurants[index].geometry.location.lng
     }}
-    onClick={() =>
-      this.showRestaurantDetails(index)
-    } />
-   })
+      onClick={() =>
+        this.showRestaurantDetails(index)
+      } />
+     })
  }
 
 
@@ -151,7 +169,7 @@ class MapDiv extends React.Component {
                   </Modal>
           </section>
           //marker modal
-          <section>
+          <section id="details_modal" >
                 <Modal visible={this.state.restaurantDetailsVisible} width="400" height="150" effect="fadeInUp" onClickAway={() => this.closeModal(0)}>
                   <a href="javascript:void(0);" className="float-left" onClick={() => this.closeModal(0)}>Close</a>
                       <div className="p-5">
