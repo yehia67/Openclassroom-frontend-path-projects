@@ -34,6 +34,7 @@ class MapDiv extends React.Component {
         zoom: 13,
         newRestaurantName:"",
         visible : false,
+        restaurantDetailsVisible:false,
         locations: []
       }
       this.handleMapClick = this.handleMapClick.bind(this);
@@ -41,29 +42,60 @@ class MapDiv extends React.Component {
 
 
 
-       openModal() {
+       openModal(flag) {
+          if(flag === 1)
+          {
            this.setState({
                visible : true
            });
+         }
+         else{
+           this.setState({
+               restaurantDetailsVisible : true
+           });
+         }
        }
 
-       closeModal() {
+       closeModal(flag) {
+         if(flag === 1){
            this.setState({
                visible : false
            });
+         }
+         else{
+           this.setState({
+               restaurantDetailsVisible : false
+           });
+         }
+
        }
     async componentDidMount() {
 
     }
+   showRestaurantDetails = (index) =>{
+    const retsuarantName =  this.props.restaurants[index].name;
+    const rate = this.props.restaurants[index].rating;
+    const noOfRaters = this.props.restaurants[index].user_ratings_total;
+    document.getElementById("restaurant_Name").innerHTML =  retsuarantName;
+    document.getElementById("restaurant_Rate").innerHTML = "Rate " +rate;
+    document.getElementById("restaurant_No_Rater").innerHTML = "No of raters " + noOfRaters;
+    this.openModal(0);
+  };
    addRestaurant = () =>{
-    const  restaurantName = prompt("Enter restaurant name: ");
-    this.setState(prevState => ({
-      newRestaurantName: restaurantName
-    }));
+    const restaurantName = document.getElementById("restaurantName").value;
+    const reviews = document.getElementById("rate").value;
+     console.log(restaurantName)
+     console.log(reviews)
+    var ul = document.getElementById("restaurantsList");
+    var li = document.createElement("li");
+    const newRestaurant = restaurantName +" "+"("+"rate = "+ reviews+", no. of raters = 1 )";
+    li.appendChild(document.createTextNode(newRestaurant));
+    ul.appendChild(li);
+    this.closeModal(1);
    };
 
     handleMapClick = (ref, map, ev) => {
-      this.addRestaurant()
+      this.openModal(1)
       const location = ev.latLng;
       this.setState(prevState => ({
         locations: [...prevState.locations, location]
@@ -78,7 +110,7 @@ class MapDiv extends React.Component {
       lng: this.props.restaurants[index].geometry.location.lng
     }}
     onClick={() =>
-    alert("Name: "+   this.props.restaurants[index].name +" " +"(rate = " + this.props.restaurants[index].rating +", no. of raters = " + this.props.restaurants[index].user_ratings_total    +")" )
+      this.showRestaurantDetails(index)
     } />
    })
  }
@@ -88,7 +120,6 @@ class MapDiv extends React.Component {
     render() {
       return (
       <div className="map-div" id="map-div">
-
         <Map
                 google={this.props.google}
                 zoom={13}
@@ -101,7 +132,35 @@ class MapDiv extends React.Component {
                 icon= {iconBase}
                  position={{ lat: this.props.Latitude, lng: this.props.Longitude}} />
               {this.displayMarkers()}
-            </Map>
+          </Map>
+          //new restaurant modal
+          <section>
+                <Modal visible={this.state.visible} width="400" height="300" effect="fadeInUp" onClickAway={() => this.closeModal(1)}>
+                      <div className="p-5">
+                        <h3 className="text-center" >Add New Restaurant</h3>
+                        <div className="form-group">
+                            <input type="text" required className="form-control" id="restaurantName" placeholder="Enter Restaurant Name" />
+                            <label className="float-left mt-3 mb-0">Your review:</label>
+                            <input type="range" required className="form-control" id="rate" placeholder="Your review from 1 to 5" max="5" min="1" />
+                        </div>
+                        <div className="form-group">
+                            <a href="javascript:void(0);" className="float-left" onClick={() => this.closeModal(1)}>Close</a>
+                            <a href="javascript:void(0);" className="float-right"  onClick={() => this.addRestaurant()}>Add Restaurant</a>
+                        </div>
+                      </div>
+                  </Modal>
+          </section>
+          //marker modal
+          <section>
+                <Modal visible={this.state.restaurantDetailsVisible} width="400" height="150" effect="fadeInUp" onClickAway={() => this.closeModal(0)}>
+                  <a href="javascript:void(0);" className="float-left" onClick={() => this.closeModal(0)}>Close</a>
+                      <div className="p-5">
+                        <h5 id="restaurant_Name" ></h5>
+                        <h5 id="restaurant_Rate" ></h5>
+                        <h5 id="restaurant_No_Rater" ></h5>
+                      </div>
+                  </Modal>
+          </section>
 
       </div>
       );

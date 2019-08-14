@@ -32,14 +32,14 @@ class RestaurantList extends React.Component {
    }
   render() {
 
-      const items =  this.props.restaurants.map((obj,index) => <li id={obj.id} key={index} ><a href="javascript:void(0);" onClick={() => this.addReview(obj.rating,obj.user_ratings_total) } >{obj.name +" "+ "(rate = " + obj.rating+", no. of raters = " +this.returnNoOfRateres(obj.user_ratings_total) +")"}</a></li>,this);
+      const items =  this.props.restaurants.map((obj,index) => <li id={obj.id} key={index} >{obj.name +" "+ "(rate = " + obj.rating+", no. of raters = " +this.returnNoOfRateres(obj.user_ratings_total) +")"}</li>,this);
 
 
       return (
 
               <div className="map-list pt-2 text-left">
                 <h6 className="ml-2">Available Restaurant:</h6>
-                <ul>
+                <ul id="restaurantsList">
                     {items}
                 </ul>
                 <section>
