@@ -25,10 +25,11 @@ const MarkersList = props => {
             position={{ lat: location.lat(), lng: location.lng() }}
             onClick={() =>
               {
-                document.getElementById("restaurant_Name").innerHTML =  newRestaurants[i].name;
-                document.getElementById("restaurant_Rate").innerHTML = "Rate "+ newRestaurants[i].rating;
-                document.getElementById("restaurant_No_Rater").innerHTML = "No of raters " +newRestaurants[i].user_ratings_total;
+                document.getElementById("new_restaurant_Name").innerHTML =  newRestaurants[i].name;
+                document.getElementById("new_restaurant_Rate").innerHTML = "Rate "+ newRestaurants[i].rating;
+                document.getElementById("new_restaurant_No_Rater").innerHTML = "No of raters " +newRestaurants[i].user_ratings_total;
                 document.getElementById("details_modal").style.display = "block";
+                console.log("hop");
 
 
               }
@@ -46,39 +47,38 @@ class MapDiv extends React.Component {
         zoom: 13,
         newRestaurantName:"",
         visible : false,
-        restaurantDetailsVisible:true,
+        restaurantDetailsVisible:false,
         locations: []
       }
       this.handleMapClick = this.handleMapClick.bind(this);
     }
 
-       openModal(flag) {
-            if(flag === 1)
-            {
-             this.setState({
-                 visible : true
-             });
-           }
-           else{
-             this.setState({
-                 restaurantDetailsVisible : true
-             });
-           }
-       }
-
+    openModal(flag) {
+           if(flag === 1)
+           {
+            this.setState({
+                visible : true
+            });
+          }
+          else{
+            this.setState({
+                restaurantDetailsVisible : true
+            });
+          }
+        }
        closeModal(flag) {
-           if(flag === 1){
-             this.setState({
-                 visible : false
-             });
-           }
-           else{
-             this.setState({
-                 restaurantDetailsVisible : false
-             });
-           }
+          if(flag === 1){
+            this.setState({
+                visible : false
+            });
+          }
+          else{
+            this.setState({
+                restaurantDetailsVisible : false
+            });
+          }
 
-       }
+        }
     async componentDidMount() {
 
      }
@@ -167,14 +167,25 @@ class MapDiv extends React.Component {
                       </div>
                   </Modal>
           </section>
-          //marker modal
+          //marker modal for already existed restaurants
+          <section>
+              <Modal visible={this.state.restaurantDetailsVisible} width="400" height="150" effect="fadeInUp" onClickAway={() => this.closeModal(0)}>
+                <a href="javascript:void(0);" className="float-left" onClick={() => this.closeModal(0)}>Close</a>
+                    <div className="p-5">
+                      <h5 id="restaurant_Name" ></h5>
+                      <h5 id="restaurant_Rate" ></h5>
+                      <h5 id="restaurant_No_Rater" ></h5>
+                    </div>
+                </Modal>
+        </section>
+          //marker modal for created restaurants
           <section id="details_modal" style={{display: "none"}} >
-                <Modal visible={this.state.restaurantDetailsVisible} width="400" height="150" effect="fadeInUp" onClickAway={() => this.closeModal(0)}>
+                <Modal  visible={true} width="400" height="150" effect="fadeInUp" onClickAway={() =>document.getElementById("details_modal").style.display = "none"}>
                   <a href="javascript:void(0);" className="float-left" onClick={() => {document.getElementById("details_modal").style.display = "none"}}>Close</a>
                       <div className="p-5">
-                        <h5 id="restaurant_Name" ></h5>
-                        <h5 id="restaurant_Rate" ></h5>
-                        <h5 id="restaurant_No_Rater" ></h5>
+                        <h5 id="new_restaurant_Name" ></h5>
+                        <h5 id="new_restaurant_Rate" ></h5>
+                        <h5 id="new_restaurant_No_Rater" ></h5>
                       </div>
                   </Modal>
           </section>
