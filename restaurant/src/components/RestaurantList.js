@@ -8,17 +8,15 @@ class RestaurantList extends React.Component {
 
    }
 
-   addReview = (review,NoOfreviewer)=>{
-     NoOfreviewer++;
-     console.log(NoOfreviewer)
-     this.returnNoOfRateres(NoOfreviewer)
+   addReview = (index)=>{
+     let review = prompt("Enter your review");
+     document.getElementById(this.props.restaurants[index].id).innerHTML =     this.props.restaurants[index].name +" "+ "(rate = " + parseFloat((parseFloat(review)/this.props.restaurants[index].user_ratings_total) + this.props.restaurants[index].rating)+", no. of raters = " +parseInt(this.props.restaurants[index].user_ratings_total+1) +")"
+     alert(this.props.restaurants[index].name)
    };
-   returnNoOfRateres = (no) =>{
-     return no;
-   }
+
   render() {
 
-      const items =  this.props.restaurants.map((obj,index) => <li id={obj.id} key={index} >{obj.name +" "+ "(rate = " + obj.rating+", no. of raters = " +this.returnNoOfRateres(obj.user_ratings_total) +")"}</li>,this);
+      const items =  this.props.restaurants.map((obj,index) => <li id={obj.id} onClick={() => this.addReview(index)}  key={index} >{obj.name +" "+ "(rate = " + obj.rating+", no. of raters = " +obj.user_ratings_total +")"}</li>,this);
 
 
       return (
@@ -28,7 +26,7 @@ class RestaurantList extends React.Component {
                 <ul id="restaurantsList">
                     {items}
                 </ul>
-              
+
 
               </div>
 

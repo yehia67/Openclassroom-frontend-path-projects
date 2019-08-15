@@ -56,6 +56,9 @@
   list-style: none;
 
 }
+#restaurantsList li {
+  cursor: pointer;
+}
 footer{
   position: absolute;
   bottom: 0px;
