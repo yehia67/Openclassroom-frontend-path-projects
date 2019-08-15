@@ -47,6 +47,7 @@ class MapDiv extends React.Component {
         zoom: 13,
         newRestaurantName:"",
         visible : false,
+        newVisible: false,
         restaurantDetailsVisible:false,
         locations: []
       }
@@ -79,9 +80,17 @@ class MapDiv extends React.Component {
           }
 
         }
-    async componentDidMount() {
+        newOpenModal() {
+                this.setState({
+                    newVisible : true
+                });
+            }
 
-     }
+            newCloseModal() {
+                this.setState({
+                    newVisible : false
+                });
+            }
    showRestaurantDetails = (index) =>{
       let retsuarantName;
       let rate;
@@ -109,10 +118,14 @@ class MapDiv extends React.Component {
       newRestaurants.push(newRestaurant);
       li.appendChild(document.createTextNode(newRestaurantListElement));
       li.onclick = ()=>{
-        let review = prompt("enter your review")
-        li.innerHTML = restaurantName +" "+ "(rate = " + parseFloat((parseFloat(review)/user_ratings_total) + parseFloat(reviews))+", no. of raters = " +parseInt(user_ratings_total+1) +")"
+        this.newOpenModal();
+      };
+      document.getElementById("add_new_review_link").onclick = () =>{
+        let review = document.getElementById("new_review_map").value;
+        li.innerHTML = newRestaurants[newRestaurants.length-1].name +" "+ "(rate = " + parseFloat((parseFloat(review)/  newRestaurants[newRestaurants.length-1].user_ratings_total ) + parseFloat(newRestaurants[newRestaurants.length-1].rating))+", no. of raters = " +parseInt(  newRestaurants[newRestaurants.length-1].user_ratings_total +1) +")"
         newRestaurants[newRestaurants.length-1].rating =  parseFloat((parseFloat(review)/user_ratings_total) + parseFloat(reviews))
-        newRestaurants[newRestaurants.length-1].user_ratings_total = newRestaurants[newRestaurants.length-1].user_ratings_total + 1;
+        newRestaurants[newRestaurants.length-1].user_ratings_total = parseInt(newRestaurants[newRestaurants.length-1].user_ratings_total + 1);
+        this.newCloseModal();
       };
       ul.appendChild(li);
       this.closeModal(1);
@@ -199,7 +212,18 @@ class MapDiv extends React.Component {
                       </div>
                   </Modal>
           </section>
-
+          {/* add review  for new restaurant modal  */}
+          <section>
+                 <Modal visible={this.state.newVisible} width="250" height="150" effect="fadeInUp" onClickAway={() => this.newCloseModal()}>
+                        <div className="p-5">
+                            <span style={{display:"none"}} id="index"></span>
+                            <label>Enter your review:-</label><br />
+                            <input type="range" id="new_review_map" min="1" max="5"/>
+                            <br />
+                            <a id="add_new_review_link" href="javascript:void(0);"className="float-right">Submit</a>
+                        </div>
+                  </Modal>
+            </section>
       </div>
       );
     }
