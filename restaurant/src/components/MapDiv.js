@@ -110,8 +110,8 @@ class MapDiv extends React.Component {
       li.appendChild(document.createTextNode(newRestaurantListElement));
       li.onclick = ()=>{
         let review = prompt("enter your review")
-        li.innerHTML = restaurantName +" "+ "(rate = " + parseFloat((parseFloat(review)/user_ratings_total) + reviews)+", no. of raters = " +parseInt(user_ratings_total+1) +")"
-        newRestaurants[newRestaurants.length-1].rating = parseFloat((parseFloat(review)/user_ratings_total) + reviews);
+        li.innerHTML = restaurantName +" "+ "(rate = " + parseFloat((parseFloat(review)/user_ratings_total) + parseFloat(reviews))+", no. of raters = " +parseInt(user_ratings_total+1) +")"
+        newRestaurants[newRestaurants.length-1].rating =  parseFloat((parseFloat(review)/user_ratings_total) + parseFloat(reviews))
         newRestaurants[newRestaurants.length-1].user_ratings_total = newRestaurants[newRestaurants.length-1].user_ratings_total + 1;
       };
       ul.appendChild(li);
@@ -157,7 +157,8 @@ class MapDiv extends React.Component {
                  position={{ lat: this.props.Latitude, lng: this.props.Longitude}} />
               {this.displayMarkers()}
           </Map>
-          //new restaurant modal
+            {/* new restaurant modal */}
+
           <section>
                 <Modal visible={this.state.visible} width="400" height="300" effect="fadeInUp" onClickAway={() => this.closeModal(1)}>
                       <div className="p-5">
@@ -174,7 +175,8 @@ class MapDiv extends React.Component {
                       </div>
                   </Modal>
           </section>
-          //marker modal for already existed restaurants
+              {/* marker modal for already existed restaurants */}
+
           <section>
               <Modal visible={this.state.restaurantDetailsVisible} width="400" height="150" effect="fadeInUp" onClickAway={() => this.closeModal(0)}>
                 <a href="javascript:void(0);" className="float-left" onClick={() => this.closeModal(0)}>Close</a>
@@ -185,7 +187,8 @@ class MapDiv extends React.Component {
                     </div>
                 </Modal>
         </section>
-          //marker modal for created restaurants
+          {/* marker modal for created restaurants */}
+
           <section id="details_modal" style={{display: "none"}} >
                 <Modal  visible={true} width="400" height="150" effect="fadeInUp" onClickAway={() =>document.getElementById("details_modal").style.display = "none"}>
                   <a href="javascript:void(0);" className="float-left" onClick={() => {document.getElementById("details_modal").style.display = "none"}}>Close</a>
