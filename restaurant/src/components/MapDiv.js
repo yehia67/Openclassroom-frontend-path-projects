@@ -97,16 +97,23 @@ class MapDiv extends React.Component {
    addRestaurant = () =>{
       const restaurantName = document.getElementById("restaurantName").value;
       const reviews = document.getElementById("rate").value;
+      const user_ratings_total = 1;
       var ul = document.getElementById("restaurantsList");
       var li = document.createElement("li");
       const newRestaurant ={
         name:restaurantName,
         rating:reviews,
-        user_ratings_total: 1
+        user_ratings_total: user_ratings_total
       };
       const newRestaurantListElement = restaurantName +" "+ "(rate = " + reviews+", no. of raters = 1 )";
       newRestaurants.push(newRestaurant);
       li.appendChild(document.createTextNode(newRestaurantListElement));
+      li.onclick = ()=>{
+        let review = prompt("enter your review")
+        li.innerHTML = restaurantName +" "+ "(rate = " + parseFloat((parseFloat(review)/user_ratings_total) + reviews)+", no. of raters = " +parseInt(user_ratings_total+1) +")"
+        newRestaurants[newRestaurants.length-1].rating = parseFloat((parseFloat(review)/user_ratings_total) + reviews);
+        newRestaurants[newRestaurants.length-1].user_ratings_total = newRestaurants[newRestaurants.length-1].user_ratings_total + 1;
+      };
       ul.appendChild(li);
       this.closeModal(1);
    };
