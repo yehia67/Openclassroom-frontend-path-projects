@@ -33,11 +33,12 @@
 .map-box  .map-div{
   width: 500px;
   height:500px;
+  position: relative;
 }
 
+.map-box  #map-div div:first-child{
 
-
-
+}
 
 .map-box .map-list{
   overflow-y: scroll;
@@ -48,12 +49,20 @@
 }
 
 .map-box .map-list h6{
-
+    padding-left: 13px
 }
 
 .map-box .map-list ul{
   list-style: none;
 
+}
+footer{
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+}
+.clearfix{
+  clear: both;
 }
 @keyframes App-logo-spin {
   from {

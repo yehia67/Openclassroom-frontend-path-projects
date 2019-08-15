@@ -27,7 +27,7 @@ const MarkersList = props => {
               {
                 document.getElementById("new_restaurant_Name").innerHTML =  newRestaurants[i].name;
                 document.getElementById("new_restaurant_Rate").innerHTML = "Rate "+ newRestaurants[i].rating;
-                document.getElementById("new_restaurant_No_Rater").innerHTML = "No of raters " +newRestaurants[i].user_ratings_total;
+                document.getElementById("new_restaurant_No_Rater").innerHTML = "no. of raters " +newRestaurants[i].user_ratings_total;
                 document.getElementById("details_modal").style.display = "block";
                 console.log("hop");
 
@@ -91,7 +91,7 @@ class MapDiv extends React.Component {
       noOfRaters = this.props.restaurants[index].user_ratings_total;
       document.getElementById("restaurant_Name").innerHTML =  retsuarantName;
       document.getElementById("restaurant_Rate").innerHTML = "Rate " +rate;
-      document.getElementById("restaurant_No_Rater").innerHTML = "No of raters " + noOfRaters;
+      document.getElementById("restaurant_No_Rater").innerHTML = "no. of raters " + noOfRaters;
       this.openModal(0);
   };
    addRestaurant = () =>{

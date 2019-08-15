@@ -11,6 +11,7 @@ class App extends React.Component {
       <div className="App">
       <Header />
      <RestaurantBox />
+     <div className="clearfix"></div>
      <Footer />
 
     </div>
