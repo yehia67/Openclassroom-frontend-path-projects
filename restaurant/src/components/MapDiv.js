@@ -122,7 +122,7 @@ class MapDiv extends React.Component {
       };
       document.getElementById("add_new_review_link").onclick = () =>{
         let review = document.getElementById("new_review_map").value;
-        li.innerHTML = newRestaurants[newRestaurants.length-1].name +" "+ "(rate = " + parseFloat((parseFloat(review)/  newRestaurants[newRestaurants.length-1].user_ratings_total ) + parseFloat(newRestaurants[newRestaurants.length-1].rating))+", no. of raters = " +parseInt(  newRestaurants[newRestaurants.length-1].user_ratings_total +1) +")"
+        li.innerHTML = newRestaurants[newRestaurants.length-1].name +" "+ "(rate = " + parseFloat((parseFloat(review) /  newRestaurants[newRestaurants.length-1].user_ratings_total ) + parseFloat(newRestaurants[newRestaurants.length-1].rating))+", no. of raters = " +parseInt(  newRestaurants[newRestaurants.length-1].user_ratings_total +1) +")"
         newRestaurants[newRestaurants.length-1].rating =  parseFloat((parseFloat(review)/user_ratings_total) + parseFloat(reviews))
         newRestaurants[newRestaurants.length-1].user_ratings_total = parseInt(newRestaurants[newRestaurants.length-1].user_ratings_total + 1);
         this.newCloseModal();
