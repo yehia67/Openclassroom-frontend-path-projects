@@ -29,7 +29,7 @@ class RestaurantList extends React.Component {
    };
    makeReview = (index)=>{
      const review = document.getElementById("new_review").value;
-     document.getElementById(this.props.restaurants[index].id).innerHTML =     this.props.restaurants[index].name +" "+ "(rate = " + parseFloat((parseFloat(review)/this.props.restaurants[index].user_ratings_total) + this.props.restaurants[index].rating)+", no. of raters = " +parseInt(this.props.restaurants[index].user_ratings_total+1) +")"
+     document.getElementById(this.props.restaurants[index].id).innerHTML =  this.props.restaurants[index].name +" "+ "(rate = " + parseFloat((parseFloat(review)/this.props.restaurants[index].user_ratings_total) + this.props.restaurants[index].rating)+", no. of raters = " +parseInt(this.props.restaurants[index].user_ratings_total+1) +")"
      this.props.restaurants[index].rating =  parseFloat((parseFloat(review)/this.props.restaurants[index].user_ratings_total) + this.props.restaurants[index].rating)
      this.props.restaurants[index].user_ratings_total = this.props.restaurants[index].user_ratings_total + 1
    }
