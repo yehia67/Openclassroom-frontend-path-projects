@@ -58,6 +58,9 @@
 }
 #restaurantsList li {
   cursor: pointer;
+  margin-bottom: 18px;
+  border-bottom: 1px solid;
+  padding-bottom: 6px;
 }
 footer{
   position: absolute;

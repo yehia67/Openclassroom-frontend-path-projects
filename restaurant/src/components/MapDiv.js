@@ -122,8 +122,8 @@ class MapDiv extends React.Component {
       document.getElementById("add_new_review_link").onclick = () =>{
         newRestaurants[newRestaurants.length-1].user_ratings_total = newRestaurants[newRestaurants.length-1].user_ratings_total + 1;
         let review = document.getElementById("new_review_map").value;
-        li.innerHTML = newRestaurants[newRestaurants.length-1].name +" "+ "(rate = " +(parseFloat(parseFloat(review)+parseFloat(newRestaurants[newRestaurants.length-1].rating)))/newRestaurants[newRestaurants.length-1].user_ratings_total +", no. of raters = " +parseInt(newRestaurants[newRestaurants.length-1].user_ratings_total) +")";
-        newRestaurants[newRestaurants.length-1].rating = (parseFloat(parseFloat(review)+parseFloat(newRestaurants[newRestaurants.length-1].rating)))/newRestaurants[newRestaurants.length-1].user_ratings_total;
+        li.innerHTML = newRestaurants[newRestaurants.length-1].name +" "+ "(rate = " +(parseFloat(parseFloat(review)+parseFloat(newRestaurants[newRestaurants.length-1].rating)))/2 +", no. of raters = " +parseInt(newRestaurants[newRestaurants.length-1].user_ratings_total) +")";
+        newRestaurants[newRestaurants.length-1].rating = (parseFloat(parseFloat(review)+parseFloat(newRestaurants[newRestaurants.length-1].rating)))/2;
       //  newRestaurants[newRestaurants.length-1].user_ratings_total = parseInt(newRestaurants[newRestaurants.length-1].user_ratings_total + 1);
         this.newCloseModal();
       };
@@ -182,8 +182,8 @@ class MapDiv extends React.Component {
                             <input type="range" required className="form-control" id="rate" placeholder="Your review from 1 to 5" max="5" min="1" />
                         </div>
                         <div className="form-group">
-                            <a href="javascript:void(0);" className="float-left" onClick={() => this.closeModal(1)}>Close</a>
-                            <a href="javascript:void(0);" className="float-right"  onClick={() => this.addRestaurant()}>Add Restaurant</a>
+                            <a    className="float-left" onClick={() => this.closeModal(1)}>Close</a>
+                            <a    className="float-right"  onClick={() => this.addRestaurant()}>Add Restaurant</a>
                         </div>
                       </div>
                   </Modal>
@@ -192,7 +192,7 @@ class MapDiv extends React.Component {
 
           <section>
               <Modal visible={this.state.restaurantDetailsVisible} width="400" height="150" effect="fadeInUp" onClickAway={() => this.closeModal(0)}>
-                <a href="javascript:void(0);" className="float-left" onClick={() => this.closeModal(0)}>Close</a>
+                <a    className="float-left" onClick={() => this.closeModal(0)}>Close</a>
                     <div className="p-5">
                       <h5 id="restaurant_Name" ></h5>
                       <h5 id="restaurant_Rate" ></h5>
@@ -204,7 +204,7 @@ class MapDiv extends React.Component {
 
           <section id="details_modal" style={{display: "none"}} >
                 <Modal  visible={true} width="400" height="150" effect="fadeInUp" onClickAway={() =>document.getElementById("details_modal").style.display = "none"}>
-                  <a href="javascript:void(0);" className="float-left" onClick={() => {document.getElementById("details_modal").style.display = "none"}}>Close</a>
+                  <a    className="float-left" onClick={() => {document.getElementById("details_modal").style.display = "none"}}>Close</a>
                       <div className="p-5">
                         <h5 id="new_restaurant_Name" ></h5>
                         <h5 id="new_restaurant_Rate" ></h5>
@@ -220,7 +220,7 @@ class MapDiv extends React.Component {
                             <label>Enter your review:-</label><br />
                             <input type="range" id="new_review_map" min="1" max="5"/>
                             <br />
-                            <a id="add_new_review_link" href="javascript:void(0);"className="float-right">Submit</a>
+                            <a id="add_new_review_link"   className="float-right">Submit</a>
                         </div>
                   </Modal>
             </section>

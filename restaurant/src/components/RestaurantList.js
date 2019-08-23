@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Modal from 'react-awesome-modal';
 
@@ -29,8 +30,8 @@ class RestaurantList extends React.Component {
    };
    makeReview = (index)=>{
      const review = document.getElementById("new_review").value;
-     document.getElementById(this.props.restaurants[index].id).innerHTML =  this.props.restaurants[index].name +" "+ "(rate = " + parseFloat((parseFloat(review)/this.props.restaurants[index].user_ratings_total) + this.props.restaurants[index].rating)+", no. of raters = " +parseInt(this.props.restaurants[index].user_ratings_total+1) +")"
-     this.props.restaurants[index].rating =  parseFloat((parseFloat(review)/this.props.restaurants[index].user_ratings_total) + this.props.restaurants[index].rating)
+     document.getElementById(this.props.restaurants[index].id).innerHTML =  this.props.restaurants[index].name +" "+ "(rate = " + parseFloat((parseFloat(review)+this.props.restaurants[index].rating)/2)+", no. of raters = " +parseInt(this.props.restaurants[index].user_ratings_total+1) +")"
+     this.props.restaurants[index].rating =  parseFloat((parseFloat(review)+this.props.restaurants[index].rating)/2)
      this.props.restaurants[index].user_ratings_total = this.props.restaurants[index].user_ratings_total + 1
    }
 
@@ -55,7 +56,7 @@ class RestaurantList extends React.Component {
                                 <label>Enter your review:-</label><br />
                                 <input type="range" id="new_review" min="1" max="5"/>
                                 <br />
-                                <a href="javascript:void(0);"className="float-right" onClick={() => {
+                                <a  className="float-right" onClick={() => {
                                     this.closeModal();
                                     console.log(document.getElementById("index").innerHTML);
                                     this.makeReview(document.getElementById("index").innerHTML);
