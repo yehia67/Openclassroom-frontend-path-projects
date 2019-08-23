@@ -7,7 +7,6 @@ const newRestaurants = []
 const google = window.google;
 
 const mapStyles = {
-  width: '500px',
   height: '500px',
 };
 

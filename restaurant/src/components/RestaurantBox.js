@@ -19,7 +19,7 @@ class RestaurantBox extends React.Component {
         Latitude: crd.latitude,
         Longitude: crd.longitude
       },()=> {
-        fetch('https://cors-anywhere.herokuapp.com/'+'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location='+this.state.Latitude +','+ this.state.Longitude + '&radius=15000&type=restaurant&keyword=cruise&key=AIzaSyAR14v1v6okXPc5QrZwvsmMbaHktnQ0M5I')
+        fetch('https://cors-anywhere.herokuapp.com/'+'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location='+this.state.Latitude +','+ this.state.Longitude + '&radius=150000&type=restaurant&key=AIzaSyAR14v1v6okXPc5QrZwvsmMbaHktnQ0M5I')
        .then(response=>response.json()).then(data =>{
          console.log(data);
          this.setState({
