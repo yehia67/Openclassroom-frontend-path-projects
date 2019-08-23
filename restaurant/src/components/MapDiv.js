@@ -8,6 +8,7 @@ const google = window.google;
 
 const mapStyles = {
   height: '500px',
+  width:'100%'
 };
 
 var iconBase = 'http://maps.google.com/mapfiles/marker_green.png';

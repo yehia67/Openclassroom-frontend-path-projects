@@ -48,7 +48,7 @@ class RestaurantBox extends React.Component {
       <div className="map-box row align-items-center" >
 
       {this.state.restaurants !== []?
-        <MapDiv  restaurants={this.state.restaurants}  Latitude={this.state.Latitude} Longitude={this.state.Longitude} /> : null}
+        <MapDiv  restaurants={this.state.restaurants}   Latitude={this.state.Latitude} Longitude={this.state.Longitude} /> : null}
 
 
        {this.state.Latitude !== 1?  <RestaurantList restaurants={this.state.restaurants}   Latitude={this.state.Latitude} Longitude={this.state.Longitude} />: null}
