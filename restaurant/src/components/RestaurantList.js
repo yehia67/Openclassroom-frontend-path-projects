@@ -2,7 +2,7 @@
 import React from 'react';
 import Modal from 'react-awesome-modal';
 
-
+const removedElements = []
 class RestaurantList extends React.Component {
   constructor(props) {
        super(props);
@@ -28,16 +28,33 @@ class RestaurantList extends React.Component {
      document.getElementById("index").innerHTML = index;
 
    };
+   removeListElement = ()=>{
+     for(let i = 0; i < removedElements.length; i++ ){
+       document.getElementById(removedElements[i]).setAttribute("display", "none");
+     }
+   }
    makeReview = (index)=>{
      const review = document.getElementById("new_review").value;
-     document.getElementById(this.props.restaurants[index].id).innerHTML =  this.props.restaurants[index].name +" "+ "(rate = " + parseFloat((parseFloat(review)+this.props.restaurants[index].rating)/2)+", no. of raters = " +parseInt(this.props.restaurants[index].user_ratings_total+1) +")"
+     document.getElementById(this.props.restaurants[index].place_id).innerHTML =  "<div className='restaurant-review-box'><p className='restaurant-review-name'>"+ this.props.restaurants[index].name  +"</p><p className='restaurant-review-rating'>rate: "+ parseFloat((parseFloat(review)+this.props.restaurants[index].rating)/2)+ "</p><p className='restaurant-review-raters'>no. Of Reviewers:  "+ parseInt(this.props.restaurants[index].user_ratings_total+1)+ "</p><button className='restaurant-add-review' onClick= '{()=> alert('yarab')}' >Add Review</button></div>"
+
      this.props.restaurants[index].rating =  parseFloat((parseFloat(review)+this.props.restaurants[index].rating)/2)
      this.props.restaurants[index].user_ratings_total = this.props.restaurants[index].user_ratings_total + 1
    }
 
   render() {
 
-      const items =  this.props.restaurants.map((obj,index) => <li id={obj.id} onClick={() => this.addReview(index)}  key={index} >{obj.name +" "+ "(rate = " + obj.rating+", no. of raters = " +obj.user_ratings_total +")"}</li>,this);
+      const items =  this.props.restaurants.map((obj,index) =>
+       <li id={obj.place_id}
+         onClick={()=> this.addReview(index)}  key={index} >
+{typeof   obj.rating !== "undefined" ?
+        <div className="restaurant-review-box">
+          <p className="restaurant-review-name">{obj.name}</p>
+          <p className="restaurant-review-rating">rate:  {obj.rating}</p>
+          <p className="restaurant-review-raters">no. Of Reviewers:  {obj.user_ratings_total}</p>
+          <button className="restaurant-add-review" onClick={()=> alert("yarab")} >Add Review</button>
+        </div>
+         : ""  }
+       </li>,this);
 
 
       return (
@@ -50,7 +67,7 @@ class RestaurantList extends React.Component {
 
               {/* add review modal  */}
               <section>
-                     <Modal visible={this.state.visible} width="250" height="150" effect="fadeInUp" onClickAway={() => this.closeModal()}>
+                     <Modal visible={this.state.visible} width="450" height="250" effect="fadeInUp" onClickAway={() => this.closeModal()}>
                             <div className="p-5">
                                 <span style={{display:"none"}} id="index"></span>
                                 <label>Enter your review:-</label><br />

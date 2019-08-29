@@ -65,9 +65,19 @@ div:nth-child(){
 }
 #restaurantsList li {
   cursor: pointer;
-  margin-bottom: 18px;
-    border-bottom: 1px solid;
-    padding-bottom: 6px;
+
+}
+.restaurant-review-box{
+
+}
+.restaurant-review-box .restaurant-review-name{
+
+}
+.restaurant-review-box .restaurant-review-rating{
+
+}
+.restaurant-review-box .restaurant-review-raters{
+  
 }
 footer{
   position: absolute;
