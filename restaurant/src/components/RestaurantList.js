@@ -9,7 +9,7 @@ class RestaurantList extends React.Component {
        this.state = {
             visible : false,
             reviews:[],
-            reviewsMap: [{key:'value'}]
+            reviewsMap: {}
         }
 
    }
@@ -31,23 +31,27 @@ class RestaurantList extends React.Component {
                visible : false
            });
        };
-    showReviews = (index) =>
+    showReviews = (reviewIndex) =>
     {
       let reviewbox;
-      fetch('https://cors-anywhere.herokuapp.com/' + 'https://maps.googleapis.com/maps/api/place/details/json?placeid='+this.props.restaurants[index].place_id + '&key=AIzaSyAR14v1v6okXPc5QrZwvsmMbaHktnQ0M5I')
+      fetch('https://cors-anywhere.herokuapp.com/' + 'https://maps.googleapis.com/maps/api/place/details/json?placeid='+this.props.restaurants[reviewIndex].place_id + '&key=AIzaSyAR14v1v6okXPc5QrZwvsmMbaHktnQ0M5I')
      .then(response=>response.json()).then(data =>{
+      var cloneObj = this.state.reviewsMap;
+      cloneObj[this.props.restaurants[reviewIndex].place_id] = data.result.reviews
        this.setState({
-        reviews: data.result.reviews
+        reviewsMap:  cloneObj,
       },()=>{
 
-        console.log(this.state.reviews)
-        for(let index = 0; index < this.state.reviews.length;index++){
-            reviewbox = "<div class='review-box'><div class='review-info'>Author: "+this.state.reviews[index].author_name +"<br/>Rate: "+this.state.reviews[index].rating   +"</div><p class='review-comment'>"+ this.state.reviews[index].text +"</p></div>";
+        const myArr =  this.state.reviewsMap[this.props.restaurants[reviewIndex].place_id];
+        console.log(myArr)
+        for(let index = 0; index < myArr.length;index++){
+          console.log(myArr[index])
+            reviewbox = "<div class='review-box'><div class='review-info'>Author: "+ myArr[index].author_name +"<br/>Rate: "+myArr[index].rating   +"</div><p class='review-comment'>"+ myArr[index].text +"</p></div>";
            document.getElementById("reviewList").innerHTML += reviewbox;
         }
 
 
-        this.setState({reviewsMap: [ ...this.state.reviewsMap, this.props.restaurants[index].place_id:reviewbox],});
+        // this.setState({reviewsMap: [ ...this.state.reviewsMap, this.props.restaurants[index].place_id:reviewbox],});
 
 
       })
@@ -93,7 +97,16 @@ class RestaurantList extends React.Component {
     const comment = document.getElementById("feedback_comment").value;
     let reviewbox = "<div class='review-box'><div class='review-info'>Author: "+ name +"<br/>Rate: "+review  +"</div><p class='review-comment'>"+ comment +"</p></div>"
     document.getElementById("reviewList").innerHTML += reviewbox;
-    console.log(reviewbox)
+    var addedReview = {
+      rating: review,
+      text: 'Some comment',
+      author_name: 'Anonymous'
+       };
+     let reviewMapClone = this.state.reviewsMap;
+     reviewMapClone[this.props.restaurants[index].place_id].push(addedReview)
+    this.setState({
+      reviewsMap: reviewMapClone,
+    })
   }
   render() {
 
