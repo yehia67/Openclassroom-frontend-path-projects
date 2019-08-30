@@ -65,20 +65,48 @@ div:nth-child(){
 }
 #restaurantsList li {
   cursor: pointer;
+  border-radius: 5px;
+   padding: 5px;
 
 }
-.restaurant-review-box{
+#restaurantsList li:hover {
+  background-color: #1bb9d2
 
 }
-.restaurant-review-box .restaurant-review-name{
+.place-details{
+  width: 100% !important
+}
+.review-form{
+    float: left;
+    width: 400px;
+}
+
+ .restaurant-review-box{
 
 }
-.restaurant-review-box .restaurant-review-rating{
+ .restaurant-review-box .restaurant-review-name{
+
+}
+ .restaurant-review-box .restaurant-review-rating{
 
 }
 .restaurant-review-box .restaurant-review-raters{
+
+}
+.reviews-List {
+  overflow-y: scroll;
+  height: 385px;
+  float: right;
+  width: 400px;
+}
+.reviews-List .review-box{
+  width: 100% !important
+}
+.reviews-List .reviews-List-title{
   
 }
+.reviews-List .review-box .review-info{}
+.reviews-List .review-box .review-comment{}
 footer{
   position: absolute;
   bottom: 0px;
