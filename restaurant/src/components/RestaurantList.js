@@ -42,11 +42,12 @@ class RestaurantList extends React.Component {
         reviewsMap:  cloneObj,
       },()=>{
 
-        const myArr =  this.state.reviewsMap[this.props.restaurants[reviewIndex].place_id];
-        console.log(myArr)
-        for(let index = 0; index < myArr.length;index++){
-          console.log(myArr[index])
-            reviewbox = "<div class='review-box'><div class='review-info'>Author: "+ myArr[index].author_name +"<br/>Rate: "+myArr[index].rating   +"</div><p class='review-comment'>"+ myArr[index].text +"</p></div>";
+        const reviews =  this.state.reviewsMap[this.props.restaurants[reviewIndex].place_id];
+        console.log(reviews)
+        document.getElementById("reviewList").innerHTML = '<h4 className="reviews-List-title">Previous reviews</h4>'
+        for(let index = 0; index < reviews.length;index++){
+          console.log(reviews[index])
+            reviewbox = "<div class='review-box'><div class='review-info'>Author: "+ reviews[index].author_name +"<br/>Rate: "+reviews[index].rating   +"</div><p class='review-comment'>"+ reviews[index].text +"</p></div>";
            document.getElementById("reviewList").innerHTML += reviewbox;
         }
 
@@ -65,15 +66,12 @@ class RestaurantList extends React.Component {
 
 
    addReview = (index)=>{
-     if( typeof  this.state.reviewsMap[this.props.restaurants[index].place_id] === "undefined" ){
+     console.log("index el hnaaa",index)
+     document.getElementById("index").innerHTML = index;
         this.showReviews(index);
         console.log(this.state.reviewsMap)
-     }
-     else{
-         document.getElementById("reviewList").innerHTML += this.state.reviewsMap[this.props.restaurants[index].place_id];
-     }
      this.openModal();
-     document.getElementById("index").innerHTML = index;
+
    };
    removeListElement = ()=>{
      for(let i = 0; i < removedElements.length; i++ ){
