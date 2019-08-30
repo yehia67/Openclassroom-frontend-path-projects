@@ -112,7 +112,8 @@ class MapDiv extends React.Component {
       const newRestaurant ={
         name:restaurantName,
         rating:reviews,
-        user_ratings_total: user_ratings_total
+        user_ratings_total: user_ratings_total,
+        comments:[{}]
       };
 
       const newRestaurantListElement = '<div className="restaurant-review-box"><p className="restaurant-review-name">'+restaurantName+'</p><p className="restaurant-review-rating">rate:  '+reviews+'</p><p className="restaurant-review-raters">no. Of Reviewers: 1</p></div>';
@@ -124,9 +125,19 @@ class MapDiv extends React.Component {
       document.getElementById("add_new_review_link").onclick = () =>{
         newRestaurants[newRestaurants.length-1].user_ratings_total = newRestaurants[newRestaurants.length-1].user_ratings_total + 1;
         let review = document.getElementById("new_review_map").value;
-
+        let comment ={
+          author_name:document.getElementById("feedback-name-map").value,
+          rating: document.getElementById("new_review_map").value,
+          text: document.getElementById("feedback_comment-map").value
+        }
+        newRestaurants[newRestaurants.length-1].comments.push(comment)
         li.innerHTML =  '<div className="restaurant-review-box"><p className="restaurant-review-name">'+newRestaurants[newRestaurants.length-1].name+'</p><p className="restaurant-review-rating">rate:  '+(parseFloat(parseFloat(review)+parseFloat(newRestaurants[newRestaurants.length-1].rating)))/2+'</p><p className="restaurant-review-raters">no. Of Reviewers: '+parseInt(newRestaurants[newRestaurants.length-1].user_ratings_total)+'</p></div>';
         newRestaurants[newRestaurants.length-1].rating = (parseFloat(parseFloat(review)+parseFloat(newRestaurants[newRestaurants.length-1].rating)))/2;
+        document.getElementById("reviewListMap").innerHTML = '<h4 className="reviews-List-title">Previous reviews</h4>';
+        for(let index = 1; index < newRestaurants[newRestaurants.length-1].comments.length;index++){
+            let reviewbox = "<div class='review-box'><div class='review-info'>Author: "+ newRestaurants[newRestaurants.length-1].comments[index].author_name +"<br/>Rate: "+newRestaurants[newRestaurants.length-1].comments[index].rating   +"</div><p class='review-comment'>"+ newRestaurants[newRestaurants.length-1].comments[index].text +"</p></div>";
+            document.getElementById("reviewListMap").innerHTML += reviewbox;
+        }
       //  newRestaurants[newRestaurants.length-1].user_ratings_total = parseInt(newRestaurants[newRestaurants.length-1].user_ratings_total + 1);
         this.newCloseModal();
       };
@@ -232,7 +243,7 @@ class MapDiv extends React.Component {
                        </div>
 
                        <div className="form-group reviewer-comment-box">
-                           <label htmlFor="feedback_comment">Leave a comment</label>
+                           <label htmlFor="feedback_comment-map">Leave a comment</label>
                            <textarea className="form-control " id="feedback_comment-map" rows="3"></textarea>
                          </div>
                          <button className="btn btn-primary"  id="add_new_review_link"> Submit Review</button>
