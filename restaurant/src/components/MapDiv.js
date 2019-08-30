@@ -114,16 +114,18 @@ class MapDiv extends React.Component {
         rating:reviews,
         user_ratings_total: user_ratings_total
       };
-      const newRestaurantListElement = restaurantName +" "+ "(rate = " + reviews+", no. of raters = 1 )";
+
+      const newRestaurantListElement = '<div className="restaurant-review-box"><p className="restaurant-review-name">'+restaurantName+'</p><p className="restaurant-review-rating">rate:  '+reviews+'</p><p className="restaurant-review-raters">no. Of Reviewers: 1</p></div>';
       newRestaurants.push(newRestaurant);
-      li.appendChild(document.createTextNode(newRestaurantListElement));
+      li.innerHTML =   newRestaurantListElement;
       li.onclick = ()=>{
         this.newOpenModal();
       };
       document.getElementById("add_new_review_link").onclick = () =>{
         newRestaurants[newRestaurants.length-1].user_ratings_total = newRestaurants[newRestaurants.length-1].user_ratings_total + 1;
         let review = document.getElementById("new_review_map").value;
-        li.innerHTML = newRestaurants[newRestaurants.length-1].name +" "+ "(rate = " +(parseFloat(parseFloat(review)+parseFloat(newRestaurants[newRestaurants.length-1].rating)))/2 +", no. of raters = " +parseInt(newRestaurants[newRestaurants.length-1].user_ratings_total) +")";
+
+        li.innerHTML =  '<div className="restaurant-review-box"><p className="restaurant-review-name">'+newRestaurants[newRestaurants.length-1].name+'</p><p className="restaurant-review-rating">rate:  '+(parseFloat(parseFloat(review)+parseFloat(newRestaurants[newRestaurants.length-1].rating)))/2+'</p><p className="restaurant-review-raters">no. Of Reviewers: '+parseInt(newRestaurants[newRestaurants.length-1].user_ratings_total)+'</p></div>';
         newRestaurants[newRestaurants.length-1].rating = (parseFloat(parseFloat(review)+parseFloat(newRestaurants[newRestaurants.length-1].rating)))/2;
       //  newRestaurants[newRestaurants.length-1].user_ratings_total = parseInt(newRestaurants[newRestaurants.length-1].user_ratings_total + 1);
         this.newCloseModal();
@@ -174,13 +176,13 @@ class MapDiv extends React.Component {
             {/* new restaurant modal */}
 
           <section>
-                <Modal visible={this.state.visible} width="400" height="300" effect="fadeInUp" onClickAway={() => this.closeModal(1)}>
-                      <div className="p-5">
+                <Modal visible={this.state.visible} width="700" height="500" effect="fadeInUp" onClickAway={() => this.closeModal(1)}>
+                      <div className="p-5 add-restaurant">
                         <h3 className="text-center" >Add New Restaurant</h3>
                         <div className="form-group">
                             <input type="text" required className="form-control" id="restaurantName" placeholder="Enter Restaurant Name" />
                             <label className="float-left mt-3 mb-0">Your review:</label>
-                            <input type="range" required className="form-control" id="rate" placeholder="Your review from 1 to 5" max="5" min="1" />
+                            <input type="number" required className="form-control" id="rate" placeholder="Your review from 1 to 5" max="5" min="0" />
                         </div>
                         <div className="form-group">
                             <a    className="float-left" onClick={() => this.closeModal(1)}>Close</a>
@@ -215,14 +217,30 @@ class MapDiv extends React.Component {
           </section>
           {/* add review  for new restaurant modal  */}
           <section>
-                 <Modal visible={this.state.newVisible} width="250" height="150" effect="fadeInUp" onClickAway={() => this.newCloseModal()}>
-                        <div className="p-5">
-                            <span style={{display:"none"}} id="index"></span>
-                            <label>Enter your review:-</label><br />
-                            <input type="range" id="new_review_map" min="1" max="5"/>
-                            <br />
-                            <a id="add_new_review_link"   className="float-right">Submit</a>
+                 <Modal visible={this.state.newVisible} width="1000" height="500" effect="fadeInUp" onClickAway={() => this.newCloseModal()}>
+                   <div className="p-5 place-details">
+                     <span style={{display:"none"}} id="index"></span>
+                     <div className="review-form">
+                       <div className="form-group  reviewer-email-box">
+                             <label htmlFor="feedback-name-map">Your Name</label>
+                             <input type="text" className="form-control reviewer-email" id="feedback-name-map" aria-describedby="emailHelp" placeholder="Enter Your User Name" required />
+                       </div>
+
+                       <div className="form-group  reviewer-score-box">
+                             <label htmlFor="new_review_map">Submit your feedback from 0 to 5</label>
+                             <input type="number" className="form-control reviewer-score" id="new_review_map" min="0" max="5" />
+                       </div>
+
+                       <div className="form-group reviewer-comment-box">
+                           <label htmlFor="feedback_comment">Leave a comment</label>
+                           <textarea className="form-control " id="feedback_comment-map" rows="3"></textarea>
+                         </div>
+                         <button className="btn btn-primary"  id="add_new_review_link"> Submit Review</button>
+                       </div>
+                        <div className="reviews-List" id="reviewListMap">
+                             <h4 className="reviews-List-title">Previous reviews</h4>
                         </div>
+                   </div>
                   </Modal>
             </section>
       </div>
