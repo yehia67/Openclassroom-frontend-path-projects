@@ -103,12 +103,21 @@ class MapDiv extends React.Component {
       document.getElementById("restaurant_No_Rater").innerHTML = "no. of raters " + noOfRaters;
       this.openModal(0);
   };
+  getNewRestaurantsByName = (name) =>{
+    for(let index = 0; index < newRestaurants.length ;index++){
+         if(name === newRestaurants[index].name ){
+           return index;
+         }
+    }
+    return -1;
+  }
    addRestaurant = () =>{
       const restaurantName = document.getElementById("restaurantName").value;
       const reviews = document.getElementById("rate").value;
       const user_ratings_total = 1;
       var ul = document.getElementById("restaurantsList");
       var li = document.createElement("li");
+      li.setAttribute("id",restaurantName);
       const newRestaurant ={
         name:restaurantName,
         rating:reviews,
@@ -120,30 +129,50 @@ class MapDiv extends React.Component {
       newRestaurants.push(newRestaurant);
       li.innerHTML =   newRestaurantListElement;
       li.onclick = ()=>{
+        let liText = li.innerHTML;
+        let startText = liText.indexOf('-name">') +7;
+        let endText = liText.indexOf('</p>')
+        let nameOfNewRestaurant = liText.substring(startText,endText);
+        let i = this.getNewRestaurantsByName(nameOfNewRestaurant)
+        console.log("index index",i)
+        this.uploadComments(i)
+
         this.newOpenModal();
       };
       document.getElementById("add_new_review_link").onclick = () =>{
+
         newRestaurants[newRestaurants.length-1].user_ratings_total = newRestaurants[newRestaurants.length-1].user_ratings_total + 1;
         let review = document.getElementById("new_review_map").value;
+
+        li.innerHTML =  '<div className="restaurant-review-box"><p className="restaurant-review-name">'+newRestaurants[newRestaurants.length-1].name+'</p><p className="restaurant-review-rating">rate:  '+(parseFloat(parseFloat(review)+parseFloat(newRestaurants[newRestaurants.length-1].rating)))/2+'</p><p className="restaurant-review-raters">no. Of Reviewers: '+parseInt(newRestaurants[newRestaurants.length-1].user_ratings_total)+'</p></div>';
+        newRestaurants[newRestaurants.length-1].rating = (parseFloat(parseFloat(review)+parseFloat(newRestaurants[newRestaurants.length-1].rating)))/2;
         let comment ={
           author_name:document.getElementById("feedback-name-map").value,
           rating: document.getElementById("new_review_map").value,
           text: document.getElementById("feedback_comment-map").value
         }
         newRestaurants[newRestaurants.length-1].comments.push(comment)
-        li.innerHTML =  '<div className="restaurant-review-box"><p className="restaurant-review-name">'+newRestaurants[newRestaurants.length-1].name+'</p><p className="restaurant-review-rating">rate:  '+(parseFloat(parseFloat(review)+parseFloat(newRestaurants[newRestaurants.length-1].rating)))/2+'</p><p className="restaurant-review-raters">no. Of Reviewers: '+parseInt(newRestaurants[newRestaurants.length-1].user_ratings_total)+'</p></div>';
-        newRestaurants[newRestaurants.length-1].rating = (parseFloat(parseFloat(review)+parseFloat(newRestaurants[newRestaurants.length-1].rating)))/2;
-        document.getElementById("reviewListMap").innerHTML = '<h4 className="reviews-List-title">Previous reviews</h4>';
-        for(let index = 1; index < newRestaurants[newRestaurants.length-1].comments.length;index++){
-            let reviewbox = "<div class='review-box'><div class='review-info'>Author: "+ newRestaurants[newRestaurants.length-1].comments[index].author_name +"<br/>Rate: "+newRestaurants[newRestaurants.length-1].comments[index].rating   +"</div><p class='review-comment'>"+ newRestaurants[newRestaurants.length-1].comments[index].text +"</p></div>";
-            document.getElementById("reviewListMap").innerHTML += reviewbox;
-        }
-      //  newRestaurants[newRestaurants.length-1].user_ratings_total = parseInt(newRestaurants[newRestaurants.length-1].user_ratings_total + 1);
+
         this.newCloseModal();
       };
       ul.appendChild(li);
       this.closeModal(1);
    };
+
+   uploadComments = (indexComment) => {
+     console.log("yarab yarab yarab",newRestaurants[indexComment].comments)
+     if(indexComment === -1 || newRestaurants[indexComment].comments.length  === 1 ){
+       document.getElementById("reviewListMap").innerHTML = '<h4 className="reviews-List-title">Previous reviews</h4>';
+     }
+     else{
+        document.getElementById("reviewListMap").innerHTML = '<h4 className="reviews-List-title">Previous reviews</h4>';
+       for(let index = 1; index < newRestaurants[indexComment].comments.length;index++){
+           let reviewbox = "<div class='review-box'><div class='review-info'>Author: "+ newRestaurants[indexComment].comments[index].author_name +"<br/>Rate: "+newRestaurants[indexComment].comments[index].rating   +"</div><p class='review-comment'>"+ newRestaurants[indexComment].comments[index].text +"</p></div>";
+           document.getElementById("reviewListMap").innerHTML += reviewbox;
+       }
+ }
+
+};
 
     handleMapClick = (ref, map, ev) => {
       this.openModal(1)

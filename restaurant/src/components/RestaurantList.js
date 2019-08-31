@@ -40,7 +40,6 @@ class RestaurantList extends React.Component {
 
          this.getApiReviews(reviewIndex,data)
        }else{
-         alert(this.state.reviewsMap.length )
          if(this.state.reviewsMap.length < data.result.reviews.length){
                  this.getApiReviews(reviewIndex,data)
           }

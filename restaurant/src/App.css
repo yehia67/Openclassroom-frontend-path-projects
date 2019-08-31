@@ -103,10 +103,14 @@ div:nth-child(){
   width: 100% !important
 }
 .reviews-List .reviews-List-title{
-  
+
 }
-.reviews-List .review-box .review-info{}
-.reviews-List .review-box .review-comment{}
+.reviews-List .review-box .review-info{
+  text-align: left;
+}
+.reviews-List .review-box .review-comment{
+  text-align: left;
+}
 footer{
   position: absolute;
   bottom: 0px;
