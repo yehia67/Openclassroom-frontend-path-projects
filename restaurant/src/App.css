@@ -35,6 +35,9 @@
   height:500px;
   position: relative;
 }
+.map-box  .add-restaurant{
+  width: 100% !important;
+}
 div:nth-child(){
 
 }

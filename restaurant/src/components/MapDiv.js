@@ -3,6 +3,7 @@ import { Map, GoogleApiWrapper, Marker,InfoWindow } from 'google-maps-react';
 import Modal from 'react-awesome-modal';
 
 const newRestaurants = []
+const newLi =[]
 
 const google = window.google;
 
@@ -111,13 +112,21 @@ class MapDiv extends React.Component {
     }
     return -1;
   }
+  getLi = (i) =>{
+    for(let index = 0; index < newLi.length;index++){
+      let checkIndeces = newLi.split("//")
+      if(i == checkIndeces[0]){
+        return checkIndeces[1];
+      }
+    }
+    return -1;
+  };
    addRestaurant = () =>{
       const restaurantName = document.getElementById("restaurantName").value;
       const reviews = document.getElementById("rate").value;
       const user_ratings_total = 1;
       var ul = document.getElementById("restaurantsList");
       var li = document.createElement("li");
-      li.setAttribute("id",restaurantName);
       const newRestaurant ={
         name:restaurantName,
         rating:reviews,
@@ -136,22 +145,28 @@ class MapDiv extends React.Component {
         let i = this.getNewRestaurantsByName(nameOfNewRestaurant)
         console.log("index index",i)
         this.uploadComments(i)
-
+        newLi.push(i+"//"+li)
         this.newOpenModal();
       };
-      document.getElementById("add_new_review_link").onclick = () =>{
 
-        newRestaurants[newRestaurants.length-1].user_ratings_total = newRestaurants[newRestaurants.length-1].user_ratings_total + 1;
+      document.getElementById("add_new_review_link").onclick = () =>{
+        let liText = li.innerHTML;
+        let startText = liText.indexOf('-name">') +7;
+        let endText = liText.indexOf('</p>')
+        let nameOfNewRestaurant = liText.substring(startText,endText);
+        let i = this.getNewRestaurantsByName(nameOfNewRestaurant)
+
+        newRestaurants[i].user_ratings_total = newRestaurants[i].user_ratings_total + 1;
         let review = document.getElementById("new_review_map").value;
 
-        li.innerHTML =  '<div className="restaurant-review-box"><p className="restaurant-review-name">'+newRestaurants[newRestaurants.length-1].name+'</p><p className="restaurant-review-rating">rate:  '+(parseFloat(parseFloat(review)+parseFloat(newRestaurants[newRestaurants.length-1].rating)))/2+'</p><p className="restaurant-review-raters">no. Of Reviewers: '+parseInt(newRestaurants[newRestaurants.length-1].user_ratings_total)+'</p></div>';
-        newRestaurants[newRestaurants.length-1].rating = (parseFloat(parseFloat(review)+parseFloat(newRestaurants[newRestaurants.length-1].rating)))/2;
+        li.innerHTML =  '<div className="restaurant-review-box"><p className="restaurant-review-name">'+newRestaurants[i].name+'</p><p className="restaurant-review-rating">rate:  '+(parseFloat(parseFloat(review)+parseFloat(newRestaurants[i].rating)))/2+'</p><p className="restaurant-review-raters">no. Of Reviewers: '+parseInt(newRestaurants[i].user_ratings_total)+'</p></div>';
+        newRestaurants[i].rating = (parseFloat(parseFloat(review)+parseFloat(newRestaurants[i].rating)))/2;
         let comment ={
           author_name:document.getElementById("feedback-name-map").value,
           rating: document.getElementById("new_review_map").value,
           text: document.getElementById("feedback_comment-map").value
         }
-        newRestaurants[newRestaurants.length-1].comments.push(comment)
+        newRestaurants[i].comments.push(comment)
 
         this.newCloseModal();
       };
@@ -216,7 +231,7 @@ class MapDiv extends React.Component {
             {/* new restaurant modal */}
 
           <section>
-                <Modal visible={this.state.visible} width="700" height="500" effect="fadeInUp" onClickAway={() => this.closeModal(1)}>
+                <Modal visible={this.state.visible} width="700" height="300" effect="fadeInUp" onClickAway={() => this.closeModal(1)}>
                       <div className="p-5 add-restaurant">
                         <h3 className="text-center" >Add New Restaurant</h3>
                         <div className="form-group">
@@ -225,8 +240,8 @@ class MapDiv extends React.Component {
                             <input type="number" required className="form-control" id="rate" placeholder="Your review from 1 to 5" max="5" min="0" />
                         </div>
                         <div className="form-group">
-                            <a    className="float-left" onClick={() => this.closeModal(1)}>Close</a>
-                            <a    className="float-right"  onClick={() => this.addRestaurant()}>Add Restaurant</a>
+                            <a    className="float-left" style={{cursor:"pointer"}} onClick={() => this.closeModal(1)}>Close</a>
+                            <a    className="float-right" style={{cursor:"pointer"}}  onClick={() => this.addRestaurant()}>Add Restaurant</a>
                         </div>
                       </div>
                   </Modal>
@@ -235,7 +250,7 @@ class MapDiv extends React.Component {
 
           <section>
               <Modal visible={this.state.restaurantDetailsVisible} width="400" height="150" effect="fadeInUp" onClickAway={() => this.closeModal(0)}>
-                <a    className="float-left" onClick={() => this.closeModal(0)}>Close</a>
+                <a    className="float-left" style={{cursor:"pointer"}} onClick={() => this.closeModal(0)}>Close</a>
                     <div className="p-5">
                       <h5 id="restaurant_Name" ></h5>
                       <h5 id="restaurant_Rate" ></h5>
@@ -247,7 +262,7 @@ class MapDiv extends React.Component {
 
           <section id="details_modal" style={{display: "none"}} >
                 <Modal  visible={true} width="400" height="150" effect="fadeInUp" onClickAway={() =>document.getElementById("details_modal").style.display = "none"}>
-                  <a    className="float-left" onClick={() => {document.getElementById("details_modal").style.display = "none"}}>Close</a>
+                  <a    className="float-left" style={{cursor:"pointer"}} onClick={() => {document.getElementById("details_modal").style.display = "none"}}>Close</a>
                       <div className="p-5">
                         <h5 id="new_restaurant_Name" ></h5>
                         <h5 id="new_restaurant_Rate" ></h5>
