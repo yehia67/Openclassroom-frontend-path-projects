@@ -119,7 +119,32 @@ getNewReviews = (reviewIndex)  =>{
     })
   };
 
+   filterReviews = (items) => {
+      const firstNo = parseFloat(document.getElementById("first-no").value);
+      const secondNo = parseFloat(document.getElementById("second-no").value);
+      let max,min;
+      if(firstNo > secondNo){
+        max = firstNo;
+        min = secondNo;
+      }
+      else if(firstNo < secondNo){
+        max = secondNo;
+        min = firstNo;
+      }
+      for(let index = 0; index < items.length; index++){
+        if(items[index].props.children === ""){
+          continue;
+        }
+        if(items[index].props.children.props.children[1].props.children[1] >= min && items[index].props.children.props.children[1].props.children[1] <= max){
+         document.getElementById(items[index].props.id).style.display = "block";
+        }
+        else{
+          document.getElementById(items[index].props.id).style.display = "none";
 
+        }
+      }
+   console.log(items)
+   };
 
   render() {
 
@@ -133,27 +158,7 @@ getNewReviews = (reviewIndex)  =>{
         </div>
          : ""  }
        </li>,this);
-     const   filterReviews = () => {
-         const firstNo = document.getElementById("first-no").value;
-         const secondNo = document.getElementById("second-no").value;
-         let max,min;
-         if(firstNo > secondNo){
-           max = firstNo;
-           min = secondNo;
-         }
-         else if(firstNo < secondNo){
-           max = secondNo;
-           min = firstNo;
-         }
-         for(let index = 0; index < items.length; index++){
-           if(items[index].props.children === ""){
-             continue;
-           }
-           if(items[index].props.children.props.children[1].props.children[1] >= min && items[index].props.children.props.children[1].props.children[1] <= max){
-             console.log(items[index].props.children.props.children[1].props.children[1])
-           }
-         }
-      };
+
 
       return (
 
@@ -162,7 +167,7 @@ getNewReviews = (reviewIndex)  =>{
                 <div className="filterBox">
                   <input id="first-no" type="number" min="0" max="5" />
                   <input id="second-no" type="number" min="0" max="5" />
-                  <button onClick= {() => {filterReviews()}}>filter </button>
+                  <button onClick= {() => {this.filterReviews(items)}}>filter </button>
                 </div>
                 <ul id="restaurantsList">
                     {items}
