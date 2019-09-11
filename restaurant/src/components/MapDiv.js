@@ -304,5 +304,5 @@ class MapDiv extends React.Component {
 
 }
 export default GoogleApiWrapper({
-  apiKey: 'AIzaSyAR14v1v6okXPc5QrZwvsmMbaHktnQ0M5I'
+  apiKey: 'AIzaSyAUXi44xrkwClTtmRDXvbR9egoGX86XTpE'
 })(MapDiv);

@@ -14,7 +14,7 @@ class RestaurantList extends React.Component {
 
    }
   getReviewDetails(id){
-         fetch('https://cors-anywhere.herokuapp.com/' + 'https://maps.googleapis.com/maps/api/place/details/json?placeid='+id + '&key=AIzaSyAR14v1v6okXPc5QrZwvsmMbaHktnQ0M5I')
+         fetch('https://cors-anywhere.herokuapp.com/' + 'https://maps.googleapis.com/maps/api/place/details/json?placeid='+id + '&key=AIzaSyAUXi44xrkwClTtmRDXvbR9egoGX86XTpE')
         .then(response=>response.json()).then(data =>{
           console.log(data);
         })
@@ -33,7 +33,7 @@ class RestaurantList extends React.Component {
        };
     showReviews = (reviewIndex) =>{
 
-      fetch('https://cors-anywhere.herokuapp.com/' + 'https://maps.googleapis.com/maps/api/place/details/json?placeid='+this.props.restaurants[reviewIndex].place_id + '&key=AIzaSyAR14v1v6okXPc5QrZwvsmMbaHktnQ0M5I')
+      fetch('https://cors-anywhere.herokuapp.com/' + 'https://maps.googleapis.com/maps/api/place/details/json?placeid='+this.props.restaurants[reviewIndex].place_id + '&key=AIzaSyAUXi44xrkwClTtmRDXvbR9egoGX86XTpE')
      .then(response=>response.json()).then(data =>{
        const reviews =  this.state.reviewsMap[this.props.restaurants[reviewIndex].place_id]
        if(typeof reviews === 'undefined' ){
@@ -73,7 +73,6 @@ getNewReviews = (reviewIndex)  =>{
      document.getElementById("reviewList").innerHTML += reviewbox;
   }
 }
-
 
    addReview = (index)=>{
      console.log("index el hnaaa",index)
@@ -118,7 +117,10 @@ getNewReviews = (reviewIndex)  =>{
       const reviews =  this.state.reviewsMap[this.props.restaurants[index].place_id];
       console.log("b3d  show Reviews ya behhhhhhhhhhhhhhhh ama t make el review",reviews)
     })
-  }
+  };
+
+
+
   render() {
 
       const items =  this.props.restaurants.map((obj,index) =>
@@ -131,12 +133,37 @@ getNewReviews = (reviewIndex)  =>{
         </div>
          : ""  }
        </li>,this);
-
+     const   filterReviews = () => {
+         const firstNo = document.getElementById("first-no").value;
+         const secondNo = document.getElementById("second-no").value;
+         let max,min;
+         if(firstNo > secondNo){
+           max = firstNo;
+           min = secondNo;
+         }
+         else if(firstNo < secondNo){
+           max = secondNo;
+           min = firstNo;
+         }
+         for(let index = 0; index < items.length; index++){
+           if(items[index].props.children === ""){
+             continue;
+           }
+           if(items[index].props.children.props.children[1].props.children[1] >= min && items[index].props.children.props.children[1].props.children[1] <= max){
+             console.log(items[index].props.children.props.children[1].props.children[1])
+           }
+         }
+      };
 
       return (
 
               <div className="map-list pt-2 text-left">
                 <h6 className="ml-2">Available Restaurant:</h6>
+                <div className="filterBox">
+                  <input id="first-no" type="number" min="0" max="5" />
+                  <input id="second-no" type="number" min="0" max="5" />
+                  <button onClick= {() => {filterReviews()}}>filter </button>
+                </div>
                 <ul id="restaurantsList">
                     {items}
                 </ul>
