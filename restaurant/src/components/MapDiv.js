@@ -30,9 +30,6 @@ const MarkersList = props => {
                 document.getElementById("new_restaurant_Rate").innerHTML = "Rate "+ newRestaurants[i].rating;
                 document.getElementById("new_restaurant_No_Rater").innerHTML = "no. of raters " +newRestaurants[i].user_ratings_total;
                 document.getElementById("details_modal").style.display = "block";
-                console.log("hop");
-
-
               }
             }
           />
@@ -200,20 +197,24 @@ class MapDiv extends React.Component {
 
     displayMarkers = () => {
       return this.props.restaurants.map((store, index) => {
-       return <Marker key={index} id={index} position={{
+       return   <Marker  key={index} id={store.place_id+"1"}  position={{
           lat: this.props.restaurants[index].geometry.location.lat,
           lng: this.props.restaurants[index].geometry.location.lng
     }}
       onClick={() =>
         this.showRestaurantDetails(index)
       } />
+      
      })
  }
 
 
 
     render() {
+      const markers = this.displayMarkers()
+      console.log(markers)
       return (
+
       <div className="map-div" id="map-div">
         <Map
                 google={this.props.google}
@@ -226,7 +227,8 @@ class MapDiv extends React.Component {
               <Marker
                 icon= {iconBase}
                  position={{ lat: this.props.Latitude, lng: this.props.Longitude}} />
-              {this.displayMarkers()}
+                 {markers}
+
           </Map>
             {/* new restaurant modal */}
 

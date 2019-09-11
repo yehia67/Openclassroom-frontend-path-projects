@@ -137,9 +137,10 @@ getNewReviews = (reviewIndex)  =>{
         }
         if(items[index].props.children.props.children[1].props.children[1] >= min && items[index].props.children.props.children[1].props.children[1] <= max){
          document.getElementById(items[index].props.id).style.display = "block";
+          document.getElementById(items[index].props.id+"1").style.display = "block";
         }
         else{
-          document.getElementById(items[index].props.id).style.display = "none";
+          document.getElementById(items[index].props.id+"1").style.display = "none";
 
         }
       }
