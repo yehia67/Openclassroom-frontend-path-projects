@@ -66,6 +66,12 @@ div:nth-child(){
   list-style: none;
 
 }
+.marker-show{
+  display: block !important;
+}
+.marker-hide{
+  display: none !important;
+}
 #restaurantsList li {
   cursor: pointer;
   border-radius: 5px;

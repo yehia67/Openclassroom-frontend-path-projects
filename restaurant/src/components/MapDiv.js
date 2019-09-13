@@ -4,7 +4,7 @@ import Modal from 'react-awesome-modal';
 
 const newRestaurants = []
 const newLi =[]
-
+const markersList = []
 const google = window.google;
 
 const mapStyles = {
@@ -196,15 +196,19 @@ class MapDiv extends React.Component {
     };
 
     displayMarkers = () => {
+
       return this.props.restaurants.map((store, index) => {
-       return   <Marker  key={index} id={store.place_id+"1"}  position={{
+      const mark =  <Marker key={index}   id= {store.place_id+"1"}   position={{
           lat: this.props.restaurants[index].geometry.location.lat,
           lng: this.props.restaurants[index].geometry.location.lng
     }}
       onClick={() =>
         this.showRestaurantDetails(index)
-      } />
-      
+      }
+      />
+
+    markersList.push(mark)
+   return mark;
      })
  }
 
@@ -212,7 +216,7 @@ class MapDiv extends React.Component {
 
     render() {
       const markers = this.displayMarkers()
-      console.log(markers)
+     console.log(markers)
       return (
 
       <div className="map-div" id="map-div">
@@ -228,6 +232,7 @@ class MapDiv extends React.Component {
                 icon= {iconBase}
                  position={{ lat: this.props.Latitude, lng: this.props.Longitude}} />
                  {markers}
+
 
           </Map>
             {/* new restaurant modal */}
