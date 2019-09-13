@@ -4,7 +4,6 @@ import Modal from 'react-awesome-modal';
 
 const newRestaurants = []
 const newLi =[]
-const markersList = []
 const google = window.google;
 
 const mapStyles = {
@@ -207,7 +206,6 @@ class MapDiv extends React.Component {
       }
       />
 
-    markersList.push(mark)
    return mark;
      })
  }
