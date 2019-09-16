@@ -44,7 +44,6 @@ class RestaurantBox extends React.Component {
         }
       }
       this.setState({
-        restaurants: items,
         filterMarker:filtredRestaurants
       });
    };

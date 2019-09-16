@@ -94,9 +94,9 @@ class MapDiv extends React.Component {
       let retsuarantName;
       let rate;
       let noOfRaters;
-      retsuarantName =  this.props.restaurants[index].name;
-      rate = this.props.restaurants[index].rating;
-      noOfRaters = this.props.restaurants[index].user_ratings_total;
+      retsuarantName =  this.props.filterMarker[index].name;
+      rate = this.props.filterMarker[index].rating;
+      noOfRaters = this.props.filterMarker[index].user_ratings_total;
       document.getElementById("restaurant_Name").innerHTML =  retsuarantName;
       document.getElementById("restaurant_Rate").innerHTML = "Rate " +rate;
       document.getElementById("restaurant_No_Rater").innerHTML = "no. of raters " + noOfRaters;
@@ -201,7 +201,7 @@ class MapDiv extends React.Component {
       return this.props.filterMarker.map((store, index) => {
       const mark = 
       
-      <Marker key={index}    ref= {store.place_id+"1"}   position={{
+      <Marker key={index}       position={{
           lat: this.props.filterMarker[index].geometry.location.lat,
           lng: this.props.filterMarker[index].geometry.location.lng
     }}
