@@ -9,15 +9,18 @@ class RestaurantBox extends React.Component {
       this.state = {
           Latitude:1,
           Longitude:1,
+          filterMarker: [],
           restaurants: [],
       }
   }
 
   filterReviews = () => {
+      const filtredRestaurants = []
       let items = this.state.restaurants;
       console.log("the items",items);
       const firstNo = parseFloat(document.getElementById("first-no").value);
       const secondNo = parseFloat(document.getElementById("second-no").value);
+    
       let max,min;
       if(firstNo > secondNo){
         max = firstNo;
@@ -33,15 +36,16 @@ class RestaurantBox extends React.Component {
         }
         if(items[index].rating >= min && items[index].rating <= max){
          document.getElementById(items[index].place_id).style.display = "block";
+         filtredRestaurants.push(items[index])
 
         }
         else{
           document.getElementById(items[index].place_id).style.display = "none";
-
         }
       }
       this.setState({
-        restaurants: items
+        restaurants: items,
+        filterMarker:filtredRestaurants
       });
    };
   componentDidMount() {
@@ -80,7 +84,7 @@ class RestaurantBox extends React.Component {
       <div className="map-box row align-items-center" >
 
       {this.state.restaurants !== []?
-        <MapDiv  restaurants={this.state.restaurants}   Latitude={this.state.Latitude} Longitude={this.state.Longitude} /> : null}
+        <MapDiv  restaurants={this.state.restaurants} filterMarker={this.state.filterMarker}  Latitude={this.state.Latitude} Longitude={this.state.Longitude} /> : null}
 
 
        {this.state.Latitude !== 1?  <RestaurantList restaurants={this.state.restaurants} filterReviews = {this.filterReviews}  Latitude={this.state.Latitude} Longitude={this.state.Longitude} />: null}

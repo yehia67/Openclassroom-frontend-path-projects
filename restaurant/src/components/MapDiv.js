@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { Map, GoogleApiWrapper, Marker,InfoWindow } from 'google-maps-react';
 import Modal from 'react-awesome-modal';
 
@@ -57,6 +58,7 @@ class MapDiv extends React.Component {
             this.setState({
                 visible : true
             });
+
           }
           else{
             this.setState({
@@ -195,11 +197,13 @@ class MapDiv extends React.Component {
     };
 
     displayMarkers = () => {
-
-      return this.props.restaurants.map((store, index) => {
-      const mark =  <Marker key={index}   id= {store.place_id+"1"}   position={{
-          lat: this.props.restaurants[index].geometry.location.lat,
-          lng: this.props.restaurants[index].geometry.location.lng
+    
+      return this.props.filterMarker.map((store, index) => {
+      const mark = 
+      
+      <Marker key={index}    ref= {store.place_id+"1"}   position={{
+          lat: this.props.filterMarker[index].geometry.location.lat,
+          lng: this.props.filterMarker[index].geometry.location.lng
     }}
       onClick={() =>
         this.showRestaurantDetails(index)
@@ -213,8 +217,9 @@ class MapDiv extends React.Component {
 
 
     render() {
-      const markers = this.displayMarkers()
-     console.log(markers)
+      
+   
+
       return (
 
       <div className="map-div" id="map-div">
@@ -229,7 +234,7 @@ class MapDiv extends React.Component {
               <Marker
                 icon= {iconBase}
                  position={{ lat: this.props.Latitude, lng: this.props.Longitude}} />
-                 {markers}
+                 {this.displayMarkers()}
 
 
           </Map>

@@ -141,7 +141,7 @@ getNewReviews = (reviewIndex)  =>{
                 <h6 className="ml-2">Available Restaurant:</h6>
                 <div className="filterBox">
                   <input id="first-no" type="number" min="0" max="5" />
-                  <input id="second-no" type="number" min="0" max="5" />
+                  <input id="second-no" type="number" min="0" max="5"  />
                   <button onClick= {() => {this.props.filterReviews(items)}}>filter </button>
                 </div>
                 <ul id="restaurantsList">
