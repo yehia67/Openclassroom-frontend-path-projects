@@ -59,7 +59,8 @@ class RestaurantBox extends React.Component {
        .then(response=>response.json()).then(data =>{
          console.log(data);
          this.setState({
-           restaurants: data.results
+           restaurants: data.results,
+           filterMarker:data.results
          });
 
        })
