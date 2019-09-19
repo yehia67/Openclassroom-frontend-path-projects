@@ -198,7 +198,7 @@ class MapDiv extends React.Component {
 
   return this.props.filterMarker.map((store, index) => {
   const mark = 
-
+  
   <Marker key={index}       position={{
       lat: this.props.filterMarker[index].geometry.location.lat,
       lng: this.props.filterMarker[index].geometry.location.lng
