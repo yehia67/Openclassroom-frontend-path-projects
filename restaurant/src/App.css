@@ -1,173 +1,201 @@
 .App {
-  text-align: center;
+    text-align: center;
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+    animation: App-logo-spin infinite 20s linear;
+    height: 40vmin;
+    pointer-events: none;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
 
 .App-link {
-  color: #61dafb;
+    color: #61dafb;
 }
 
-.map-box{
-  width: 100%;
-  height:500px;
-  margin: auto;
-  margin-top: 60px;
+.map-box {
+    width: 100%;
+    height: 500px;
+    margin: auto;
+    margin-top: 60px;
 }
 
-.map-box  .map-div{
-  width: 100% !important;
-  height:500px;
-  position: relative;
-}
-.map-box  .add-restaurant{
-  width: 100% !important;
-}
-div:nth-child(){
-
-}
-.map-box div:first-child{
-  width: 50%;
-
+.map-box .map-div {
+    width: 100% !important;
+    height: 500px;
+    position: relative;
 }
 
-.map-box  #map-div div:first-child{
-
+.map-box .add-restaurant {
+    width: 100% !important;
 }
 
-.map-box .map-list{
-  overflow-y: scroll;
-  width:   50%;
-  height:484px;
-  position: relative;
+div:nth-child() {}
 
+.map-box div:first-child {
+    width: 50%;
 }
 
-.map-box .map-list h6{
+.map-box #map-div div:first-child {}
+
+.map-box .map-list {
+    overflow-y: scroll;
+    width: 50%;
+    height: 484px;
+    position: relative;
+}
+
+.map-box .map-list h6 {
     padding-left: 13px
 }
 
-.map-box .map-list ul{
-  list-style: none;
+.map-box .map-list ul {
+    list-style: none;
+}
 
+.filterBox {
+    margin-left: 21px;
 }
-.marker-show{
-  display: block !important;
+
+.filterBox #first-no,
+.filterBox #second-no {
+    text-align: center;
+    height: 24px;
 }
-.marker-hide{
-  display: none !important;
+
+.filterBox #first-no {
+    margin-right: 10px;
 }
+
+.filterBox #second-no {}
+
+.filterBox button {
+    border-radius: 5px;
+    margin-left: 11px;
+    width: 81px;
+    border: navajowhite;
+    cursor: pointer;
+}
+
+.filterBox button:hover {
+    background-color: #1bb9d2;
+    color: #ffffff
+}
+
 #restaurantsList li {
-  cursor: pointer;
-  border-radius: 5px;
-   padding: 5px;
-
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 5px;
 }
+
 #restaurantsList li:hover {
-  background-color: #1bb9d2
+    background-color: #1bb9d2
+}
 
+.place-details {
+    width: 100% !important
 }
-.place-details{
-  width: 100% !important
-}
-.review-form{
+
+.review-form {
     float: left;
     width: 400px;
 }
 
- .restaurant-review-box{
+.restaurant-review-box {}
 
-}
- .restaurant-review-box .restaurant-review-name{
+.restaurant-review-box .restaurant-review-name {}
 
-}
- .restaurant-review-box .restaurant-review-rating{
+.restaurant-review-box .restaurant-review-rating {}
 
-}
-.restaurant-review-box .restaurant-review-raters{
+.restaurant-review-box .restaurant-review-raters {}
 
-}
 .reviews-List {
-  overflow-y: scroll;
-  height: 385px;
-  float: right;
-  width: 400px;
+    overflow-y: scroll;
+    height: 385px;
+    float: right;
+    width: 400px;
 }
-.reviews-List .review-box{
-  width: 100% !important
-}
-.reviews-List .reviews-List-title{
 
+.reviews-List .review-box {
+    width: 100% !important
 }
-.reviews-List .review-box .review-info{
-  text-align: left;
+
+.reviews-List .reviews-List-title {}
+
+.reviews-List .review-box .review-info {
+    text-align: left;
 }
-.reviews-List .review-box .review-comment{
-  text-align: left;
+
+.reviews-List .review-box .review-comment {
+    text-align: left;
 }
-footer{
-  position: absolute;
-  bottom: 0px;
-  width: 100%;
+
+footer {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
 }
-.clearfix{
-  clear: both;
+
+.clearfix {
+    clear: both;
 }
+
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
+
 
 /*Modal*/
+
 .modal {
-  font-size: 12px;
+    font-size: 12px;
 }
-.modal > .header {
-  width: 100%;
-  border-bottom: 1px solid gray;
-  font-size: 18px;
-  text-align: center;
-  padding: 5px;
+
+.modal>.header {
+    width: 100%;
+    border-bottom: 1px solid gray;
+    font-size: 18px;
+    text-align: center;
+    padding: 5px;
 }
-.modal > .content {
-  width: 100%;
-  padding: 10px 5px;
+
+.modal>.content {
+    width: 100%;
+    padding: 10px 5px;
 }
-.modal > .actions {
-  width: 100%;
-  padding: 10px 5px;
-  margin: auto;
-  text-align: center;
+
+.modal>.actions {
+    width: 100%;
+    padding: 10px 5px;
+    margin: auto;
+    text-align: center;
 }
-.modal > .close {
-  cursor: pointer;
-  position: absolute;
-  display: block;
-  padding: 2px 5px;
-  line-height: 20px;
-  right: -10px;
-  top: -10px;
-  font-size: 24px;
-  background: #ffffff;
-  border-radius: 18px;
-  border: 1px solid #cfcece;
+
+.modal>.close {
+    cursor: pointer;
+    position: absolute;
+    display: block;
+    padding: 2px 5px;
+    line-height: 20px;
+    right: -10px;
+    top: -10px;
+    font-size: 24px;
+    background: #ffffff;
+    border-radius: 18px;
+    border: 1px solid #cfcece;
 }

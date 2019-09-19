@@ -1,6 +1,7 @@
 
 import React from 'react';
 import Modal from 'react-awesome-modal';
+import localRestaurants from "./localRestaurants.json";
 
 const removedElements = []
 class RestaurantList extends React.Component {
@@ -18,7 +19,7 @@ class RestaurantList extends React.Component {
         .then(response=>response.json()).then(data =>{
           console.log(data);
         })
-}
+   }
 
    openModal() {
            this.setState({
@@ -26,15 +27,27 @@ class RestaurantList extends React.Component {
            });
        };
 
-       closeModal() {
-           this.setState({
-               visible : false
-           });
-       };
-    showReviews = (reviewIndex) =>{
-
+  closeModal() {
+    this.setState({
+      visible : false
+    });
+  };       
+  showReviews = (reviewIndex) =>{
       fetch('https://cors-anywhere.herokuapp.com/' + 'https://maps.googleapis.com/maps/api/place/details/json?placeid='+this.props.restaurants[reviewIndex].place_id + '&key=AIzaSyAUXi44xrkwClTtmRDXvbR9egoGX86XTpE')
      .then(response=>response.json()).then(data =>{
+       console.log(data)
+       
+       if (data.status === "INVALID_REQUEST") {
+        for (let index = 0; index < localRestaurants.length; index++) {
+          if(this.props.restaurants[reviewIndex].place_id === localRestaurants[index].place_id)
+            {
+                  data = localRestaurants[index];
+                  console.log(data)
+                  break;
+            }
+          }   
+       }
+       
        const reviews =  this.state.reviewsMap[this.props.restaurants[reviewIndex].place_id]
        if(typeof reviews === 'undefined' ){
 
@@ -51,6 +64,7 @@ class RestaurantList extends React.Component {
 
 getApiReviews = (reviewIndex,data) =>{
   var cloneObj = this.state.reviewsMap;
+ 
   cloneObj[this.props.restaurants[reviewIndex].place_id] = data.result.reviews;
    this.setState({
     reviewsMap:  cloneObj
@@ -115,17 +129,13 @@ getNewReviews = (reviewIndex)  =>{
       let reviewbox = "<div class='review-box'><div class='review-info'>Author: "+ name +"<br/>Rate: "+review  +"</div><p class='review-comment'>"+ comment +"</p></div>"
       document.getElementById("reviewList").innerHTML += reviewbox;
       const reviews =  this.state.reviewsMap[this.props.restaurants[index].place_id];
-      console.log("b3d  show Reviews ya behhhhhhhhhhhhhhhh ama t make el review",reviews)
     })
   };
-
-
-
   render() {
 
       const items =  this.props.restaurants.map((obj,index) =>
        <li id={obj.place_id}  key={index} onClick={()=> this.addReview(index)} >
-{typeof   obj.rating !== "undefined" ?
+      {typeof   obj.rating !== "undefined" ?
         <div className="restaurant-review-box">
           <p className="restaurant-review-name">{obj.name}</p>
           <p className="restaurant-review-rating">rate:  {obj.rating}</p>
@@ -133,10 +143,7 @@ getNewReviews = (reviewIndex)  =>{
         </div>
          : ""  }
        </li>,this);
-
-
       return (
-
               <div className="map-list pt-2 text-left">
                 <h6 className="ml-2">Available Restaurant:</h6>
                 <div className="filterBox">
@@ -182,8 +189,6 @@ getNewReviews = (reviewIndex)  =>{
                       </Modal>
                 </section>
               </div>
-
-
       );
   }
 }

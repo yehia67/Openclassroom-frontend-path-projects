@@ -2,6 +2,8 @@ import React from 'react';
 import MapDiv from './MapDiv.js';
 import '../App.css';
 import RestaurantList from './RestaurantList.js';
+import localRestaurants from "./localRestaurants.json";
+
 
 class RestaurantBox extends React.Component {
   constructor(props) {
@@ -57,6 +59,10 @@ class RestaurantBox extends React.Component {
         fetch('https://cors-anywhere.herokuapp.com/'+'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location='+this.state.Latitude +','+ this.state.Longitude + '&radius=150000&type=restaurant&key=AIzaSyAUXi44xrkwClTtmRDXvbR9egoGX86XTpE')
        .then(response=>response.json()).then(data =>{
          console.log(data);
+         console.log(localRestaurants)
+         for (let index = 0; index < localRestaurants.length; index++) {
+                data.results.push(localRestaurants[index]); 
+         }  
          this.setState({
            restaurants: data.results,
            filterMarker:data.results
