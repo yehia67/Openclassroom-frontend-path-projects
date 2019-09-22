@@ -56,7 +56,7 @@ class RestaurantList extends React.Component {
          if(this.state.reviewsMap.length < data.result.reviews.length){
                  this.getApiReviews(reviewIndex,data)
           }
-          else{ this.getNewReviews(reviewIndex)  }
+          else{ this.getNewReviews(reviewIndex,data)  }
       }
 
        })
@@ -108,7 +108,7 @@ getNewReviews = (reviewIndex)  =>{
       this.addToPreviousReviews(index,review);
    }
   addToList = (index,review) =>{
-    document.getElementById(this.props.restaurants[index].place_id).innerHTML =  "<div className='restaurant-review-box'><p className='restaurant-review-name'>"+ this.props.restaurants[index].name  +"</p><p className='restaurant-review-rating'>rate: "+ parseFloat((parseFloat(review)+this.props.restaurants[index].rating)/2)+ "</p><p className='restaurant-review-raters'>no. Of Reviewers:  "+ parseInt(this.props.restaurants[index].user_ratings_total+1)+ "</p></div>";
+    document.getElementById(this.props.restaurants[index].place_id).innerHTML =  "<div className='restaurant-review-box'><p className='restaurant-review-name'>"+ this.props.restaurants[index].name  +"</p><p className='restaurant-review-rating'>rate: "+ parseFloat((parseFloat(review)+parseFloat(this.props.restaurants[index].rating))/2)+ "</p><p className='restaurant-review-raters'>no. Of Reviewers:  "+ parseInt(this.props.restaurants[index].user_ratings_total+1)+ "</p></div>";
     this.getReviewDetails(this.props.restaurants[index].place_id)
     this.props.restaurants[index].rating =  parseFloat((parseFloat(review)+this.props.restaurants[index].rating)/2);
     this.props.restaurants[index].user_ratings_total = this.props.restaurants[index].user_ratings_total + 1;
