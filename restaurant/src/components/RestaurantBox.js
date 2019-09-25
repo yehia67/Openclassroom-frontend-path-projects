@@ -19,7 +19,6 @@ class RestaurantBox extends React.Component {
   filterReviews = () => {
       const filtredRestaurants = []
       let items = this.state.restaurants;
-      console.log("the items",items);
       const firstNo = parseFloat(document.getElementById("first-no").value);
       const secondNo = parseFloat(document.getElementById("second-no").value);
     

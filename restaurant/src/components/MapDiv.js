@@ -13,30 +13,7 @@ const mapStyles = {
 
 var iconBase = 'http://maps.google.com/mapfiles/marker_green.png';
 
-const MarkersList = props => {
-  const { locations, ...markerProps } = props;
-  return (
-    <span>
-      {locations.map((location, i) => {
-        return (
-          <Marker
-            key={i}
-            {...markerProps}
-            position={{ lat: location.lat(), lng: location.lng() }}
-            onClick={() =>
-              {
-                document.getElementById("new_restaurant_Name").innerHTML =  newRestaurants[i].name;
-                document.getElementById("new_restaurant_Rate").innerHTML = "Rate "+ newRestaurants[i].rating;
-                document.getElementById("new_restaurant_No_Rater").innerHTML = "no. of raters " +newRestaurants[i].user_ratings_total;
-                document.getElementById("details_modal").style.display = "block";
-              }
-            }
-          />
-        );
-      })}
-    </span>
-  );
-};
+
 class MapDiv extends React.Component {
   constructor() {
       super()
@@ -221,7 +198,6 @@ class MapDiv extends React.Component {
                 initialCenter={{ lat: this.props.Latitude, lng: this.props.Longitude}}
                  onClick={this.handleMapClick}
               >
-               <MarkersList locations={this.state.locations} icon="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png" />
               <Marker
                 icon= {iconBase}
                  position={{ lat: this.props.Latitude, lng: this.props.Longitude}} />

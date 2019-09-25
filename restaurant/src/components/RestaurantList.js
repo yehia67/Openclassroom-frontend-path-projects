@@ -169,7 +169,6 @@ class RestaurantList extends React.Component {
                                   </div>
                                   <button className="btn btn-primary"  onClick={() => {
                                       this.closeModal();
-                                      console.log(document.getElementById("index").innerHTML);
                                       this.makeReview(document.getElementById("index").innerHTML);
 
                                     }}> Submit Review</button>
