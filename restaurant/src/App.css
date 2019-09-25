@@ -64,7 +64,8 @@ div:nth-child() {}
 }
 
 .filterBox {
-    margin-left: 21px;
+    margin-left: 42px;
+    margin-bottom: 12px;
 }
 
 .filterBox #first-no,

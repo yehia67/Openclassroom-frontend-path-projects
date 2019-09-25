@@ -62,7 +62,7 @@
      {
          "name": "MAC",
          "place_id": "YBS31",
-         "rating": "3.2",
+         "rating": 3.2,
          "user_ratings_total": 2999,
          "geometry": {
              "location": {
