@@ -12,6 +12,30 @@ const mapStyles = {
 };
 
 var iconBase = 'http://maps.google.com/mapfiles/marker_green.png';
+const MarkersList = props => {
+  const { locations, ...markerProps } = props;
+  return (
+    <span>
+      {locations.map((location, i) => {
+        return (
+          <Marker
+            key={i}
+            {...markerProps}
+            position={{ lat: location.lat(), lng: location.lng() }}
+            onClick={() =>
+              {
+                document.getElementById("new_restaurant_Name").innerHTML =  newRestaurants[i].name;
+                document.getElementById("new_restaurant_Rate").innerHTML = "Rate "+ newRestaurants[i].rating;
+                document.getElementById("new_restaurant_No_Rater").innerHTML = "no. of raters " +newRestaurants[i].user_ratings_total;
+                document.getElementById("details_modal").style.display = "block";
+              }
+            }
+          />
+        );
+      })}
+    </span>
+  );
+};
 
 
 class MapDiv extends React.Component {
@@ -56,56 +80,59 @@ class MapDiv extends React.Component {
 
   }
   newOpenModal() {
-          this.setState({
-              newVisible : true
-          });
+    this.setState({
+        newVisible : true
+        });
       }
 
-      newCloseModal() {
-          this.setState({
-              newVisible : false
-          });
-      }
+  newCloseModal() {
+    this.setState({
+        newVisible : false
+      });
+  }
+
   showRestaurantDetails = (index) =>{
-  let retsuarantName;
-  let rate;
-  let noOfRaters;
-  retsuarantName =  this.props.filterMarker[index].name;
-  rate = this.props.filterMarker[index].rating;
-  noOfRaters = this.props.filterMarker[index].user_ratings_total;
-  document.getElementById("restaurant_Name").innerHTML =  retsuarantName;
-  document.getElementById("restaurant_Rate").innerHTML = "Rate " +rate;
-  document.getElementById("restaurant_No_Rater").innerHTML = "no. of raters " + noOfRaters;
-  this.openModal(0);
+    let retsuarantName;
+    let rate;
+    let noOfRaters;
+    retsuarantName =  this.props.filterMarker[index].name;
+    rate = this.props.filterMarker[index].rating;
+    noOfRaters = this.props.filterMarker[index].user_ratings_total;
+    document.getElementById("restaurant_Name").innerHTML =  retsuarantName;
+    document.getElementById("restaurant_Rate").innerHTML = "Rate " +rate;
+    document.getElementById("restaurant_No_Rater").innerHTML = "no. of raters " + noOfRaters;
+    this.openModal(0);
   };
+
   getNewRestaurantsByName = (name) =>{
-  for(let index = 0; index < newRestaurants.length ;index++){
-    if(name === newRestaurants[index].name ){
-      return index;
+    for(let index = 0; index < newRestaurants.length ;index++){
+      if(name === newRestaurants[index].name ){
+        return index;
+      }
     }
-  }
-  return -1;
-  }
-  getLi = (i) =>{
-  for(let index = 0; index < newLi.length;index++){
-  let checkIndeces = newLi.split("//")
-  if(i == checkIndeces[0]){
-    return checkIndeces[1];
-  }
-  }
-  return -1;
+    return -1;
+    }
+    getLi = (i) =>{
+    for(let index = 0; index < newLi.length;index++){
+    let checkIndeces = newLi.split("//")
+    if(i == checkIndeces[0]){
+      return checkIndeces[1];
+    }
+    }
+    return -1;
   };
+
   addRestaurant = () =>{
-  const restaurantName = document.getElementById("restaurantName").value;
-  const reviews = document.getElementById("rate").value;
-  const user_ratings_total = 1;
-  var ul = document.getElementById("restaurantsList");
-  var li = document.createElement("li");
-  const newRestaurant ={
-    name:restaurantName,
-    rating:reviews,
-    user_ratings_total: user_ratings_total,
-    comments:[{}]
+    const restaurantName = document.getElementById("restaurantName").value;
+    const reviews = document.getElementById("rate").value;
+    const user_ratings_total = 1;
+    var ul = document.getElementById("restaurantsList");
+    var li = document.createElement("li");
+    const newRestaurant ={
+      name:restaurantName,
+      rating:reviews,
+      user_ratings_total: user_ratings_total,
+      comments:[{}]
   };
 
   const newRestaurantListElement = '<div className="restaurant-review-box"><p className="restaurant-review-name">'+restaurantName+'</p><p className="restaurant-review-rating">rate:  '+reviews+'</p><p className="restaurant-review-raters">no. Of Reviewers: 1</p></div>';
@@ -148,43 +175,41 @@ class MapDiv extends React.Component {
   };
 
   uploadComments = (indexComment) => {
-  console.log("yarab yarab yarab",newRestaurants[indexComment].comments)
-  if(indexComment === -1 || newRestaurants[indexComment].comments.length  === 1 ){
-  document.getElementById("reviewListMap").innerHTML = '<h4 className="reviews-List-title">Previous reviews</h4>';
-  }
-  else{
-    document.getElementById("reviewListMap").innerHTML = '<h4 className="reviews-List-title">Previous reviews</h4>';
-  for(let index = 1; index < newRestaurants[indexComment].comments.length;index++){
-      let reviewbox = "<div class='review-box'><div class='review-info'>Author: "+ newRestaurants[indexComment].comments[index].author_name +"<br/>Rate: "+newRestaurants[indexComment].comments[index].rating   +"</div><p class='review-comment'>"+ newRestaurants[indexComment].comments[index].text +"</p></div>";
-      document.getElementById("reviewListMap").innerHTML += reviewbox;
-  }
-  }
+    if(indexComment === -1 || newRestaurants[indexComment].comments.length  === 1 ){
+      document.getElementById("reviewListMap").innerHTML = '<h4 className="reviews-List-title">Previous reviews</h4>';
+    }
+    else{
+      document.getElementById("reviewListMap").innerHTML = '<h4 className="reviews-List-title">Previous reviews</h4>';
+    for(let index = 1; index < newRestaurants[indexComment].comments.length;index++){
+        let reviewbox = "<div class='review-box'><div class='review-info'>Author: "+ newRestaurants[indexComment].comments[index].author_name +"<br/>Rate: "+newRestaurants[indexComment].comments[index].rating   +"</div><p class='review-comment'>"+ newRestaurants[indexComment].comments[index].text +"</p></div>";
+        document.getElementById("reviewListMap").innerHTML += reviewbox;
+    }
+    }
 
   };
 
   handleMapClick = (ref, map, ev) => {
-  this.openModal(1)
-  const location = ev.latLng;
-  this.setState(prevState => ({
-    locations: [...prevState.locations, location]
-  }));
-  map.panTo(location);
+    this.openModal(1)
+    const location = ev.latLng;
+    this.setState(prevState => ({
+      locations: [...prevState.locations, location]
+    }));
+    map.panTo(location);
   };
 
   displayMarkers = () => {
-
-  return this.props.filterMarker.map((store, index) => {
-  const mark = 
-  
-  <Marker key={index}       position={{
-      lat: this.props.filterMarker[index].geometry.location.lat,
-      lng: this.props.filterMarker[index].geometry.location.lng
-  }}
-  onClick={() =>
-    this.showRestaurantDetails(index)
-  }
-  />
-  return mark;
+    return this.props.filterMarker.map((store, index) => {
+    const mark = 
+    
+    <Marker key={index}       position={{
+        lat: this.props.filterMarker[index].geometry.location.lat,
+        lng: this.props.filterMarker[index].geometry.location.lng
+    }}
+    onClick={() =>
+      this.showRestaurantDetails(index)
+    }
+    />
+    return mark;
   })
   }
 
@@ -197,7 +222,9 @@ class MapDiv extends React.Component {
                 style={mapStyles}
                 initialCenter={{ lat: this.props.Latitude, lng: this.props.Longitude}}
                  onClick={this.handleMapClick}
-              >
+        >
+             <MarkersList locations={this.state.locations} icon="https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png" />
+
               <Marker
                 icon= {iconBase}
                  position={{ lat: this.props.Latitude, lng: this.props.Longitude}} />

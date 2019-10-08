@@ -80,28 +80,26 @@ class RestaurantList extends React.Component {
     }
   }
 
-    addReview = (index)=>{
-      console.log("index el hnaaa",index)
-      document.getElementById("index").innerHTML = index;
-      this.showReviews(index);
-      console.log(this.state.reviewsMap)
-      this.openModal();
+  addReview = (index)=>{
+    console.log("index el hnaaa",index)
+    document.getElementById("index").innerHTML = index;
+    this.showReviews(index);
+    console.log(this.state.reviewsMap)
+    this.openModal();
 
-    };
-    removeListElement = ()=>{
-      for(let i = 0; i < removedElements.length; i++ ){
-        document.getElementById(removedElements[i]).setAttribute("display", "none");
-      }
+  };
+  removeListElement = ()=>{
+    for(let i = 0; i < removedElements.length; i++ ){
+      document.getElementById(removedElements[i]).setAttribute("display", "none");
     }
-    makeReview = (index)=>{
-      console.log("console review  ahoo  ooo debug")
-      const review = document.getElementById("new_review").value;
-        this.addToList(index,review);
-        this.addToPreviousReviews(index,review);
+  }
+  makeReview = (index)=>{
+    const review = document.getElementById("new_review").value;
+    this.addToList(index,review);
+    this.addToPreviousReviews(index,review);
     }
     addToList = (index,review) =>{
       document.getElementById(this.props.restaurants[index].place_id).innerHTML =  "<div className='restaurant-review-box'><p className='restaurant-review-name'>"+ this.props.restaurants[index].name  +"</p><p className='restaurant-review-rating'>rate: "+ parseFloat((parseFloat(review)+parseFloat(this.props.restaurants[index].rating))/2)+ "</p><p className='restaurant-review-raters'>no. Of Reviewers:  "+ parseInt(this.props.restaurants[index].user_ratings_total+1)+ "</p></div>";
-      this.getReviewDetails(this.props.restaurants[index].place_id)
       this.props.restaurants[index].rating =  parseFloat((parseFloat(review)+this.props.restaurants[index].rating)/2);
       this.props.restaurants[index].user_ratings_total = this.props.restaurants[index].user_ratings_total + 1;
     }

@@ -5,7 +5,7 @@
          "user_ratings_total": 1999,
          "geometry": {
              "location": {
-                 "lat": 30.141327,
+                 "lat": 30.0554688,
                  "lng": 31.3463554
              }
          },
@@ -35,7 +35,7 @@
          "user_ratings_total": 2999,
          "geometry": {
              "location": {
-                 "lat": 30.151327,
+                 "lat": 30.0524688,
                  "lng": 31.3563554
              }
          },
@@ -66,7 +66,7 @@
          "user_ratings_total": 2999,
          "geometry": {
              "location": {
-                 "lat": 30.157327,
+                 "lat": 30.0534688,
                  "lng": 31.3573554
              }
          },
